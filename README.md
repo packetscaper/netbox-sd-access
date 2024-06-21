@@ -3,7 +3,6 @@
 NetBox plugin for SD-Access.
 
 
-* Free software: Apache-2.0
 * Documentation: https://theelliotm.github.io/netbox-sd-access/
 
 
