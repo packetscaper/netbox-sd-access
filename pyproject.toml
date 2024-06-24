@@ -9,7 +9,7 @@ build-backend = "setuptools.build_meta"
 name =  "netbox-sd-access"
 version = "0.1.0"
 authors = [
-    {name = "John Doe", email = ""},
+    {name = "John Doe", email = "john@example.com"},
 ]
 description = "NetBox plugin for SD-Access."
 readme = "README.md"
