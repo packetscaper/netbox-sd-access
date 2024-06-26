@@ -14,3 +14,17 @@ class SDAccess(NetBoxModel):
 
     def get_absolute_url(self):
         return reverse("plugins:netbox_sd_access:sdaccess", args=[self.pk])
+
+class FabricSite(NetBoxModel):
+    name = models.CharField(max_length=200)
+    physical_site = models.ForeignKey(to='dcim.Site', on_delete=models.PROTECT)
+    # locations is an optional field for if you make the fabric on a per floor basis
+    locations = models.ForeignKey(to='dcim.Location', on_delete=models.PROTECT, blank=True, null=True)
+    ip_prefixes = models.ManyToManyField(to='ipam.Prefix', on_delete=models.PROTECT)
+    devices = models.ManyToManyField(to='dcim.Device', blank=True)
+    
+    class Meta:
+        ordering = ("name",)
+        
+    def __str__(self):
+        return self.name
