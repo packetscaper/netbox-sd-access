@@ -19,7 +19,7 @@ class FabricSite(NetBoxModel):
     name = models.CharField(max_length=200)
     physical_site = models.ForeignKey(to='dcim.Site', on_delete=models.PROTECT)
     # locations is an optional field for if you make the fabric on a per floor basis
-    locations = models.ForeignKey(to='dcim.Location', on_delete=models.PROTECT, blank=True, null=True)
+    locations = models.OneToOneField(to='dcim.Location', on_delete=models.PROTECT, blank=True, null=True)
     ip_prefixes = models.ManyToManyField(to='ipam.Prefix')
     devices = models.ManyToManyField(to='dcim.Device', blank=True)
     
