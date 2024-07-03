@@ -17,5 +17,5 @@ class FabricSiteTable(NetBoxTable):
     
     class Meta(NetBoxTable.Meta):
         model = FabricSite
-        fields = ("pk", "id", "name", "location", "actions")
-        default_columns = ("name", "location")
+        fields = ("pk", "id", "name", "physical_site", "location", "ip_prefixes", "devices_count", "actions")
+        default_columns = ("name", "physical_site", "location", "devices_count")
