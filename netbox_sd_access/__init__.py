@@ -13,7 +13,7 @@ class SDAccessConfig(PluginConfig):
     verbose_name = "NetBox SD-Access Plugin"
     description = "NetBox plugin for SD-Access."
     version = "version"
-    base_url = "netbox_sd_access"
+    base_url = "sd-access"
 
 
 config = SDAccessConfig
