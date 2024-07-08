@@ -25,6 +25,6 @@ class FabricSiteForm(NetBoxModelForm):
 class FabricSiteFilterForm(NetBoxModelFilterSetForm):
     model = FabricSite
     physical_site = forms.ModelMultipleChoiceField(
-        queryset=Device.objects.all(),
+        queryset=Site.objects.all(),
         required=False
     )
