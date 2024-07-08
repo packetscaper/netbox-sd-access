@@ -4,6 +4,6 @@ from . import views
 app_name = 'netbox_sd_access'
 
 router = NetBoxRouter()
-router.register('fabric-site', views.FabricSiteViewSet)
+router.register('fabric-sites', views.FabricSiteViewSet)
 
 urlpatterns = router.urls
