@@ -1,10 +1,9 @@
-from netbox.api.routers import NetboxRouter
+from netbox.api.routers import NetBoxRouter
 from . import views
 
-app_name = 'netbox_sd_access'
+app_name = 'netbox_access_list'
 
-router = NetboxRouter()
-router.register('sd-access', views.SDAccessViewSet)
-router.register('fabric-sites', views.FabricSiteViewSet)
+router = NetBoxRouter()
+router.register('fabric-site', views.FabricSiteViewSet)
 
 urlpatterns = router.urls
