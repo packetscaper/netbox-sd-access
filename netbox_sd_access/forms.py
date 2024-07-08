@@ -14,7 +14,7 @@ class SDAccessForm(NetBoxModelForm):
 
 class FabricSiteForm(NetBoxModelForm):
     physical_site = DynamicModelChoiceField(queryset=Site.objects.all(), required=True)
-    location = DynamicModelChoiceField(queryset=Location.objects.none(), required=False)
+    location = DynamicModelChoiceField(queryset=Location.objects.all(), required=False)
     ip_prefixes = DynamicModelMultipleChoiceField(queryset=Prefix.objects.all(), required=True)
     devices = DynamicModelMultipleChoiceField(queryset=Device.objects.all(), required=True)
     

@@ -17,11 +17,11 @@ urlpatterns = (
     #     kwargs={"model": models.SDAccess},
     # ),
     
-    path("fabric-site/", views.FabricSiteListView.as_view(), name='fabricsite_list'),
-    path("fabric-site/add/", views.FabricSiteEditView.as_view(), name='fabricsite_add'),
-    path('fabric-site/<int:pk>/', views.FabricSiteView.as_view(), name='fabricsite'),
-    path('fabric-site/<int:pk>/edit/', views.FabricSiteEditView.as_view(), name='fabricsite_edit'),
-    path('fabric-site/<int:pk>/delete/', views.FabricSiteDeleteView.as_view(), name='fabricsite_delete'),
-    path('fabric-site/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='fabricsite_changelog', 
+    path("fabric-sites/", views.FabricSiteListView.as_view(), name='fabricsite_list'),
+    path("fabric-sites/add/", views.FabricSiteEditView.as_view(), name='fabricsite_add'),
+    path('fabric-sites/<int:pk>/', views.FabricSiteView.as_view(), name='fabricsite'),
+    path('fabric-sites/<int:pk>/edit/', views.FabricSiteEditView.as_view(), name='fabricsite_edit'),
+    path('fabric-sites/<int:pk>/delete/', views.FabricSiteDeleteView.as_view(), name='fabricsite_delete'),
+    path('fabric-sites/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='fabricsite_changelog', 
          kwargs={'model': models.FabricSite})
 )
