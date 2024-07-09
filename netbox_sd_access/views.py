@@ -72,6 +72,7 @@ class IPTransitListView(generic.ObjectListView):
     
     
 class SDATransitListView(generic.ObjectListView):
+    
     queryset = models.SDATransit.objects.annotate(
         device_count = Count('devices')
     )

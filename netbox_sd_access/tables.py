@@ -32,4 +32,4 @@ class SDATransitTable(NetBoxTable):
     class Meta(NetBoxTable.Meta):
         model = SDATransit
         fields=("pk", "id", "transit_type", "name", "fabric_site", "control_plane_node", "device_count")
-        default_columns=("name", "fabric_site", "transit_type", "")
+        default_columns=("name", "fabric_site", "transit_type", "device_count", "control_plane_node")

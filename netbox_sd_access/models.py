@@ -47,6 +47,7 @@ class SDATransit(NetBoxModel):
     
     class Meta:
         ordering = ("name",)
+        verbose_name = "SDA Transit"
         
     def __str__(self):
         return self.name
@@ -80,6 +81,7 @@ class IPTransit(NetBoxModel):
     
     class Meta:
         ordering = ("name",)
+        verbose_name = "IP Transit"
         
     def __str__(self):
         return self.name
