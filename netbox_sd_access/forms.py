@@ -13,10 +13,12 @@ class SDAccessForm(NetBoxModelForm):
         fields = ("name", "tags")
 
 class FabricSiteForm(NetBoxModelForm):
-    physical_site = DynamicModelChoiceField(queryset=Site.objects.all(), required=True)
-    location = DynamicModelChoiceField(queryset=Location.objects.all(), required=False)
+    physical_site = DynamicModelChoiceField(queryset=Site.objects.all(),required=True)
+    location = DynamicModelChoiceField(queryset=Location.objects.all(), required=False, query_params={'site_id': '$physical_site'} )
+    
+
     ip_prefixes = DynamicModelMultipleChoiceField(queryset=Prefix.objects.all(), required=True)
-    devices = DynamicModelMultipleChoiceField(queryset=Device.objects.all(), required=True)
+    devices = DynamicModelMultipleChoiceField(queryset=Device.objects.all(), required=True, query_params={'site_id':'$physical_site', 'location_id':'$location'})
     
     class Meta:
         model = FabricSite
