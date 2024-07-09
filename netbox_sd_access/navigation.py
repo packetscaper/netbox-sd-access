@@ -14,4 +14,12 @@ menu_items = (
         link_text='Fabric Sites',
         buttons=fabricsite_buttons
     ),
+    PluginMenuItem(
+        link='plugins:netbox_sd_access:ip_transits_list',
+        link_text='IP Transits'
+    ),
+    PluginMenuItem(
+        link='plugins:netbox_sd_access:sda_transits_list',
+        link_text='SDA Transits'
+    )
 )

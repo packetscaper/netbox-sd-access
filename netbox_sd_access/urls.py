@@ -17,11 +17,17 @@ urlpatterns = (
     #     kwargs={"model": models.SDAccess},
     # ),
     
+    #### FABRIC SITES
     path("fabric-sites/", views.FabricSiteListView.as_view(), name='fabricsite_list'),
     path("fabric-sites/add/", views.FabricSiteEditView.as_view(), name='fabricsite_add'),
     path('fabric-sites/<int:pk>/', views.FabricSiteView.as_view(), name='fabricsite'),
     path('fabric-sites/<int:pk>/edit/', views.FabricSiteEditView.as_view(), name='fabricsite_edit'),
     path('fabric-sites/<int:pk>/delete/', views.FabricSiteDeleteView.as_view(), name='fabricsite_delete'),
     path('fabric-sites/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='fabricsite_changelog', 
-         kwargs={'model': models.FabricSite})
+         kwargs={'model': models.FabricSite}),
+    
+    #### TRANSITS
+    path("transits/ip/", views.IPTransitListView.as_view(), name='ip_transits_list'),
+    path('transits/sda/', views.SDATransitListView.as_view(), name='sda_transits_list')
+    
 )

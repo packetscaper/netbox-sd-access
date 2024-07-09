@@ -38,8 +38,7 @@ class FabricSite(NetBoxModel):
 class SDATransitType(models.TextChoices):
     LISP = 'LISP', 'LISP'
     LISP_BGP = 'LISP-BGP', 'LISP-BGP'   
-class SDA_Transit(NetBoxModel):
-    id=models.AutoField(primary_key=True)
+class SDATransit(NetBoxModel):
     name=models.CharField(max_length=200)
     transit_type=models.CharField(max_length=8, choices=SDATransitType.choices, default=SDATransitType.LISP, blank=False, null=False)
     fabric_site=models.OneToOneField(to=FabricSite, on_delete=models.PROTECT, blank=True, null=True)
@@ -50,7 +49,7 @@ class SDA_Transit(NetBoxModel):
         ordering = ("name",)
         
     def __str__(self):
-        return str(FabricSite) + self.name
+        return self.name
     
     def get_absolute_url(self):
         return reverse('plugins:netbox_sd_access:sdatransit', args=[self.pk])
@@ -74,8 +73,7 @@ class SDA_Transit(NetBoxModel):
         self.full_clean()
         super().save(*args, **kwargs)
     
-class IP_Transit(NetBoxModel):
-    id=models.AutoField(primary_key=True)
+class IPTransit(NetBoxModel):
     name=models.CharField(max_length=200)
     fabric_site=models.OneToOneField(to=FabricSite, on_delete=models.PROTECT, blank=True, null=True)
     asn=models.CharField(max_length=200)
@@ -84,7 +82,7 @@ class IP_Transit(NetBoxModel):
         ordering = ("name",)
         
     def __str__(self):
-        return str(FabricSite) + self.name
+        return self.name
     
     def get_absolute_url(self):
         return reverse('plugins:netbox_sd_access:iptransit', args=[self.pk])
