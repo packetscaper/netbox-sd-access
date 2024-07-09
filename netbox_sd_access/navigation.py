@@ -1,18 +1,17 @@
-from extras.plugins import PluginMenuButton, PluginMenuItem
-from utilities.choices import ButtonColorChoices
+from netbox.plugins import PluginMenuButton, PluginMenuItem
 
-plugin_buttons = [
+fabricsite_buttons = [
     PluginMenuButton(
-        link="plugins:netbox_sd_access:sdaccess_add",
-        title="Add",
-        icon_class="mdi mdi-plus-thick",
-    )
+        link='plugins:netbox_sd_access:fabricsite_add',
+        title='Add',
+        icon_class='mdi mdi-plus-thick'
+    ),
 ]
 
 menu_items = (
     PluginMenuItem(
-        link="plugins:netbox_sd_access:sdaccess_list",
-        link_text="SD-Access",
-        buttons=plugin_buttons,
+        link='plugins:netbox_sd_access:fabricsite_list',
+        link_text='Fabric Sites',
+        buttons=fabricsite_buttons
     ),
 )
