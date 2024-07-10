@@ -53,7 +53,7 @@ class SDATransit(NetBoxModel):
         return self.name
     
     def get_absolute_url(self):
-        return reverse('plugins:netbox_sd_access:sdatransit', args=[self.pk])
+        return reverse('plugins:netbox_sd_access:sda_transit', args=[self.pk])
     
     def clean (self):
         if self.transit_type == SDATransitType.LISP and self.devices.count() > 4: 
@@ -87,4 +87,4 @@ class IPTransit(NetBoxModel):
         return self.name
     
     def get_absolute_url(self):
-        return reverse('plugins:netbox_sd_access:iptransit', args=[self.pk])
+        return reverse('plugins:netbox_sd_access:ip_transit', args=[self.pk])

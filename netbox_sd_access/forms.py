@@ -28,3 +28,18 @@ class FabricSiteFilterForm(NetBoxModelFilterSetForm):
         queryset=Site.objects.all(),
         required=False
     )
+    
+class IPTransitForm(NetBoxModelForm):
+    fabric_site = DynamicModelChoiceField(queryset=FabricSite.objects.all(), required=True)
+    asn = forms.CharField(required=False)
+    
+    class Meta:
+        model = IPTransit
+        fields = ('name', 'fabric_site', 'asn')
+        
+class IPTransitFilterForm(NetBoxModelFilterSetForm):
+    model = IPTransit
+    fabric_site = forms.ModelMultipleChoiceField(
+        queryset=FabricSite.objects.all(),
+        required=False
+    )

@@ -17,3 +17,15 @@ class FabricSiteType(NetBoxObjectType):
     location: Annotated["LocationType", strawberry.lazy('dcim.graphql.types')]
     ip_prefixes: List[Annotated["PrefixType", strawberry.lazy('ipam.graphql.types')]]
     devices: List[Annotated["DeviceType", strawberry.lazy('dcim.graphql.types')]]
+    
+    
+@strawberry_django.type(
+    models.IPTransit,
+    fields='__all__',
+    filters=filters.IPTransitFilter
+)
+class IPTransitType(NetBoxObjectType):
+    id:int
+    name:str
+    fabric_site: Annotated["FabricSiteType", strawberry.lazy('dcim.graphql.types')]
+    asn:str

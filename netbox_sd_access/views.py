@@ -70,6 +70,14 @@ class IPTransitListView(generic.ObjectListView):
     #         'sda_transit_table': sda_transit_table
     #     }
     
+class IPTransitEditView(generic.ObjectEditView):
+    queryset = models.IPTransit.objects.all()
+    form = forms.IPTransitForm
+class IPTransitDeleteView(generic.ObjectDeleteView):
+    queryset = models.IPTransit.objects.all()
+    
+class IPTransitView(generic.ObjectView):
+    queryset = models.IPTransit.objects.all()
     
 class SDATransitListView(generic.ObjectListView):
     

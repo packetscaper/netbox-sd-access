@@ -27,7 +27,14 @@ urlpatterns = (
          kwargs={'model': models.FabricSite}),
     
     #### TRANSITS
-    path("transits/ip/", views.IPTransitListView.as_view(), name='ip_transits_list'),
-    path('transits/sda/', views.SDATransitListView.as_view(), name='sda_transits_list')
+    path("ip-transits/", views.IPTransitListView.as_view(), name='ip_transit_list'),
+    path("ip-transits/add/", views.IPTransitEditView.as_view(), name='ip_transit_add'),
+    path('ip-transits/<int:pk>/', views.IPTransitView.as_view(), name='ip_transit'),
+    path('ip-transits/<int:pk>/edit/', views.IPTransitEditView.as_view(), name='ip_transit_edit'),
+    path('ip-transits/<int:pk>/delete/', views.IPTransitDeleteView.as_view(), name='ip_transit_delete'),
+    path('ip-transits/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='ip_transit_changelog', 
+         kwargs={'model': models.IPTransit}),
+        
+    path('sda-transits/', views.SDATransitListView.as_view(), name='sda_transit_list')
     
 )
