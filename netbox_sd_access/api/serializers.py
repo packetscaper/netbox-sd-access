@@ -27,9 +27,9 @@ class FabricSiteSerializer(NetBoxModelSerializer):
 
 class IPTransitSerializer(NetBoxModelSerializer):
     url = serializers.HyperlinkedIdentityField(
-        view_name='plugins-api:netbox_sd_access-api:ip-transit-detail'
+        view_name='plugins-api:netbox_sd_access-api:iptransit-detail'
     )
     
     class Meta:
         model = IPTransit
-        fields= ('id', 'url', 'name', 'fabric_site', 'asn', 'tags', 'custom_fields', 'created', 'last_updated')
+        fields= ('id', 'url', 'name', 'fabric_site', 'asn', 'comments', 'tags', 'custom_fields', 'created', 'last_updated')

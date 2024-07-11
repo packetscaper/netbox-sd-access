@@ -24,7 +24,7 @@ class FabricSiteFilterSet(NetBoxModelFilterSet):
 class IPTransitFilterSet(NetBoxModelFilterSet):
     class Meta:
         model = IPTransit
-        fields = ('id', 'name', 'fabric_site', 'asn')
+        fields = ('id', 'name', 'fabric_site', 'asn', 'comments')
         
     def search(self, queryset, name, value):
         return queryset.filter(name__icontains=value)

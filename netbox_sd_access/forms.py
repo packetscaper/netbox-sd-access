@@ -31,11 +31,12 @@ class FabricSiteFilterForm(NetBoxModelFilterSetForm):
     
 class IPTransitForm(NetBoxModelForm):
     fabric_site = DynamicModelChoiceField(queryset=FabricSite.objects.all(), required=True)
-    asn = forms.CharField(required=False)
+    asn = forms.IntegerField(required=False)
+    comments = CommentField(name="comments")
     
     class Meta:
         model = IPTransit
-        fields = ('name', 'fabric_site', 'asn')
+        fields = ('name', 'fabric_site', 'asn', 'comments')
         
 class IPTransitFilterForm(NetBoxModelFilterSetForm):
     model = IPTransit

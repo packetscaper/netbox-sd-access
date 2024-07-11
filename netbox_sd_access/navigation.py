@@ -10,7 +10,7 @@ fabricsite_buttons = [
 
 ip_transit_buttons = [
     PluginMenuButton(
-        link='plugins:netbox_sd_access:ip_transit_add',
+        link='plugins:netbox_sd_access:iptransit_add',
         title='Add',
         icon_class='mdi mdi-plus-thick'
     )
@@ -23,12 +23,12 @@ menu_items = (
         buttons=fabricsite_buttons
     ),
     PluginMenuItem(
-        link='plugins:netbox_sd_access:ip_transit_list',
+        link='plugins:netbox_sd_access:iptransit_list',
         link_text='IP Transits',
         buttons=ip_transit_buttons
     ),
     PluginMenuItem(
-        link='plugins:netbox_sd_access:sda_transit_list',
+        link='plugins:netbox_sd_access:sdatransit_list',
         link_text='SDA Transits'
     )
 )

@@ -27,5 +27,6 @@ class FabricSiteType(NetBoxObjectType):
 class IPTransitType(NetBoxObjectType):
     id:int
     name:str
-    fabric_site: Annotated["FabricSiteType", strawberry.lazy('dcim.graphql.types')]
-    asn:str
+    fabric_site:FabricSiteType
+    asn:int
+    comments:str

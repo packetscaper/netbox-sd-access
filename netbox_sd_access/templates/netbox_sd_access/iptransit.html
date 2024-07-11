@@ -1,4 +1,5 @@
-{% extends 'generic/object.html' %} {% load render_table from django_tables2 %}
+{% extends 'generic/object.html' %} 
+{% load render_table from django_tables2 %}
 {% block content %}
 <div class="row mb-3">
     <div class="col col-md-6">
@@ -25,6 +26,9 @@
                 </table>
             </div>
         </div>
+        {% include 'inc/panels/custom_fields.html' %}
+        {% include 'inc/panels/tags.html' %}
+        {% include 'inc/panels/comments.html' %}
     </div>
 </div>
 {% endblock content %}
