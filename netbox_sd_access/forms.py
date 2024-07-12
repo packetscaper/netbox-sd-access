@@ -38,3 +38,7 @@ class IPPoolForm(NetBoxModelForm):
     class Meta:
         model = IPPool
         fields = ('name', 'prefix', 'gateway', 'dhcp_server', 'dns_servers')
+
+class IPPoolFilterForm(NetBoxModelFilterSetForm):
+    model = IPPool
+    prefix = DynamicModelChoiceField(queryset=Prefix.objects.all(), required=False)

@@ -56,7 +56,7 @@ class IPPoolListView(generic.ObjectListView):
     queryset = models.IPPool.objects.all()
     table = tables.IPPoolTable
     filterset = filtersets.IPPoolFilterSet
-    filterset_form = forms.IPPoolForm
+    filterset_form = forms.IPPoolFilterForm
 
 class IPPoolEditView(generic.ObjectEditView):
     queryset = models.IPPool.objects.all()
