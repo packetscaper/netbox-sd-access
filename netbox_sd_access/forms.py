@@ -1,5 +1,5 @@
 from django import forms
-from ipam.models import Prefix
+from ipam.models import Prefix, IPAddress
 from dcim.models import Site, Location, Device
 from netbox.forms import NetBoxModelForm, NetBoxModelFilterSetForm
 from utilities.forms.fields import CommentField, DynamicModelChoiceField, DynamicModelMultipleChoiceField
@@ -28,3 +28,13 @@ class FabricSiteFilterForm(NetBoxModelFilterSetForm):
         queryset=Site.objects.all(),
         required=False
     )
+
+class IPPoolForm(NetBoxModelForm):
+    prefix = DynamicModelChoiceField(queryset=Prefix.objects.all(), required=True)
+    gateway = DynamicModelChoiceField(queryset=IPAddress.objects.all(), required=True)
+    dhcp_server = DynamicModelChoiceField(queryset=IPAddress.objects.all(), required=True)
+    dns_servers = DynamicModelMultipleChoiceField(queryset=IPAddress.objects.all(), required=True)
+    
+    class Meta:
+        model = IPPool
+        fields = ('name', 'prefix', 'gateway', 'dhcp_server', 'dns_servers')

@@ -31,3 +31,15 @@ class FabricSite(NetBoxModel):
     
     def get_absolute_url(self):
         return reverse('plugins:netbox_sd_access:fabricsite', args=[self.pk])
+    
+class IPPool(NetBoxModel):
+    name = models.CharField(max_length=200)
+    prefix = models.ForeignKey(to='ipam.Prefix', on_delete=models.PROTECT)
+    gateway = models.ForeignKey(to='ipam.IPAddress', on_delete=models.PROTECT)
+    dhcp_server = models.ForeignKey(to='ipam.IPAddress', on_delete=models.PROTECT, related_name='dhcp_server')
+    dns_servers = models.ManyToManyField(to='ipam.IPAddress', related_name='dns_servers')
+    
+    class Meta:
+        ordering = ("name",)
+        verbose_name = 'IP Pool'
+        verbose_name_plural = 'IP Pools'
