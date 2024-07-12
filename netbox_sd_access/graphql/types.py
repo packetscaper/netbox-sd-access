@@ -30,3 +30,4 @@ class IPTransitType(NetBoxObjectType):
     fabric_site:FabricSiteType
     asn:int
     comments:str
+

@@ -4,6 +4,7 @@ from .. import filtersets, models
 from netbox.graphql.filter_mixins import autotype_decorator, BaseFilterMixin
 
 __all__ = (
+    'FabricSiteFilter'
     'FabricSiteFilter',
     'IPTransitFilter'
 )

@@ -11,9 +11,10 @@ class Query:
         return models.FabricSite.objects.get(pk=id)
     fabricsite_list: list[FabricSiteType] = strawberry_django.field()
     
+
     @strawberry.field
     def iptransit(self,id:int) -> IPTransitType:
         return models.IPTransit.objects.get(pk=id)
     iptransit_list: list[IPTransitType] = strawberry_django.field()
-    
+
 schema = [Query]

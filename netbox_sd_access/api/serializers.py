@@ -3,7 +3,6 @@ from rest_framework import serializers
 from netbox.api.serializers import NetBoxModelSerializer, WritableNestedSerializer
 from ..models import *
 
-
 #import and use NestedPrefix, Nested Device Serializer
 class NestedFabricSiteSerializer(WritableNestedSerializer):
     url = serializers.HyperlinkedIdentityField(
