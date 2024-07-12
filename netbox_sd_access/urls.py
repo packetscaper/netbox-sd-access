@@ -17,11 +17,24 @@ urlpatterns = (
     #     kwargs={"model": models.SDAccess},
     # ),
     
+    #### FABRIC SITES
     path("fabric-sites/", views.FabricSiteListView.as_view(), name='fabricsite_list'),
     path("fabric-sites/add/", views.FabricSiteEditView.as_view(), name='fabricsite_add'),
     path('fabric-sites/<int:pk>/', views.FabricSiteView.as_view(), name='fabricsite'),
     path('fabric-sites/<int:pk>/edit/', views.FabricSiteEditView.as_view(), name='fabricsite_edit'),
     path('fabric-sites/<int:pk>/delete/', views.FabricSiteDeleteView.as_view(), name='fabricsite_delete'),
     path('fabric-sites/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='fabricsite_changelog', 
-         kwargs={'model': models.FabricSite})
+         kwargs={'model': models.FabricSite}),
+    
+    #### TRANSITS
+    path("ip-transits/", views.IPTransitListView.as_view(), name='iptransit_list'),
+    path("ip-transits/add/", views.IPTransitEditView.as_view(), name='iptransit_add'),
+    path('ip-transits/<int:pk>/', views.IPTransitView.as_view(), name='iptransit'),
+    path('ip-transits/<int:pk>/edit/', views.IPTransitEditView.as_view(), name='iptransit_edit'),
+    path('ip-transits/<int:pk>/delete/', views.IPTransitDeleteView.as_view(), name='iptransit_delete'),
+    path('ip-transits/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='iptransit_changelog', 
+         kwargs={'model': models.IPTransit}),
+        
+    path('sda-transits/', views.SDATransitListView.as_view(), name='sdatransit_list')
+    
 )
