@@ -5,9 +5,16 @@ from netbox.graphql.filter_mixins import autotype_decorator, BaseFilterMixin
 
 __all__ = (
     'FabricSiteFilter'
+    'FabricSiteFilter',
+    'IPTransitFilter'
 )
 
 @strawberry_django.filter(models.FabricSite, lookups=True)
 @autotype_decorator(filtersets.FabricSiteFilterSet)
 class FabricSiteFilter(BaseFilterMixin):
+    pass
+
+@strawberry_django.filter(models.IPTransit, lookups=True)
+@autotype_decorator(filtersets.IPTransitFilterSet)
+class IPTransitFilter(BaseFilterMixin):
     pass

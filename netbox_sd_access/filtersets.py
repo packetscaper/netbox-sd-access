@@ -20,6 +20,14 @@ class FabricSiteFilterSet(NetBoxModelFilterSet):
     def search(self, queryset, name, value):
         return queryset.filter(name__icontains=value)
 
+class IPTransitFilterSet(NetBoxModelFilterSet):
+    class Meta:
+        model = IPTransit
+        fields = ('id', 'name', 'fabric_site', 'asn', 'comments')
+        
+    def search(self, queryset, name, value):
+        return queryset.filter(name__icontains=value)
+
 class IPPoolFilterSet(NetBoxModelFilterSet):
     class Meta:
         model = IPPool
