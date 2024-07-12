@@ -1,10 +1,9 @@
 from django.db.models import Count
-from django.shortcuts import render
+
 from netbox.views import generic
 from dcim.models import Device
 from dcim.tables import DeviceTable
 from . import filtersets, forms, models, tables
-from django_tables2 import RequestConfig
 
 
 class SDAccessView(generic.ObjectView):
@@ -49,39 +48,3 @@ class FabricSiteEditView(generic.ObjectEditView):
     
 class FabricSiteDeleteView(generic.ObjectDeleteView):
     queryset = models.FabricSite.objects.all()
-    
-class IPTransitListView(generic.ObjectListView):
-    # qs1 = 
-    # qs2 = models.SDATransit.objects.annotate(
-    #     device_count=Count('devices')
-    # )
-    queryset = models.IPTransit.objects.all()
-    table = tables.IPTransitTable
-    
-    # def get_extra_context(self, request, instance):
-    #     ip_transit_table = tables.IPTransitTable(self.qs1)
-    #     sda_transit_table = tables.SDATransitTable(self.qs2)
-        
-    #     ip_transit_table.configure(request)
-    #     sda_transit_table.configure(request)
-        
-    #     return {
-    #         'ip_transit_table': ip_transit_table,
-    #         'sda_transit_table': sda_transit_table
-    #     }
-    
-class IPTransitEditView(generic.ObjectEditView):
-    queryset = models.IPTransit.objects.all()
-    form = forms.IPTransitForm
-class IPTransitDeleteView(generic.ObjectDeleteView):
-    queryset = models.IPTransit.objects.all()
-    
-class IPTransitView(generic.ObjectView):
-    queryset = models.IPTransit.objects.all()
-    
-class SDATransitListView(generic.ObjectListView):
-    
-    queryset = models.SDATransit.objects.annotate(
-        device_count = Count('devices')
-    )
-    table = tables.SDATransitTable
