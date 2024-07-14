@@ -46,6 +46,14 @@ PLUGINS_CONFIG = {
 }
 ```
 
+## Developing
+
+Development can be done using Docker and VS Code Dev Containers. Open the repository in VS Code and make sure you have the Dev Containers extension installed. Then use `Ctrl+Shift+P` (`Cmd+Shift+P` on Mac) and select "Dev Containers: Reopen in Container". When you are done, you can exit the Dev Container by clicking on the icon in the bottom left corner and selecting "Close Remote Connection". When you want to reopen the container, you can use the same steps, or simply select the workspace marked with \[Dev Container\] on VS Code.
+
+To install the plugin, use `pip install --editable .` once the container loads, and then use `python ../manage.py migrate`
+
+To run the server, use `python ../manage.py runserver`
+
 ## Credits
 
 Based on the NetBox plugin tutorial:
