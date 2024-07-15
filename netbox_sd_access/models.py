@@ -31,3 +31,22 @@ class FabricSite(NetBoxModel):
     
     def get_absolute_url(self):
         return reverse('plugins:netbox_sd_access:fabricsite', args=[self.pk])
+    
+
+# class VirtualNetworkType(models.TextChoices):
+#     VN3 = 'Layer 3 Virtual Network'
+#     VN2 = 'Layer 2 Virutal Network'
+class LayerThreeVirtualNetwork(NetBoxModel):
+    name=models.CharField(max_length=200)
+    fabric_site=models.ManyToManyField(to=FabricSite, on_delete=models.PROTECT, blank=True, null=True)
+    vrf=models.OneToOneField(to='ipam.VRF', blank = True)
+
+    class Meta:
+        ordering = ("name",)
+
+    def __str__(self):
+        return self.name
+    
+    def get_absolute_url(self):
+        return reverse('plugins:netbox-sd-access:virtualnetwork', args=[self.pk])
+

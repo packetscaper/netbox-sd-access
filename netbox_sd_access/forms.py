@@ -1,5 +1,5 @@
 from django import forms
-from ipam.models import Prefix
+from ipam.models import Prefix, VRF
 from dcim.models import Site, Location, Device
 from netbox.forms import NetBoxModelForm, NetBoxModelFilterSetForm
 from utilities.forms.fields import CommentField, DynamicModelChoiceField, DynamicModelMultipleChoiceField
@@ -26,5 +26,16 @@ class FabricSiteFilterForm(NetBoxModelFilterSetForm):
     model = FabricSite
     physical_site = forms.ModelMultipleChoiceField(
         queryset=Site.objects.all(),
+        required=False
+    )
+
+class VirtualNetworkForm(NetBoxModelForm):
+    fabric_site = DynamicModelChoiceField(queryset = FabricSite.objects.all(), required=True)
+    vrf = DynamicModelChoiceField(queryset = VRF.objects.all(), required=True)
+
+class VirtualNetworkFilterForm(NetBoxModelFilterSetForm):
+    model = LayerThreeVirtualNetwork
+    fabric_site = forms.ModelMultipleChoiceField(
+        queryset = FabricSite.objects.all(),
         required=False
     )
