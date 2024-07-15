@@ -9,5 +9,5 @@ services:
       - "8000:8080"
     volumes:
       - ../:/opt/netbox/netbox/netbox-sd-access
-      - ~/.gitconfig:/home/vscode/.gitconfig:z,ro
-      - ~/.ssh:/home/vscode/.ssh
+      - ~/.gitconfig:/home/ubuntu/.gitconfig:z,ro
+      - ~/.ssh:/home/ubuntu/.ssh
