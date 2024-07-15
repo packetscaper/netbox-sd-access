@@ -13,6 +13,16 @@ class NestedFabricSiteSerializer(WritableNestedSerializer):
     class Meta:
         model = FabricSite
         fields = ('id', 'url', 'display', 'name')
+        
+class NextedIPPoolSerializer(WritableNestedSerializer):
+    url = serializers.HyperlinkedIdentityField(
+        view_name='plugins-api:netbox_sd_access-api:ippool-detail'
+    )
+    prefix = NestedPrefixSerializer()
+    
+    class Meta:
+        model = IPPool
+        fields = ('id', 'url', 'display', 'name', 'prefix')
 
 class FabricSiteSerializer(NetBoxModelSerializer):
     url = serializers.HyperlinkedIdentityField(

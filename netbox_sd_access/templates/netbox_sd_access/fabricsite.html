@@ -22,9 +22,9 @@
                 <td>{{ object.devices.count }}</td>
             </tr>
             <tr>
-                <th scope="row">IP Prefixes</th>
+                <th scope="row">IP Pools</th>
                 <td>{% for prefix in object.ip_prefixes.all %}
-                    <a href="{{ prefix.get_absolute_url }}">{{ prefix }}</a>
+                    <a href="{{ prefix.get_absolute_url }}">{{ prefix.prefix }}</a>
                     <br>
                     {% endfor %}
                 </td>

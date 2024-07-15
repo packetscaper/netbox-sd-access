@@ -14,23 +14,6 @@ class SDAccess(NetBoxModel):
 
     def get_absolute_url(self):
         return reverse("plugins:netbox_sd_access:sdaccess", args=[self.pk])
-
-class FabricSite(NetBoxModel):
-    name = models.CharField(max_length=200)
-    physical_site = models.ForeignKey(to='dcim.Site', on_delete=models.PROTECT)
-    # locations is an optional field for if you make the fabric on a per floor basis
-    location = models.OneToOneField(to='dcim.Location', on_delete=models.PROTECT, blank=True, null=True)
-    ip_prefixes = models.ManyToManyField(to='ipam.Prefix')
-    devices = models.ManyToManyField(to='dcim.Device', blank=True)
-    
-    class Meta:
-        ordering = ("name",)
-        
-    def __str__(self):
-        return self.name
-    
-    def get_absolute_url(self):
-        return reverse('plugins:netbox_sd_access:fabricsite', args=[self.pk])
     
 class IPPool(NetBoxModel):
     name = models.CharField(max_length=200)
@@ -50,4 +33,19 @@ class IPPool(NetBoxModel):
     def __str__(self) -> str:
         return self.name
     
+class FabricSite(NetBoxModel):
+    name = models.CharField(max_length=200)
+    physical_site = models.ForeignKey(to='dcim.Site', on_delete=models.PROTECT)
+    # locations is an optional field for if you make the fabric on a per floor basis
+    location = models.OneToOneField(to='dcim.Location', on_delete=models.PROTECT, blank=True, null=True)
+    ip_prefixes = models.ManyToManyField(to=IPPool)
+    devices = models.ManyToManyField(to='dcim.Device', blank=True)
     
+    class Meta:
+        ordering = ("name",)
+        
+    def __str__(self):
+        return self.name
+    
+    def get_absolute_url(self):
+        return reverse('plugins:netbox_sd_access:fabricsite', args=[self.pk])
