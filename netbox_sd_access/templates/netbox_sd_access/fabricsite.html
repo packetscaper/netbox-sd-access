@@ -20,6 +20,14 @@
             <tr>
                 <th scope="row">Number of Devices</th>
                 <td>{{ object.devices.count }}</td>
+            </tr>
+            <tr>
+                <th scope="row">IP Prefixes</th>
+                <td>{% for prefix in object.ip_prefixes.all %}
+                    <a href="{{ prefix.get_absolute_url }}">{{ prefix }}</a>
+                    <br>
+                    {% endfor %}
+                </td>
             </tr></table></div>
         </div>
     </div>
