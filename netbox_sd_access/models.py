@@ -77,7 +77,7 @@ class SDATransit(NetBoxModel):
 class IPTransit(NetBoxModel):
     name=models.CharField(max_length=200)
     fabric_site=models.OneToOneField(to=FabricSite, on_delete=models.PROTECT, blank=True, null=True)
-    asn=models.IntegerField()
+    asn=models.OneToOneField(to='ipam.ASN',on_delete=models.PROTECT,null=True, blank=True)
     comments=models.TextField(blank=True)
     
     class Meta:

@@ -58,6 +58,9 @@ class IPTransitListView(generic.ObjectListView):
     queryset = models.IPTransit.objects.all()
     table = tables.IPTransitTable
     
+    filterset = filtersets.IPTransitFilterSet
+    filterset_form = forms.IPTransitFilterForm
+    
     # def get_extra_context(self, request, instance):
     #     ip_transit_table = tables.IPTransitTable(self.qs1)
     #     sda_transit_table = tables.SDATransitTable(self.qs2)
@@ -78,6 +81,11 @@ class IPTransitDeleteView(generic.ObjectDeleteView):
     
 class IPTransitView(generic.ObjectView):
     queryset = models.IPTransit.objects.all()
+    
+# class IPTransitBulkDeleteView(generic.BulkDeleteView):
+#     queryset = models.IPTransit.objects.all()
+#     filterset = filtersets.IPTransitFilterSet
+#     table = tables.IPTransitTable
     
 class SDATransitListView(generic.ObjectListView):
     

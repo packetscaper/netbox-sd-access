@@ -28,6 +28,6 @@ class IPTransitType(NetBoxObjectType):
     id:int
     name:str
     fabric_site:FabricSiteType
-    asn:int
+    asn: Annotated["ASNType", strawberry.lazy('ipam.graphql.types')]
     comments:str
 
