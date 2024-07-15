@@ -43,3 +43,11 @@ class IPPool(NetBoxModel):
         ordering = ("name",)
         verbose_name = 'IP Pool'
         verbose_name_plural = 'IP Pools'
+    
+    def get_absolute_url(self):
+        return reverse("plugins:netbox_sd_access:ippool", args=[self.pk])
+    
+    def __str__(self) -> str:
+        return self.name
+    
+    
