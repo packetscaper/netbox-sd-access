@@ -1,6 +1,6 @@
 #!/bin/bash
 
-USER=ubuntu
+USER=vscode
 
 # Reconfigure User id if set by user
 if [ ! -z "${USER_UID}" ] && [ "${USER_UID}" != "`id -u ${USER}`" ] ; then
