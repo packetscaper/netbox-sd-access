@@ -17,23 +17,14 @@ class FabricSiteFilterSet(NetBoxModelFilterSet):
     
     class Meta:
         model = FabricSite
-        fields = ('id', 'name', 'physical_site', 'location', 'ip_prefixes', 'devices')
+        fields = ('id', 'name', 'physical_site', 'location', 'ip_prefixes')
     
     def search(self, queryset, name, value):
         return queryset.filter(name__icontains=value)
 
-class SDADeviceRoleFilterSet(NetBoxModelFilterSet):
+class SDADeviceFilterSet(NetBoxModelFilterSet):
     role = django_filters.CharFilter(field_name='role', lookup_expr='exact')
-    site = django_filters.NumberFilter(method='filter_location')
     
     class Meta:
-        model = SDADeviceRole
-        fields = ('role','site',)
-        fields = ('role',)
-    
-    def filter_location(self, queryset, name, value):
-        print(value)
-        print(type(value))
-        queryset = queryset.annotate(site_id=F('device__site__id'))
-        queryset = queryset.filter(site_id=value)
-        return queryset
+        model = SDADevice
+        fields = ('role','fabric_site',)

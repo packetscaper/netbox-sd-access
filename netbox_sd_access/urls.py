@@ -25,11 +25,11 @@ urlpatterns = (
     path('fabric-sites/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='fabricsite_changelog', 
          kwargs={'model': models.FabricSite}),
     
-    path("device-roles/", views.SDADeviceRoleListView.as_view(), name='sdadevicerole_list'),
-    path("device-roles/add/", views.SDADeviceRoleEditView.as_view(), name='sdadevicerole_add'),
-    path('device-roles/<int:pk>/', views.SDADeviceRoleView.as_view(), name='sdadevicerole'),
-    path('device-roles/<int:pk>/edit/', views.SDADeviceRoleEditView.as_view(), name='sdadevicerole_edit'),
-    path('device-roles/<int:pk>/delete/', views.SDADeviceRoleDeleteView.as_view(), name='sdadevicerole_delete'),
-    path('device-roles/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='sdadevicerole_changelog', 
-         kwargs={'model': models.SDADeviceRole}),
+    path("sda-devices/", views.SDADeviceListView.as_view(), name='sdadevice_list'),
+    path("sda-devices/add/", views.SDADeviceEditView.as_view(), name='sdadevice_add'),
+    path('sda-devices/<int:pk>/', views.SDADeviceView.as_view(), name='sdadevice'),
+    path('sda-devices/<int:pk>/edit/', views.SDADeviceEditView.as_view(), name='sdadevice_edit'),
+    path('sda-devices/<int:pk>/delete/', views.SDADeviceDeleteView.as_view(), name='sdadevice_delete'),
+    path('sda-devices/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='sdadevice_changelog', 
+         kwargs={'model': models.SDADevice}),
 )

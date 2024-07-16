@@ -5,6 +5,6 @@ app_name = 'netbox_sd_access'
 
 router = NetBoxRouter()
 router.register('fabric-sites', views.FabricSiteViewSet)
-router.register('device-roles', views.SDADeviceRoleViewSet)
+router.register('sda-devices', views.SDADeviceViewSet)
 
 urlpatterns = router.urls
