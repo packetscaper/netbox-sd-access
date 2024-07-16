@@ -48,3 +48,20 @@ class FabricSiteEditView(generic.ObjectEditView):
     
 class FabricSiteDeleteView(generic.ObjectDeleteView):
     queryset = models.FabricSite.objects.all()
+
+class VirtualNetworkListView(generic.ObjectListView):
+    queryset = models.VirtualNetwork.objects.all()
+    table = tables.VirtualNetworkTable
+
+    filterset = filtersets.VirtualNetworkFilterSet
+    filterset_form = forms.VirtualNetworkFilterForm
+
+class VirtualNetworkEditView(generic.ObjectEditView):
+    queryset = models.VirtualNetwork.objects.all()
+    form = forms.VirtualNetworkForm
+
+class VirtualNetworkDeleteView(generic.ObjectDeleteView):
+    queryset = models.VirtualNetwork.objects.all()
+
+class VirtualNetworkView(generic.ObjectView):
+    queryset = models.VirtualNetwork.objects.all()

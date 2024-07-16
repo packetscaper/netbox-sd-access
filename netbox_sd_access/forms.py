@@ -34,7 +34,7 @@ class VirtualNetworkForm(NetBoxModelForm):
     vrf = DynamicModelChoiceField(queryset = VRF.objects.all(), required=True)
 
 class VirtualNetworkFilterForm(NetBoxModelFilterSetForm):
-    model = LayerThreeVirtualNetwork
+    model = VirtualNetwork
     fabric_site = forms.ModelMultipleChoiceField(
         queryset = FabricSite.objects.all(),
         required=False
