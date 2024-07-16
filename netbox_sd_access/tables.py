@@ -19,3 +19,13 @@ class FabricSiteTable(NetBoxTable):
         model = FabricSite
         fields = ("pk", "id", "name", "physical_site", "location", "ip_prefixes", "device_count", "actions")
         default_columns = ("name", "physical_site", "location", "device_count")
+
+class SDADeviceRoleTable(NetBoxTable):
+    id = tables.Column(linkify=True)
+    device = tables.Column(linkify=True)
+    role = ChoiceFieldColumn()
+    
+    class Meta(NetBoxTable.Meta):
+        model = SDADeviceRole
+        fields = ('pk', 'id', 'device', 'role', 'actions')
+        default_columns = ('id', 'device', 'role')

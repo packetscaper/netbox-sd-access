@@ -28,3 +28,15 @@ class FabricSiteFilterForm(NetBoxModelFilterSetForm):
         queryset=Site.objects.all(),
         required=False
     )
+
+class SDADeviceRoleForm(NetBoxModelForm):
+    device = DynamicModelChoiceField(queryset=Device.objects.all(), required=True)
+    
+    class Meta:
+        model = SDADeviceRole
+        fields = ('device', 'role')
+
+class SDADeviceRoleFilterForm(NetBoxModelFilterSetForm):
+    model = SDADeviceRole
+    site = forms.ModelChoiceField(queryset=Site.objects.all(), required=False)
+    role = forms.MultipleChoiceField(choices=SDADeviceRoleChoices, required=False, initial=None)

@@ -48,3 +48,19 @@ class FabricSiteEditView(generic.ObjectEditView):
     
 class FabricSiteDeleteView(generic.ObjectDeleteView):
     queryset = models.FabricSite.objects.all()
+
+class SDADeviceRoleView(generic.ObjectView):
+    queryset = models.SDADeviceRole.objects.all()
+    
+class SDADeviceRoleListView(generic.ObjectListView):
+    queryset = models.SDADeviceRole.objects.all()
+    table = tables.SDADeviceRoleTable
+    filterset = filtersets.SDADeviceRoleFilterSet
+    filterset_form = forms.SDADeviceRoleFilterForm
+
+class SDADeviceRoleEditView(generic.ObjectEditView):
+    queryset = models.SDADeviceRole.objects.all()
+    form = forms.SDADeviceRoleForm
+    
+class SDADeviceRoleDeleteView(generic.ObjectDeleteView):
+    queryset = models.SDADeviceRole.objects.all()

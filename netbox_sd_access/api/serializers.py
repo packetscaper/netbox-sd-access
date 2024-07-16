@@ -24,3 +24,11 @@ class FabricSiteSerializer(NetBoxModelSerializer):
         fields = ('id', 'url', 'display', 'name', 'physical_site', 'location', 'ip_prefixes', 'device_count', 'devices', 
                   'tags', 'custom_fields', 'created', 'last_updated')
 
+class SDADeviceRoleSerializer(NetBoxModelSerializer):
+    url = serializers.HyperlinkedIdentityField(
+        view_name='plugins-api:netbox_sd_access-api:sdadevicerole-detail'
+    )
+    
+    class Meta:
+        model = SDADeviceRole
+        fields = ('id', 'url', 'display', 'device', 'role', 'tags', 'custom_fields', 'created', 'last_updated')
