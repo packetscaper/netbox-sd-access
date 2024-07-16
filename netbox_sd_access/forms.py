@@ -41,10 +41,11 @@ class SDADeviceForm(NetBoxModelForm):
         required=True, 
         query_params={'site_id': '$physical_site', 'location_id': '$location'}
     )
+    comments = CommentField()
     
     class Meta:
         model = SDADevice
-        fields = ('physical_site', 'location', 'fabric_site', 'device', 'role',)
+        fields = ('physical_site', 'location', 'fabric_site', 'device', 'role', 'comments', 'tags',)
 
 class SDADeviceFilterForm(NetBoxModelFilterSetForm):
     model = SDADevice

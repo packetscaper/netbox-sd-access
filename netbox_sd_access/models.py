@@ -48,6 +48,7 @@ class SDADevice(NetBoxModel):
     device = models.OneToOneField(to='dcim.Device', on_delete=models.CASCADE, related_name='sda_info')
     role = models.CharField(max_length=50, choices=SDADeviceRoleChoices, blank=True, null=True)
     fabric_site = models.ForeignKey(to=FabricSite, on_delete=models.CASCADE, related_name='devices')
+    comments = models.TextField(blank=True)
     
     class Meta:
         ordering = ('fabric_site','device',)
