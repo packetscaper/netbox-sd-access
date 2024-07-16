@@ -11,4 +11,9 @@ class Query:
         return models.FabricSite.objects.get(pk=id)
     fabricsite_list: list[FabricSiteType] = strawberry_django.field()
     
+    @strawberry.field
+    def ippool(self, id: int) -> IPPoolType:
+        return models.IPPool.objects.get(pk=id)
+    ippool_list: list[IPPoolType] = strawberry_django.field()
+    
 schema = [Query]
