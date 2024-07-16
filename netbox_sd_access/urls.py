@@ -23,5 +23,15 @@ urlpatterns = (
     path('fabric-sites/<int:pk>/edit/', views.FabricSiteEditView.as_view(), name='fabricsite_edit'),
     path('fabric-sites/<int:pk>/delete/', views.FabricSiteDeleteView.as_view(), name='fabricsite_delete'),
     path('fabric-sites/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='fabricsite_changelog', 
-         kwargs={'model': models.FabricSite})
+         kwargs={'model': models.FabricSite}),
+
+    #####Virtual Networks
+    path("virtual-networks/", views.VirtualNetworkListView.as_view(), name='virtualnetwork_list'),
+    path("virtual-networks/add/", views.VirtualNetworkEditView.as_view(), name='virtualnetwork_add'),
+    path('virtual-networks/<int:pk>/', views.VirtualNetworkView.as_view(), name='virtualnetwork'),
+    path("virtual-networkss/<int:pk>/edit", views.VirtualNetworkEditView.as_vierw, name='virtualnetwork_edit'),
+    path('virtual-networks/<int:pk/delete/', views.VirtualNetworkDeleteView.as_view(), name = "virtualnetwork_delete"),
+    path('virtual-networks/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='virtualnetwork_changelog',
+        kwargs={'models': models.VirtualNetwork}),
+
 )

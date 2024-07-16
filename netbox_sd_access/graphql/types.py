@@ -17,3 +17,9 @@ class FabricSiteType(NetBoxObjectType):
     location: Annotated["LocationType", strawberry.lazy('dcim.graphql.types')]
     ip_prefixes: List[Annotated["PrefixType", strawberry.lazy('ipam.graphql.types')]]
     devices: List[Annotated["DeviceType", strawberry.lazy('dcim.graphql.types')]]
+
+class VirtualNetworkType(NetBoxObjectType):
+    id: int
+    name: str
+    fabric_site: FabricSiteType
+    vrf: Annotated["VRFType", strawberry.lazy('ipam.graphql.types')]
