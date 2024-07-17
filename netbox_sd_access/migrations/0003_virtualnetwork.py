@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ("last_updated", models.DateTimeField(auto_now=True, null=True))
                 (
                     "custom_field_data",
-                    models.JSOnField(blank=True, default=dict, encode=utilities.json.CustomFieldJSONEncoder),
+                    models.JSONField(blank=True, default=dict, encode=utilities.json.CustomFieldJSONEncoder),
 
                 ),
                 (

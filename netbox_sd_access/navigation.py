@@ -10,7 +10,7 @@ fabricsite_buttons = [
 
 virtualnetwork_buttons = [
     PluginMenuButton(
-        link='plugins:netbox_sd_access:virtualnetwork_list',
+        link='plugins:netbox_sd_access:virtualnetwork_add',
         title='Add',
         icon_class='mdi mdi-plus-thick'
     ),

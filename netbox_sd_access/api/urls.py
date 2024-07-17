@@ -5,6 +5,6 @@ app_name = 'netbox_sd_access'
 
 router = NetBoxRouter()
 router.register('fabric-sites', views.FabricSiteViewSet)
-router.regsiter('virtual-networks', views.VirtualNetworkViewSet)
+router.register('virtual-networks', views.VirtualNetworkViewSet)
 
 urlpatterns = router.urls
