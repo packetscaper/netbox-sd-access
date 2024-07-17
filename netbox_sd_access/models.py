@@ -34,12 +34,13 @@ class FabricSite(NetBoxModel):
     
 
 class VirtualNetwork(NetBoxModel):
-    name=models.CharField(max_length=200)
+    name=models.CharField(max_length=200, default = "Virtual Network")
     fabric_site=models.ManyToManyField(to=FabricSite)
     vrf=models.OneToOneField(to='ipam.VRF', on_delete = models.PROTECT, blank = True)
 
     class Meta:
         ordering = ("name",)
+        verbose_name = "Virtual Network"
 
     def __str__(self):
         return self.name

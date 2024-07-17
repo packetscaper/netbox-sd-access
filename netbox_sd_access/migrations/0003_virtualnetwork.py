@@ -8,8 +8,7 @@ class Migration(migrations.Migration):
         ##more stuff
         ("extras", "0115_convert_dashboard_widgets"),
         ("ipam", "0069_gfk_indexes"),
-        ("netbox_sd_access", "0001_initial"),
-        ["fabric_site", "0002_initial"]
+        ("netbox_sd_access", "0002_fabricsite"),
     ]
 
     operations = [
@@ -18,16 +17,16 @@ class Migration(migrations.Migration):
             fields=[
                 ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False)),
                 ("created", models.DateTimeField(auto_now_add=True, null=True)),
-                ("last_updated", models.DateTimeField(auto_now=True, null=True))
+                ("last_updated", models.DateTimeField(auto_now=True, null=True)),
                 (
                     "custom_field_data",
-                    models.JSONField(blank=True, default=dict, encode=utilities.json.CustomFieldJSONEncoder),
+                    models.JSONField(blank=True, default=dict, encoder=utilities.json.CustomFieldJSONEncoder),
 
                 ),
                 (
                     "fabric_site",
                     models.ManyToManyField(
-                        blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, to="netbox_sd_access.fabricsite",
+                        blank=True,  to="netbox_sd_access.fabricsite",
                     ),
                 ),
                 (
