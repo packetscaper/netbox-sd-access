@@ -6,7 +6,10 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
     dependencies = [
         ##more stuff
-        ("ipam")
+        ("extras", "0115_convert_dashboard_widgets"),
+        ("ipam", "0069_gfk_indexes"),
+        ("netbox_sd_access", "0001_initial"),
+        ["fabric_site", "0002_initial"]
     ]
 
     operations = [

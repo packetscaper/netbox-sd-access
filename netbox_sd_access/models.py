@@ -35,8 +35,8 @@ class FabricSite(NetBoxModel):
 
 class VirtualNetwork(NetBoxModel):
     name=models.CharField(max_length=200)
-    fabric_site=models.ManyToManyField(to=FabricSite, on_delete=models.PROTECT, blank=True, null=True)
-    vrf=models.OneToOneField(to='ipam.VRF', blank = True)
+    fabric_site=models.ManyToManyField(to=FabricSite)
+    vrf=models.OneToOneField(to='ipam.VRF', on_delete = models.PROTECT, blank = True)
 
     class Meta:
         ordering = ("name",)
