@@ -31,3 +31,11 @@ class SDADeviceFilterSet(NetBoxModelFilterSet):
     
     def search(self, queryset, name, value):
         return queryset.filter(comments__icontains=value)
+
+class IPPoolFilterSet(NetBoxModelFilterSet):
+    class Meta:
+        model = IPPool
+        fields = ('id', 'name', 'gateway', 'dhcp_server', 'dns_servers')
+    
+    def search(self, queryset, name, value):
+        return queryset.filter(name__itcontains=value)

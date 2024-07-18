@@ -30,3 +30,11 @@ class SDADeviceTable(NetBoxTable):
         model = SDADevice
         fields = ('pk', 'id', 'device', 'role', 'fabric_site', 'actions')
         default_columns = ('id', 'device', 'role', 'fabric_site')
+        
+class IPPoolTable(NetBoxTable):
+    name = tables.Column(linkify=True)
+    
+    class Meta(NetBoxTable.Meta):
+        model = IPPool
+        fields = ("pk", "id", "name", "prefix", "gateway", "dhcp_server", "dns_servers")
+        default_columns = ("name", "prefix", "gateway")

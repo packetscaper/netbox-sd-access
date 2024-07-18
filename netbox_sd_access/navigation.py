@@ -8,9 +8,18 @@ fabricsite_buttons = [
     ),
 ]
 
+
 devicerole_buttons = [
     PluginMenuButton(
         link='plugins:netbox_sd_access:sdadevice_add',
+        title='Add',
+        icon_class='mdi mdi-plus-thick'
+    ),
+]
+
+ippool_buttons = [
+    PluginMenuButton(
+        link='plugins:netbox_sd_access:ippool_add',
         title='Add',
         icon_class='mdi mdi-plus-thick'
     ),
@@ -26,5 +35,10 @@ menu_items = (
         link='plugins:netbox_sd_access:sdadevice_list',
         link_text='SDA Devices',
         buttons=devicerole_buttons
+    ),
+    PluginMenuItem(
+        link='plugins:netbox_sd_access:ippool_list',
+        link_text='IP Pools',
+        buttons=ippool_buttons
     ),
 )

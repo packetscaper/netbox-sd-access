@@ -16,4 +16,9 @@ class Query:
         return models.SDADevice.objects.get(pk=id)
     sdadevice_list: list[SDADeviceType] = strawberry_django.field()
     
+    @strawberry.field
+    def ippool(self, id: int) -> IPPoolType:
+        return models.IPPool.objects.get(pk=id)
+    ippool_list: list[IPPoolType] = strawberry_django.field()
+    
 schema = [Query]
