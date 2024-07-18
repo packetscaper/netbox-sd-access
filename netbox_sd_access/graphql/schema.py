@@ -10,6 +10,11 @@ class Query:
     def fabricsite(self, id: int) -> FabricSiteType:
         return models.FabricSite.objects.get(pk=id)
     fabricsite_list: list[FabricSiteType] = strawberry_django.field()
+
+    @strawberry.field
+    def sdadevice(self, id: int) -> SDADeviceType:
+        return models.SDADevice.objects.get(pk=id)
+    sdadevice_list: list[SDADeviceType] = strawberry_django.field()
     
     @strawberry.field
     def ippool(self, id: int) -> IPPoolType:

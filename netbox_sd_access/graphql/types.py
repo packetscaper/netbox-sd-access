@@ -30,4 +30,14 @@ class FabricSiteType(NetBoxObjectType):
     physical_site: Annotated["SiteType", strawberry.lazy('dcim.graphql.types')]
     location: Annotated["LocationType", strawberry.lazy('dcim.graphql.types')]
     ip_prefixes: List[IPPoolType]
-    devices: List[Annotated["DeviceType", strawberry.lazy('dcim.graphql.types')]]
+
+@strawberry_django.type(
+    models.SDADevice,
+    fields='__all__',
+    filters=filters.SDADeviceFilter
+)
+class SDADeviceType(NetBoxObjectType):
+    id: int
+    device: Annotated["DeviceType", strawberry.lazy('dcim.graphql.types')]
+    fabric_site: FabricSiteType
+    role: str

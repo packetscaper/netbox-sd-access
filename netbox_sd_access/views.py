@@ -1,8 +1,6 @@
 from django.db.models import Count
 
 from netbox.views import generic
-from dcim.models import Device
-from dcim.tables import DeviceTable
 from . import filtersets, forms, models, tables
 
 
@@ -27,7 +25,7 @@ class FabricSiteView(generic.ObjectView):
     queryset = models.FabricSite.objects.all()
     
     def get_extra_context(self, request, instance):
-        table = DeviceTable(instance.devices.all())
+        table = tables.SDADeviceTable(instance.devices.all())
         table.configure(request)
         
         return {
@@ -49,6 +47,23 @@ class FabricSiteEditView(generic.ObjectEditView):
 class FabricSiteDeleteView(generic.ObjectDeleteView):
     queryset = models.FabricSite.objects.all()
 
+
+class SDADeviceView(generic.ObjectView):
+    queryset = models.SDADevice.objects.all()
+    
+class SDADeviceListView(generic.ObjectListView):
+    queryset = models.SDADevice.objects.all()
+    table = tables.SDADeviceTable
+    filterset = filtersets.SDADeviceFilterSet
+    filterset_form = forms.SDADeviceFilterForm
+
+class SDADeviceEditView(generic.ObjectEditView):
+    queryset = models.SDADevice.objects.all()
+    form = forms.SDADeviceForm
+    
+class SDADeviceDeleteView(generic.ObjectDeleteView):
+    queryset = models.SDADevice.objects.all()
+
 class IPPoolView(generic.ObjectView):
     queryset = models.IPPool.objects.all()
     
@@ -64,3 +79,4 @@ class IPPoolEditView(generic.ObjectEditView):
     
 class IPPoolDeleteView(generic.ObjectDeleteView):
     queryset = models.IPPool.objects.all()
+
