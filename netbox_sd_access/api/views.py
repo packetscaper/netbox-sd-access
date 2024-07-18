@@ -19,4 +19,4 @@ class SDADeviceViewSet(NetBoxModelViewSet):
 
 class IPPoolViewSet(NetBoxModelViewSet):
     queryset = models.IPPool.objects.prefetch_related('tags').all()
-    serializer_class = IPPoolSerialize
+    serializer_class = IPPoolSerializer

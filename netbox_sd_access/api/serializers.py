@@ -3,7 +3,7 @@ from rest_framework import serializers
 from dcim.api.serializers import SiteSerializer
 from netbox.api.serializers import NetBoxModelSerializer, WritableNestedSerializer
 from ipam.api.serializers import NestedPrefixSerializer, NestedIPAddressSerializer
-from ..models import FabricSite, IPPool
+from ..models import FabricSite, IPPool, SDADevice
 
 #import and use NestedPrefix, Nested Device Serializer
 class NestedFabricSiteSerializer(WritableNestedSerializer):
