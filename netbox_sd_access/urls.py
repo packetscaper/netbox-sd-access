@@ -35,6 +35,12 @@ urlpatterns = (
     path('ip-transits/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='iptransit_changelog', 
          kwargs={'model': models.IPTransit}),
         
-    path('sda-transits/', views.SDATransitListView.as_view(), name='sdatransit_list')
+    path("sda-transits/", views.SDATransitListView.as_view(), name='sdatransit_list'),
+    path("sda-transits/add/", views.SDATransitEditView.as_view(), name='sdatransit_add'),
+    path('sda-transits/<int:pk>/', views.SDATransitView.as_view(), name='sdatransit'),
+    path('sda-transits/<int:pk>/edit/', views.SDATransitEditView.as_view(), name='sdatransit_edit'),
+    path('sda-transits/<int:pk>/delete/', views.SDATransitDeleteView.as_view(), name='sdatransit_delete'),
+    path('sda-transits/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='sdatransit_changelog', 
+         kwargs={'model': models.SDATransit}),
     
 )

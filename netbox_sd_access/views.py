@@ -93,3 +93,12 @@ class SDATransitListView(generic.ObjectListView):
         device_count = Count('devices')
     )
     table = tables.SDATransitTable
+    
+class SDATransitEditView(generic.ObjectEditView):
+    queryset = models.SDATransit.objects.all()
+    form = forms.SDATransitForm
+class SDATransitDeleteView(generic.ObjectDeleteView):
+    queryset = models.SDATransit.objects.all()
+    
+class SDATransitView(generic.ObjectView):
+    queryset = models.SDATransit.objects.all()

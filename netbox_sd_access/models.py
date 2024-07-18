@@ -34,16 +34,17 @@ class FabricSite(NetBoxModel):
         return reverse('plugins:netbox_sd_access:fabricsite', args=[self.pk])
     
     
-    
 class SDATransitType(models.TextChoices):
     LISP = 'LISP', 'LISP'
-    LISP_BGP = 'LISP-BGP', 'LISP-BGP'   
+    LISP_BGP = 'LISP-BGP', 'LISP-BGP'
+    
 class SDATransit(NetBoxModel):
     name=models.CharField(max_length=200)
     transit_type=models.CharField(max_length=8, choices=SDATransitType.choices, default=SDATransitType.LISP, blank=False, null=False)
     fabric_site=models.OneToOneField(to=FabricSite, on_delete=models.PROTECT, blank=True, null=True)
     control_plane_node=models.OneToOneField(to='dcim.Device', on_delete=models.PROTECT, blank=False, related_name="transit_control_nodes")
     devices=models.ManyToManyField(to='dcim.Device', blank=True, related_name="transit_devices")
+    comments=models.TextField(blank=True)
     
     class Meta:
         ordering = ("name",)

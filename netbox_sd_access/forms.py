@@ -44,3 +44,21 @@ class IPTransitFilterForm(NetBoxModelFilterSetForm):
         queryset=FabricSite.objects.all(),
         required=False
     )
+    
+class SDATransitForm(NetBoxModelForm):
+    #transit_type = ArrayField(queryset=SDATransitType.choices(),required=True)
+    fabric_site = DynamicModelChoiceField(queryset=FabricSite.objects.all(), required=True)
+    control_plane_node = DynamicModelChoiceField(queryset=Device.objects.all(), required=True)
+    devices = DynamicModelMultipleChoiceField(queryset=Device.objects.all())
+    comments = CommentField()
+    
+    class Meta:
+        model = SDATransit
+        fields = ('name', 'transit_type', 'fabric_site', 'control_plane_node', 'devices', 'comments', 'tags')
+        
+class SDATransitFilterForm(NetBoxModelFilterSetForm):
+    model = IPTransit
+    fabric_site = forms.ModelMultipleChoiceField(
+        queryset=FabricSite.objects.all(),
+        required=False
+    )

@@ -41,3 +41,22 @@ class IPTransitSerializer(NetBoxModelSerializer):
     class Meta:
         model = IPTransit
         fields= ('id', 'url', 'display', 'name', 'fabric_site', 'asn', 'comments', 'tags', 'custom_fields', 'created', 'last_updated')
+
+
+class NestedSDATransitSerializer(WritableNestedSerializer):
+    url = serializers.HyperlinkedIdentityField(
+        view_name = 'plugins-api:netbox_sd_access-api:sdatransit-detail'
+    )
+    
+    class Meta:
+        model=SDATransit
+        fields=('id','url','display','name')
+        
+class SDATransitSerializer(NetBoxModelSerializer):
+    url=serializers.HyperlinkedIdentityField(
+        view_name = 'plugins-api:netbox_sd_access-api:sdatransit-detail'
+    )
+    
+    class Meta:
+        model=SDATransit
+        fields=('id', 'url', 'display', 'name', 'transit_type', 'fabric_site', 'control_plane_node', 'devices', 'comments', 'tags', 'custom_fields', 'created', 'last_updated')

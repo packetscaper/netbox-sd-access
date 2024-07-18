@@ -30,4 +30,20 @@ class IPTransitType(NetBoxObjectType):
     fabric_site:FabricSiteType
     asn: Annotated["ASNType", strawberry.lazy('ipam.graphql.types')]
     comments:str
+    
+    
+@strawberry_django.type(
+    models.SDATransit,
+    fields='__all__',
+    filters=filters.SDATransitFilter
+)
+class SDATransitType(NetBoxObjectType):
+    id:int
+    name:str
+    transit_type:str
+    fabric_site:FabricSiteType
+    control_plane_node:Annotated["DeviceType", strawberry.lazy('dcim.graphql.types')]
+    devices:List[Annotated["DeviceType", strawberry.lazy('dcim.graphql.types')]]
+    comments:str
+    
 

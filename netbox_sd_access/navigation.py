@@ -16,6 +16,14 @@ ip_transit_buttons = [
     )
 ]
 
+sda_transit_buttons = [
+    PluginMenuButton(
+        link='plugins:netbox_sd_access:sdatransit_add',
+        title='Add',
+        icon_class='mdi mdi-plus-thick'
+    )
+]
+
 menu_items = (
     PluginMenuItem(
         link='plugins:netbox_sd_access:fabricsite_list',
@@ -29,6 +37,7 @@ menu_items = (
     ),
     PluginMenuItem(
         link='plugins:netbox_sd_access:sdatransit_list',
-        link_text='SDA Transits'
+        link_text='SDA Transits',
+        buttons=sda_transit_buttons
     )
 )

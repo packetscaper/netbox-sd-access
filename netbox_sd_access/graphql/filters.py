@@ -18,3 +18,8 @@ class FabricSiteFilter(BaseFilterMixin):
 @autotype_decorator(filtersets.IPTransitFilterSet)
 class IPTransitFilter(BaseFilterMixin):
     pass
+
+@strawberry_django.filter(models.SDATransit, lookups=True)
+@autotype_decorator(filtersets.SDATransitFilterSet)
+class SDATransitFilter(BaseFilterMixin):
+    pass

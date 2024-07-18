@@ -16,5 +16,10 @@ class Query:
     def iptransit(self,id:int) -> IPTransitType:
         return models.IPTransit.objects.get(pk=id)
     iptransit_list: list[IPTransitType] = strawberry_django.field()
+    
+    @strawberry.field
+    def sdatransit(self,id:int) -> SDATransitType:
+        return models.SDATransit.objects.get(pk=id)
+    sdatransit_list: list[SDATransitType] = strawberry_django.field()
 
 schema = [Query]

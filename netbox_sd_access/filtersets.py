@@ -28,3 +28,11 @@ class IPTransitFilterSet(NetBoxModelFilterSet):
         
     def search(self, queryset, name, value):
         return queryset.filter(name__icontains=value)
+
+class SDATransitFilterSet(NetBoxModelFilterSet):
+    class Meta:
+        model = SDATransit
+        fields = ('id', 'name', 'transit_type', 'fabric_site', 'control_plane_node', 'devices', 'comments')
+        
+    def search(self, queryset, name, value):
+        return queryset.filter(name__icontains=value)
