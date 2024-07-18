@@ -48,3 +48,19 @@ class FabricSiteEditView(generic.ObjectEditView):
     
 class FabricSiteDeleteView(generic.ObjectDeleteView):
     queryset = models.FabricSite.objects.all()
+
+class IPPoolView(generic.ObjectView):
+    queryset = models.IPPool.objects.all()
+    
+class IPPoolListView(generic.ObjectListView):
+    queryset = models.IPPool.objects.all()
+    table = tables.IPPoolTable
+    filterset = filtersets.IPPoolFilterSet
+    filterset_form = forms.IPPoolFilterForm
+
+class IPPoolEditView(generic.ObjectEditView):
+    queryset = models.IPPool.objects.all()
+    form = forms.IPPoolForm
+    
+class IPPoolDeleteView(generic.ObjectDeleteView):
+    queryset = models.IPPool.objects.all()

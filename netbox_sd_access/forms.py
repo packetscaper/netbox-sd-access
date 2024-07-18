@@ -1,5 +1,5 @@
 from django import forms
-from ipam.models import Prefix
+from ipam.models import Prefix, IPAddress
 from dcim.models import Site, Location, Device
 from netbox.forms import NetBoxModelForm, NetBoxModelFilterSetForm
 from utilities.forms.fields import CommentField, DynamicModelChoiceField, DynamicModelMultipleChoiceField
@@ -15,7 +15,7 @@ class SDAccessForm(NetBoxModelForm):
 class FabricSiteForm(NetBoxModelForm):
     physical_site = DynamicModelChoiceField(queryset=Site.objects.all(),required=True)
     location = DynamicModelChoiceField(queryset=Location.objects.all(), required=False, query_params={'site_id': '$physical_site'} )
-    ip_prefixes = DynamicModelMultipleChoiceField(queryset=Prefix.objects.all(), required=True, label='IP Prefixes')
+    ip_prefixes = DynamicModelMultipleChoiceField(queryset=IPPool.objects.all(), required=True, label='IP Pools')
     devices = DynamicModelMultipleChoiceField(queryset=Device.objects.all(), required=True, query_params={'site_id':'$physical_site', 'location_id':'$location'})
     
     class Meta:
@@ -28,3 +28,17 @@ class FabricSiteFilterForm(NetBoxModelFilterSetForm):
         queryset=Site.objects.all(),
         required=False
     )
+
+class IPPoolForm(NetBoxModelForm):
+    prefix = DynamicModelChoiceField(queryset=Prefix.objects.all(), required=True)
+    gateway = DynamicModelChoiceField(queryset=IPAddress.objects.all(), required=True)
+    dhcp_server = DynamicModelChoiceField(queryset=IPAddress.objects.all(), required=True)
+    dns_servers = DynamicModelMultipleChoiceField(queryset=IPAddress.objects.all(), required=True)
+    
+    class Meta:
+        model = IPPool
+        fields = ('name', 'prefix', 'gateway', 'dhcp_server', 'dns_servers')
+
+class IPPoolFilterForm(NetBoxModelFilterSetForm):
+    model = IPPool
+    prefix = DynamicModelChoiceField(queryset=Prefix.objects.all(), required=False)

@@ -1,0 +1,35 @@
+{% extends 'generic/object.html' %}
+{% load render_table from django_tables2 %}
+{% block content %}
+<div class="row mb-3">
+    <div class="col col-md-6">
+        <div class="card">
+            <h5 class="card-header">IP Pool</h5>
+            <div class="card-body"><table class="table table-hover attr-table"><tr>
+                <th scope="row">Name</th>
+                <td>{{ object.name }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Prefix</th>
+                <td><a href="{{ object.prefix.get_absolute_url }}">{{ object.prefix }}</a></td>
+            </tr>
+            <tr>
+                <th scope="row">Gateway</th>
+                <td><a href="{{ object.gateway.get_absolute_url }}">{{ object.gateway }}</a></td>
+            </tr>
+            <tr>
+                <th scope="row">DHCP Server</th>
+                <td><a href="{{ object.dhcp_server.get_absolute_url }}">{{ object.dhcp_server }}</a></td>
+            </tr>
+            <tr>
+                <th scope="row">DNS Servers</th>
+                <td>{% for server in object.dns_servers.all %}
+                    <a href="{{ server.get_absolute_url }}">{{ server }}</a>
+                    <br>
+                    {% endfor %}
+                </td>
+            </tr></table></div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

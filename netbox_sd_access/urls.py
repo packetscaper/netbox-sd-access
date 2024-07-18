@@ -23,5 +23,13 @@ urlpatterns = (
     path('fabric-sites/<int:pk>/edit/', views.FabricSiteEditView.as_view(), name='fabricsite_edit'),
     path('fabric-sites/<int:pk>/delete/', views.FabricSiteDeleteView.as_view(), name='fabricsite_delete'),
     path('fabric-sites/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='fabricsite_changelog', 
-         kwargs={'model': models.FabricSite})
+         kwargs={'model': models.FabricSite}),
+    
+    path("ip-pools/", views.IPPoolListView.as_view(), name='ippool_list'),
+    path("ip-pools/add/", views.IPPoolEditView.as_view(), name='ippool_add'),
+    path('ip-pools/<int:pk>/', views.IPPoolView.as_view(), name='ippool'),
+    path('ip-pools/<int:pk>/edit/', views.IPPoolEditView.as_view(), name='ippool_edit'),
+    path('ip-pools/<int:pk>/delete/', views.IPPoolDeleteView.as_view(), name='ippool_delete'),
+    path('ip-pools/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='ippool_changelog', 
+         kwargs={'model': models.IPPool})
 )

@@ -19,3 +19,11 @@ class FabricSiteTable(NetBoxTable):
         model = FabricSite
         fields = ("pk", "id", "name", "physical_site", "location", "ip_prefixes", "device_count", "actions")
         default_columns = ("name", "physical_site", "location", "device_count")
+        
+class IPPoolTable(NetBoxTable):
+    name = tables.Column(linkify=True)
+    
+    class Meta(NetBoxTable.Meta):
+        model = IPPool
+        fields = ("pk", "id", "name", "prefix", "gateway", "dhcp_server", "dns_servers")
+        default_columns = ("name", "prefix", "gateway")
