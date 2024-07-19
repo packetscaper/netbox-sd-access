@@ -17,7 +17,6 @@ urlpatterns = (
     #     kwargs={"model": models.SDAccess},
     # ),
     
-    #### FABRIC SITES
     path("fabric-sites/", views.FabricSiteListView.as_view(), name='fabricsite_list'),
     path("fabric-sites/add/", views.FabricSiteEditView.as_view(), name='fabricsite_add'),
     path('fabric-sites/<int:pk>/', views.FabricSiteView.as_view(), name='fabricsite'),
@@ -43,4 +42,19 @@ urlpatterns = (
     path('sda-transits/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='sdatransit_changelog', 
          kwargs={'model': models.SDATransit}),
     
+    path("sda-devices/", views.SDADeviceListView.as_view(), name='sdadevice_list'),
+    path("sda-devices/add/", views.SDADeviceEditView.as_view(), name='sdadevice_add'),
+    path('sda-devices/<int:pk>/', views.SDADeviceView.as_view(), name='sdadevice'),
+    path('sda-devices/<int:pk>/edit/', views.SDADeviceEditView.as_view(), name='sdadevice_edit'),
+    path('sda-devices/<int:pk>/delete/', views.SDADeviceDeleteView.as_view(), name='sdadevice_delete'),
+    path('sda-devices/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='sdadevice_changelog', 
+         kwargs={'model': models.SDADevice}),
+
+    path("ip-pools/", views.IPPoolListView.as_view(), name='ippool_list'),
+    path("ip-pools/add/", views.IPPoolEditView.as_view(), name='ippool_add'),
+    path('ip-pools/<int:pk>/', views.IPPoolView.as_view(), name='ippool'),
+    path('ip-pools/<int:pk>/edit/', views.IPPoolEditView.as_view(), name='ippool_edit'),
+    path('ip-pools/<int:pk>/delete/', views.IPPoolDeleteView.as_view(), name='ippool_delete'),
+    path('ip-pools/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='ippool_changelog', 
+         kwargs={'model': models.IPPool}),
 )

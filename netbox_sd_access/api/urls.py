@@ -7,5 +7,7 @@ router = NetBoxRouter()
 router.register('fabric-sites', views.FabricSiteViewSet)
 router.register('ip-transits', views.IPTransitViewSet)
 router.register('sda-transits', views.SDATransitViewSet)
+router.register('sda-devices', views.SDADeviceViewSet)
+router.register('ip-pools', views.IPPoolViewSet)
 
 urlpatterns = router.urls

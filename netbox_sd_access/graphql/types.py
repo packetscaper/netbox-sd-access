@@ -6,6 +6,20 @@ from .. import models
 from . import filters
 
 @strawberry_django.type(
+    models.IPPool,
+    fields='__all__',
+    filters=filters.IPPoolFilter
+)
+class IPPoolType(NetBoxObjectType):
+    id: int
+    name: str
+    prefix: Annotated["PrefixType", strawberry.lazy('ipam.graphql.types')]
+    gateway: Annotated["IPAddressType", strawberry.lazy('ipam.graphql.types')]
+    dhcp_server: Annotated["IPAddressType", strawberry.lazy('ipam.graphql.types')]
+    dns_servers: List[Annotated["IPAddressType", strawberry.lazy('ipam.graphql.types')]]
+    
+    
+@strawberry_django.type(
     models.FabricSite,
     fields='__all__',
     filters=filters.FabricSiteFilter
@@ -46,4 +60,15 @@ class SDATransitType(NetBoxObjectType):
     devices:List[Annotated["DeviceType", strawberry.lazy('dcim.graphql.types')]]
     comments:str
     
+    ip_prefixes: List[IPPoolType]
 
+@strawberry_django.type(
+    models.SDADevice,
+    fields='__all__',
+    filters=filters.SDADeviceFilter
+)
+class SDADeviceType(NetBoxObjectType):
+    id: int
+    device: Annotated["DeviceType", strawberry.lazy('dcim.graphql.types')]
+    fabric_site: FabricSiteType
+    role: str

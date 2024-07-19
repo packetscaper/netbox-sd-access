@@ -8,12 +8,29 @@ fabricsite_buttons = [
     ),
 ]
 
+
+devicerole_buttons = [
+    PluginMenuButton(
+        link='plugins:netbox_sd_access:sdadevice_add',
+        title='Add',
+        icon_class='mdi mdi-plus-thick'
+    ),
+]
+
 ip_transit_buttons = [
     PluginMenuButton(
         link='plugins:netbox_sd_access:iptransit_add',
         title='Add',
         icon_class='mdi mdi-plus-thick'
     )
+]
+
+ippool_buttons = [
+    PluginMenuButton(
+        link='plugins:netbox_sd_access:ippool_add',
+        title='Add',
+        icon_class='mdi mdi-plus-thick'
+    ),
 ]
 
 sda_transit_buttons = [
@@ -31,13 +48,23 @@ menu_items = (
         buttons=fabricsite_buttons
     ),
     PluginMenuItem(
-        link='plugins:netbox_sd_access:iptransit_list',
-        link_text='IP Transits',
-        buttons=ip_transit_buttons
+        link='plugins:netbox_sd_access:sdadevice_list',
+        link_text='SDA Devices',
+        buttons=devicerole_buttons
     ),
     PluginMenuItem(
         link='plugins:netbox_sd_access:sdatransit_list',
         link_text='SDA Transits',
         buttons=sda_transit_buttons
+    ),
+    PluginMenuItem(
+        link='plugins:netbox_sd_access:iptransit_list',
+        link_text='IP Transits',
+        buttons=ip_transit_buttons
+    ),
+    PluginMenuItem(
+        link='plugins:netbox_sd_access:ippool_list',
+        link_text='IP Pools',
+        buttons=ippool_buttons
     )
 )
