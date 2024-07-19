@@ -45,22 +45,6 @@ class IPTransitType(NetBoxObjectType):
     asn: Annotated["ASNType", strawberry.lazy('ipam.graphql.types')]
     comments:str
     
-    
-@strawberry_django.type(
-    models.SDATransit,
-    fields='__all__',
-    filters=filters.SDATransitFilter
-)
-class SDATransitType(NetBoxObjectType):
-    id:int
-    name:str
-    transit_type:str
-    fabric_site:FabricSiteType
-    control_plane_node:Annotated["DeviceType", strawberry.lazy('dcim.graphql.types')]
-    devices:List[Annotated["DeviceType", strawberry.lazy('dcim.graphql.types')]]
-    comments:str
-    
-    ip_prefixes: List[IPPoolType]
 
 @strawberry_django.type(
     models.SDADevice,
@@ -72,3 +56,20 @@ class SDADeviceType(NetBoxObjectType):
     device: Annotated["DeviceType", strawberry.lazy('dcim.graphql.types')]
     fabric_site: FabricSiteType
     role: str
+    
+    
+@strawberry_django.type(
+    models.SDATransit,
+    fields='__all__',
+    filters=filters.SDATransitFilter
+)
+class SDATransitType(NetBoxObjectType):
+    id:int
+    name:str
+    transit_type:str
+    fabric_site:FabricSiteType
+    control_plane_node:SDADeviceType
+    devices:List[SDADeviceType]
+    comments:str
+    
+    

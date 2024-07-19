@@ -31,10 +31,16 @@
                             >
                         </td>
                     </tr>
+                    <tr>
+                        <th scope="row">Number of Devices</th>
+                        <td>{{ object.devices.count }}</td>
+                    </tr>
                 </table>
             </div>
         </div>
         {% include 'inc/panels/custom_fields.html' %}
+    </div>
+    <div class="col col-md-6">
         {% include 'inc/panels/tags.html' %}
         {% include 'inc/panels/comments.html' %}
     </div>

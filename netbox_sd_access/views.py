@@ -148,7 +148,7 @@ class SDATransitDeleteView(generic.ObjectDeleteView):
 class SDATransitView(generic.ObjectView):
     queryset = models.SDATransit.objects.all()
     def get_extra_context(self, request, instance):
-        table = DeviceTable(instance.devices.all())
+        table = tables.SDADeviceTable(instance.devices.all())
         table.configure(request)
         
         return {

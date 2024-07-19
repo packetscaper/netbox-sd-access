@@ -41,6 +41,8 @@ class IPTransitFilterSet(NetBoxModelFilterSet):
         return queryset.filter(name__icontains=value)
 
 class SDATransitFilterSet(NetBoxModelFilterSet):
+    transit_type = django_filters.CharFilter(field_name='transit_type', lookup_expr='exact')
+    
     class Meta:
         model = SDATransit
         fields = ('id', 'name', 'transit_type', 'fabric_site', 'control_plane_node', 'devices', 'comments')

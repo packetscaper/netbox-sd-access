@@ -1,5 +1,5 @@
 from django import forms
-from ipam.models import Prefix, IPAddress
+from ipam.models import Prefix, IPAddress, ASN
 from dcim.models import Site, Location, Device
 from netbox.forms import NetBoxModelForm, NetBoxModelFilterSetForm
 from utilities.forms.fields import CommentField, DynamicModelChoiceField, DynamicModelMultipleChoiceField
@@ -30,7 +30,7 @@ class FabricSiteFilterForm(NetBoxModelFilterSetForm):
     
 class IPTransitForm(NetBoxModelForm):
     fabric_site = DynamicModelChoiceField(queryset=FabricSite.objects.all(), required=True)
-    asn = forms.IntegerField(required=False)
+    asn = DynamicModelChoiceField(queryset=ASN.objects.all())
     comments = CommentField()
     
     class Meta:
@@ -47,8 +47,8 @@ class IPTransitFilterForm(NetBoxModelFilterSetForm):
 class SDATransitForm(NetBoxModelForm):
     #transit_type = ArrayField(queryset=SDATransitType.choices(),required=True)
     fabric_site = DynamicModelChoiceField(queryset=FabricSite.objects.all(), required=True)
-    control_plane_node = DynamicModelChoiceField(queryset=Device.objects.all(), required=True)
-    devices = DynamicModelMultipleChoiceField(queryset=Device.objects.all())
+    control_plane_node = DynamicModelChoiceField(queryset=SDADevice.objects.all(), required=True)
+    devices = DynamicModelMultipleChoiceField(queryset=SDADevice.objects.all())
     comments = CommentField()
     
     class Meta:
@@ -56,11 +56,12 @@ class SDATransitForm(NetBoxModelForm):
         fields = ('name', 'transit_type', 'fabric_site', 'control_plane_node', 'devices', 'comments', 'tags')
         
 class SDATransitFilterForm(NetBoxModelFilterSetForm):
-    model = IPTransit
+    model = SDATransit
     fabric_site = forms.ModelMultipleChoiceField(
         queryset=FabricSite.objects.all(),
         required=False
     )
+    transit_type = forms.MultipleChoiceField(choices=SDATransitTypeChoices, required=False, initial=None)
 
 class SDADeviceForm(NetBoxModelForm):
     physical_site = DynamicModelChoiceField(queryset=Site.objects.all(), required=False)
