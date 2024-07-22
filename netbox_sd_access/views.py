@@ -33,6 +33,10 @@ class FabricSiteView(generic.ObjectView):
         return {
             'devices_table': table,
         }
+        
+class FabricSiteBulkDeleteView(generic.BulkDeleteView):
+    queryset = models.FabricSite.objects.all()
+    table = tables.FabricSiteTable
     
 class FabricSiteListView(generic.ObjectListView):
     queryset = models.FabricSite.objects.annotate(
@@ -106,6 +110,10 @@ class IPPoolEditView(generic.ObjectEditView):
 class IPPoolDeleteView(generic.ObjectDeleteView):
     queryset = models.IPPool.objects.all()
     
+class IPPoolBulkDeleteView(generic.BulkDeleteView):
+    queryset = models.IPPool.objects.all()
+    table = tables.IPPoolTable
+    
 class IPTransitListView(generic.ObjectListView):
     # qs1 = 
     # qs2 = models.SDATransit.objects.annotate(
@@ -138,6 +146,15 @@ class IPTransitDeleteView(generic.ObjectDeleteView):
 class IPTransitView(generic.ObjectView):
     queryset = models.IPTransit.objects.all()
     
+class IPTransitBulkImportView(generic.BulkImportView):
+    queryset = models.IPTransit.objects.all()
+    model_form = forms.IPTransitImportForm
+
+class IPTransitBulkDeleteView(generic.BulkDeleteView):
+    queryset = models.IPTransit.objects.all()
+    table = tables.IPTransitTable
+
+    
 # class IPTransitBulkDeleteView(generic.BulkDeleteView):
 #     queryset = models.IPTransit.objects.all()
 #     filterset = filtersets.IPTransitFilterSet
@@ -167,3 +184,12 @@ class SDATransitView(generic.ObjectView):
         return {
             'devices_table': table,
         }
+
+class SDATransitBulkImportView(generic.BulkImportView):
+    queryset = models.SDATransit.objects.all()
+    model_form = forms.SDATransitImportForm
+
+class SDATransitBulkDeleteView(generic.BulkDeleteView):
+    queryset = models.SDATransit.objects.all()
+    table = tables.SDATransitTable
+

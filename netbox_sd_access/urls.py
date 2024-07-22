@@ -19,6 +19,7 @@ urlpatterns = (
     
     path("fabric-sites/", views.FabricSiteListView.as_view(), name='fabricsite_list'),
     path("fabric-sites/add/", views.FabricSiteEditView.as_view(), name='fabricsite_add'),
+    path('fabric-sites/delete/', views.FabricSiteBulkDeleteView.as_view(), name='fabricsite_bulk_delete'),
     path('fabric-sites/<int:pk>/', views.FabricSiteView.as_view(), name='fabricsite'),
     path('fabric-sites/<int:pk>/edit/', views.FabricSiteEditView.as_view(), name='fabricsite_edit'),
     path('fabric-sites/<int:pk>/delete/', views.FabricSiteDeleteView.as_view(), name='fabricsite_delete'),
@@ -42,6 +43,8 @@ urlpatterns = (
     path('ip-transits/<int:pk>/delete/', views.IPTransitDeleteView.as_view(), name='iptransit_delete'),
     path('ip-transits/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='iptransit_changelog', 
          kwargs={'model': models.IPTransit}),
+    path('ip-transits/import/', views.IPTransitBulkImportView.as_view(), name='iptransit_import'),
+    path('ip-transits/delete/', views.IPTransitBulkDeleteView.as_view(), name='iptransit_bulk_delete'),
         
     path("sda-transits/", views.SDATransitListView.as_view(), name='sdatransit_list'),
     path("sda-transits/add/", views.SDATransitEditView.as_view(), name='sdatransit_add'),
@@ -50,6 +53,8 @@ urlpatterns = (
     path('sda-transits/<int:pk>/delete/', views.SDATransitDeleteView.as_view(), name='sdatransit_delete'),
     path('sda-transits/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='sdatransit_changelog', 
          kwargs={'model': models.SDATransit}),
+    path('sda-transits/import/', views.SDATransitBulkImportView.as_view(), name='sdatransit_import'),
+    path('sda-transits/delete/', views.SDATransitBulkDeleteView.as_view(), name='sdatransit_bulk_delete'),
     
     #### SDA Devices
     path("sda-devices/", views.SDADeviceListView.as_view(), name='sdadevice_list'),
@@ -65,6 +70,7 @@ urlpatterns = (
     #### IP Pools
     path("ip-pools/", views.IPPoolListView.as_view(), name='ippool_list'),
     path("ip-pools/add/", views.IPPoolEditView.as_view(), name='ippool_add'),
+    path('ip-pools/delete/', views.IPPoolBulkDeleteView.as_view(), name='ippool_bulk_delete'),
     path('ip-pools/<int:pk>/', views.IPPoolView.as_view(), name='ippool'),
     path('ip-pools/<int:pk>/edit/', views.IPPoolEditView.as_view(), name='ippool_edit'),
     path('ip-pools/<int:pk>/delete/', views.IPPoolDeleteView.as_view(), name='ippool_delete'),
