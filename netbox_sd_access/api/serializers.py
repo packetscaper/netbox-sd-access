@@ -15,7 +15,7 @@ class NestedFabricSiteSerializer(WritableNestedSerializer):
         model = FabricSite
         fields = ('id', 'url', 'display', 'name')
         
-class NextedIPPoolSerializer(WritableNestedSerializer):
+class NestedIPPoolSerializer(WritableNestedSerializer):
     url = serializers.HyperlinkedIdentityField(
         view_name='plugins-api:netbox_sd_access-api:ippool-detail'
     )
