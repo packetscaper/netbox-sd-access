@@ -29,7 +29,7 @@ class SDADeviceFilterSet(NetBoxModelFilterSet):
         fields = ('role','fabric_site')
     
     def search(self, queryset, name, value):
-        return queryset.filter(name__icontains=value)
+        return queryset.filter(comments__icontains=value)
     
 
 class IPTransitFilterSet(NetBoxModelFilterSet):

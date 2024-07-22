@@ -29,7 +29,7 @@ class FabricSiteType(NetBoxObjectType):
     name: str
     physical_site: Annotated["SiteType", strawberry.lazy('dcim.graphql.types')]
     location: Annotated["LocationType", strawberry.lazy('dcim.graphql.types')]
-    ip_prefixes: List[Annotated["PrefixType", strawberry.lazy('ipam.graphql.types')]]
+    ip_prefixes: List[IPPoolType]
     devices: List[Annotated["DeviceType", strawberry.lazy('dcim.graphql.types')]]
     
     

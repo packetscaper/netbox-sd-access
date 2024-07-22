@@ -10,6 +10,7 @@ class FabricSiteViewSet(NetBoxModelViewSet):
         device_count=Count('devices')
     )
     serializer_class = FabricSiteSerializer
+    filterset_class = filtersets.FabricSiteFilterSet
     
 class IPTransitViewSet(NetBoxModelViewSet):
     queryset = models.IPTransit.objects.prefetch_related('tags').all()
