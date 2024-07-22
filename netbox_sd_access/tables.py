@@ -19,6 +19,13 @@ class FabricSiteTable(NetBoxTable):
         fields = ("pk", "id", "name", "physical_site", "location", "ip_prefixes", "device_count", "actions")
         default_columns = ("name", "physical_site", "location", "device_count")
 
+class VirtualNetworkTable(NetBoxTable):
+    name = tables.Column(linkify=True)
+    class Meta(NetBoxTable.Meta):
+        model = VirtualNetwork   
+        fields= ("pk", "id", "fabric_site", "name", "vrf")  
+        default_columns=("name","fabric_site","vrf")   
+
 class SDADeviceTable(NetBoxTable):
     id = tables.Column(linkify=True)
     device = tables.Column(linkify=True)

@@ -56,4 +56,13 @@ class IPPoolFilterSet(NetBoxModelFilterSet):
         fields = ('id', 'name', 'gateway', 'dhcp_server', 'dns_servers')
     
     def search(self, queryset, name, value):
-        return queryset.filter(name__itcontains=value)
+        return queryset.filter(name__icontains=value)
+    
+class VirtualNetworkFilterSet(NetBoxModelFilterSet):
+
+    class Meta:
+        model = VirtualNetwork
+        fields = ('name', 'fabric_site', 'vrf')
+
+    def search(self, queryset, name, value):
+        return queryset.filter(name_icontains=value)

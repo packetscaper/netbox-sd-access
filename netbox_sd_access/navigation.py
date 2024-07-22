@@ -8,6 +8,13 @@ fabricsite_buttons = [
     ),
 ]
 
+virtualnetwork_buttons = [
+    PluginMenuButton(
+        link='plugins:netbox_sd_access:virtualnetwork_add',
+        title='Add',
+        icon_class='mdi mdi-plus-thick'
+    ),
+]
 
 devicerole_buttons = [
     PluginMenuButton(
@@ -41,6 +48,7 @@ sda_transit_buttons = [
     )
 ]
 
+
 menu_items = (
     PluginMenuItem(
         link='plugins:netbox_sd_access:fabricsite_list',
@@ -66,5 +74,10 @@ menu_items = (
         link='plugins:netbox_sd_access:ippool_list',
         link_text='IP Pools',
         buttons=ippool_buttons
-    )
+    ),
+    PluginMenuItem(
+        link='plugins:netbox_sd_access:virtualnetwork_list',
+        link_text='Virtual Networks',
+        buttons=virtualnetwork_buttons
+    ),
 )

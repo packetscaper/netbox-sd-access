@@ -30,8 +30,7 @@ class FabricSiteType(NetBoxObjectType):
     physical_site: Annotated["SiteType", strawberry.lazy('dcim.graphql.types')]
     location: Annotated["LocationType", strawberry.lazy('dcim.graphql.types')]
     ip_prefixes: List[IPPoolType]
-    devices: List[Annotated["DeviceType", strawberry.lazy('dcim.graphql.types')]]
-    
+      
     
 @strawberry_django.type(
     models.IPTransit,
@@ -71,5 +70,15 @@ class SDATransitType(NetBoxObjectType):
     control_plane_node:SDADeviceType
     devices:List[SDADeviceType]
     comments:str
+      
     
-    
+@strawberry_django.type(
+    models.VirtualNetwork,
+    fields='__all__',
+    filters=filters.VirtualNetworkFilter
+)
+class VirtualNetworkType(NetBoxObjectType):
+    id: int
+    name: str
+    fabric_site: FabricSiteType
+    vrf: Annotated["VRFType", strawberry.lazy('ipam.graphql.types')]

@@ -24,6 +24,15 @@ urlpatterns = (
     path('fabric-sites/<int:pk>/delete/', views.FabricSiteDeleteView.as_view(), name='fabricsite_delete'),
     path('fabric-sites/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='fabricsite_changelog', 
          kwargs={'model': models.FabricSite}),
+
+    #####Virtual Networks
+    path("virtual-networks/", views.VirtualNetworkListView.as_view(), name='virtualnetwork_list'),
+    path("virtual-networks/add/", views.VirtualNetworkEditView.as_view(), name='virtualnetwork_add'),
+    path('virtual-networks/<int:pk>/', views.VirtualNetworkView.as_view(), name='virtualnetwork'),
+    path("virtual-networks/<int:pk>/edit/", views.VirtualNetworkEditView.as_view(), name='virtualnetwork_edit'),
+    path('virtual-networks/<int:pk>/delete/', views.VirtualNetworkDeleteView.as_view(), name = "virtualnetwork_delete"),
+    path('virtual-networks/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='virtualnetwork_changelog',
+         kwargs={'model': models.VirtualNetwork}),
     
     #### TRANSITS
     path("ip-transits/", views.IPTransitListView.as_view(), name='iptransit_list'),
@@ -42,6 +51,7 @@ urlpatterns = (
     path('sda-transits/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='sdatransit_changelog', 
          kwargs={'model': models.SDATransit}),
     
+    #### SDA Devices
     path("sda-devices/", views.SDADeviceListView.as_view(), name='sdadevice_list'),
     path("sda-devices/add/", views.SDADeviceEditView.as_view(), name='sdadevice_add'),
     path('sda-devices/<int:pk>/', views.SDADeviceView.as_view(), name='sdadevice'),
@@ -50,6 +60,7 @@ urlpatterns = (
     path('sda-devices/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='sdadevice_changelog', 
          kwargs={'model': models.SDADevice}),
 
+    #### IP Pools
     path("ip-pools/", views.IPPoolListView.as_view(), name='ippool_list'),
     path("ip-pools/add/", views.IPPoolEditView.as_view(), name='ippool_add'),
     path('ip-pools/<int:pk>/', views.IPPoolView.as_view(), name='ippool'),

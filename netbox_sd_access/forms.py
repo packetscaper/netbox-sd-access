@@ -1,5 +1,5 @@
 from django import forms
-from ipam.models import Prefix, IPAddress, ASN
+from ipam.models import Prefix, IPAddress, ASN, VRF
 from dcim.models import Site, Location, Device
 from netbox.forms import NetBoxModelForm, NetBoxModelFilterSetForm
 from utilities.forms.fields import CommentField, DynamicModelChoiceField, DynamicModelMultipleChoiceField
@@ -101,18 +101,21 @@ class IPPoolFilterForm(NetBoxModelFilterSetForm):
     model = IPPool
     prefix = DynamicModelChoiceField(queryset=Prefix.objects.all(), required=False)
 
-# class IPTransitForm(NetBoxModelForm):
-#     fabric_site = DynamicModelChoiceField(queryset=FabricSite.objects.all(), required=True)
-#     asn = forms.IntegerField(required=False)
-#     comments = CommentField()
-    
-#     class Meta:
-#         model = IPTransit
-#         fields = ('name', 'fabric_site', 'asn', 'comments', 'tags')
-        
-# class IPTransitFilterForm(NetBoxModelFilterSetForm):
-#     model = IPTransit
-#     fabric_site = forms.ModelMultipleChoiceField(
-#         queryset=FabricSite.objects.all(),
-#         required=False
-#     )
+class VirtualNetworkForm(NetBoxModelForm):
+    fabric_site = DynamicModelMultipleChoiceField(queryset = FabricSite.objects.all(), required=True)
+    # fabric_site = forms.ModelMultipleChoiceField(
+    #     queryset=FabricSite.objects.all(),
+    #     required=False
+    # )
+    vrf = DynamicModelChoiceField(queryset = VRF.objects.all(), required=True, label='VRF')
+
+    class Meta:
+        model = VirtualNetwork
+        fields = ('name', 'fabric_site', 'vrf')
+
+class VirtualNetworkFilterForm(NetBoxModelFilterSetForm):
+    model = VirtualNetwork
+    fabric_site = DynamicModelChoiceField(
+        queryset = FabricSite.objects.all(),
+        required=False
+    )

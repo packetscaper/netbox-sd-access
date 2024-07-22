@@ -12,6 +12,11 @@ class Query:
     fabricsite_list: list[FabricSiteType] = strawberry_django.field()
 
     @strawberry.field
+    def virtualnetwork(self, id:int) -> VirtualNetworkType:
+        return models.VirtualNetwork.objects.get(pk=id)
+    virtualnetwork_list: list[VirtualNetworkType] = strawberry_django.field()
+    
+    @strawberry.field
     def iptransit(self,id:int) -> IPTransitType:
         return models.IPTransit.objects.get(pk=id)
     iptransit_list: list[IPTransitType] = strawberry_django.field()
