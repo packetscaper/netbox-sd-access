@@ -91,6 +91,23 @@ class SDADevice(NetBoxModel):
     def get_role_color(self):
         return SDADeviceRoleChoices.colors.get(self.role)
     
+    def clean(self):
+        """
+        Fabric site and device must belong to the same site
+        """
+        if (self.fabric_site.physical_site != self.device.site):
+            raise ValidationError('Fabric site and device must belong to the same site and location')
+        
+        if (self.fabric_site.location):
+            device_location = self.device.location
+            
+            while device_location and device_location != self.fabric_site.location:
+                device_location = device_location.parent
+            
+            if not device_location:
+                raise ValidationError('Fabric site and device must belong to the same site and location')
+            
+    
     
 class SDATransit(NetBoxModel):
     name=models.CharField(max_length=200)
