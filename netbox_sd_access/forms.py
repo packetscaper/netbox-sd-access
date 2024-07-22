@@ -50,6 +50,22 @@ class IPTransitFilterForm(NetBoxModelFilterSetForm):
         queryset=FabricSite.objects.all(),
         required=False
     )
+
+class IPTransitImportForm(NetBoxModelImportForm):
+    fabric_site = CSVModelChoiceField(
+        queryset=FabricSite.objects.all(),
+        to_field_name="name",
+        help_text='Fabric site'
+    )
+    asn = CSVModelChoiceField(
+        queryset=ASN.objects.all(),
+        to_field_name="name",
+        help_text='ASN',
+    )
+
+    class Meta:
+        model = IPTransit
+        fields = ('fabric_site', 'asn', 'comments', 'tags')
     
 class SDATransitForm(NetBoxModelForm):
     #transit_type = ArrayField(queryset=SDATransitType.choices(),required=True)
@@ -69,6 +85,30 @@ class SDATransitFilterForm(NetBoxModelFilterSetForm):
         required=False
     )
     transit_type = forms.MultipleChoiceField(choices=SDATransitTypeChoices, required=False, initial=None)
+    
+class SDATransitImportForm(NetBoxModelImportForm):
+    transit_type = CSVChoiceField(
+        choices=SDATransitTypeChoices, help_text='SDA trasit type'
+    )
+    fabric_site = CSVModelChoiceField(
+        queryset=FabricSite.objects.all(),
+        to_field_name="name",
+        help_text='Fabric site'
+    )
+    control_plane_node = CSVModelChoiceField(
+        queryset=SDADevice.objects.all(),
+        to_field_name="name",
+        help_text='Control plane node, an SDA device',
+    )
+    devices = CSVModelMultipleChoiceField(
+        queryset=SDADevice.objects.all(),
+        to_field_name="name",
+        help_text='SDA devices within the transit',
+    )
+
+    class Meta:
+        model = SDATransit
+        fields = ('transit_type', 'fabric_site', 'control_plane_node', 'devices', 'comments', 'tags')
 
 class SDADeviceForm(NetBoxModelForm):
     physical_site = DynamicModelChoiceField(queryset=Site.objects.all(), required=False)

@@ -27,6 +27,11 @@ ip_transit_buttons = [
         link='plugins:netbox_sd_access:iptransit_add',
         title='Add',
         icon_class='mdi mdi-plus-thick'
+    ),
+    PluginMenuButton(
+        link='plugins:netbox_sd_access:iptransit_import',
+        title='Import',
+        icon_class='mdi mdi-upload',
     )
 ]
 
@@ -43,6 +48,11 @@ sda_transit_buttons = [
         link='plugins:netbox_sd_access:sdatransit_add',
         title='Add',
         icon_class='mdi mdi-plus-thick'
+    ),
+    PluginMenuButton(
+        link='plugins:netbox_sd_access:sdatransit_import',
+        title='Import',
+        icon_class='mdi mdi-upload',
     )
 ]
 
