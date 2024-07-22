@@ -2,7 +2,6 @@ from netbox.api.viewsets import NetBoxModelViewSet
 from django.db.models import Count
 
 from .. import filtersets, models
-
 from .serializers import *
 
 class FabricSiteViewSet(NetBoxModelViewSet):
@@ -31,3 +30,8 @@ class IPPoolViewSet(NetBoxModelViewSet):
     queryset = models.IPPool.objects.prefetch_related('tags').all()
     serializer_class = IPPoolSerializer
     filterset_class = filtersets.IPPoolFilterSet
+
+class VirtualNetworkViewSet(NetBoxModelViewSet):
+    queryset = models.VirtualNetwork.objects.prefetch_related('tags').all()
+    serializer_class = VirtualNetworkSerializer
+    filterset_class = filtersets.VirtualNetworkFilterSet

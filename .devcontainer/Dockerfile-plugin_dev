@@ -15,7 +15,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 
 # Install development & ide dependencies
 COPY requirements-dev.txt /tmp/pip-tmp/
-RUN /opt/netbox/venv/bin/python3 -m pip install --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements-dev.txt \
+RUN /opt/netbox/venv/bin/python3 -m pip install --disable-pip-version-check --no-cache-dir -r /tmp/pip-tmp/requirements-dev.txt \
    && rm -rf /tmp/*
 
 ARG USERNAME=ubuntu

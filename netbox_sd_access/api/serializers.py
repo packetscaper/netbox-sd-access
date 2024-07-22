@@ -2,8 +2,8 @@ from rest_framework import serializers
 
 from dcim.api.serializers import SiteSerializer
 from netbox.api.serializers import NetBoxModelSerializer, WritableNestedSerializer
-from ipam.api.serializers import NestedPrefixSerializer, NestedIPAddressSerializer
-from ..models import FabricSite, IPPool, SDADevice, IPTransit, SDATransit
+from ipam.api.serializers import NestedPrefixSerializer, NestedIPAddressSerializer, NestedVRFSerializer
+from ..models import FabricSite, IPPool, SDADevice, IPTransit, SDATransit, VirtualNetwork
 
 #import and use NestedPrefix, Nested Device Serializer
 class NestedFabricSiteSerializer(WritableNestedSerializer):
@@ -15,7 +15,7 @@ class NestedFabricSiteSerializer(WritableNestedSerializer):
         model = FabricSite
         fields = ('id', 'url', 'display', 'name')
         
-class NextedIPPoolSerializer(WritableNestedSerializer):
+class NestedIPPoolSerializer(WritableNestedSerializer):
     url = serializers.HyperlinkedIdentityField(
         view_name='plugins-api:netbox_sd_access-api:ippool-detail'
     )
@@ -95,3 +95,22 @@ class IPPoolSerializer(NetBoxModelSerializer):
     class Meta:
         model = IPPool
         fields = ('id', 'url', 'display', 'name', 'prefix', 'gateway', 'dhcp_server', 'dns_servers')
+
+class NestedVirtualNetworkSerializer(WritableNestedSerializer):
+    url = serializers.HyperlinkedIdentityField(
+        view_name='plugins-api:netbox_sd_access-api:virtualnetwork-detail'
+    )
+
+    class Meta:
+        model = VirtualNetwork
+        fields = ('id', 'url', 'display', 'name')
+
+class VirtualNetworkSerializer(NetBoxModelSerializer):
+    url = serializers.HyperlinkedIdentityField(
+        view_name='plugins-api:netbox_sd_access-api:virtualnetwork-detail'
+    )
+    vrf = NestedVRFSerializer()
+
+    class Meta:
+        model = VirtualNetwork
+        fields = ('id','url', 'name', 'fabric_site','vrf', 'tags', 'custom_fields', 'created', 'last_updated')

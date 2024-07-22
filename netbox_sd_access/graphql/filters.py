@@ -8,7 +8,8 @@ __all__ = (
     'SDADeviceFilter',
     'IPTransitFilter',
     'SDATransitFilter',
-    'IPPoolFilter'
+    'IPPoolFilter',
+    'VirtualNetworkFilter'
 )
 
 @strawberry_django.filter(models.FabricSite, lookups=True)
@@ -34,4 +35,9 @@ class SDATransitFilter(BaseFilterMixin):
 @strawberry_django.filter(models.IPPool, lookups=True)
 @autotype_decorator(filtersets.IPPoolFilterSet)
 class IPPoolFilter(BaseFilterMixin):
+    pass
+
+@strawberry_django.filter(models.VirtualNetwork, lookups = True)
+@autotype_decorator(filtersets.VirtualNetworkFilterSet)
+class VirtualNetworkFilter(BaseFilterMixin):
     pass
