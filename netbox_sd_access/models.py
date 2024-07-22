@@ -134,7 +134,7 @@ class IPTransit(NetBoxModel):
 class VirtualNetwork(NetBoxModel):
     name=models.CharField(max_length=200, default = "Virtual Network")
     #fabric_site=models.ForeignKey(to=FabricSite, on_delete=models.CASCADE, related_name='virtual_networks')
-    fabric_site=models.ManyToManyField(to=FabricSite, blank= True,related_name = 'fabric_site')
+    fabric_site=models.ManyToManyField(to=FabricSite, blank= True,related_name = 'virtual_networks')
     
     #need to catch error if no vrf is added, 
     vrf=models.OneToOneField(to='ipam.VRF', on_delete = models.PROTECT, blank = True)

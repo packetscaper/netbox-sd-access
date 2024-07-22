@@ -107,7 +107,7 @@ class VirtualNetworkForm(NetBoxModelForm):
     #     queryset=FabricSite.objects.all(),
     #     required=False
     # )
-    vrf = DynamicModelChoiceField(queryset = VRF.objects.all(), required=True)
+    vrf = DynamicModelChoiceField(queryset = VRF.objects.all(), required=True, label='VRF')
 
     class Meta:
         model = VirtualNetwork
