@@ -1,4 +1,5 @@
 import django_filters
+from django.db.models import Q
 from netbox.filtersets import NetBoxModelFilterSet
 from .models import *
 from dcim.models import Site
@@ -29,7 +30,8 @@ class SDADeviceFilterSet(NetBoxModelFilterSet):
         fields = ('role','fabric_site')
     
     def search(self, queryset, name, value):
-        return queryset.filter(comments__icontains=value)
+        # return queryset.filter(comments__icontains=value)
+        return queryset.filter(Q(comments__icontains=value) | Q(device__name__icontains=value))
     
 
 class IPTransitFilterSet(NetBoxModelFilterSet):
