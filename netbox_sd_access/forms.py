@@ -30,12 +30,20 @@ class FabricSiteFilterForm(NetBoxModelFilterSetForm):
     )
 
 class VirtualNetworkForm(NetBoxModelForm):
-    fabric_site = DynamicModelChoiceField(queryset = FabricSite.objects.all(), required=True)
+    fabric_site = DynamicModelMultipleChoiceField(queryset = FabricSite.objects.all(), required=True)
+    # fabric_site = forms.ModelMultipleChoiceField(
+    #     queryset=FabricSite.objects.all(),
+    #     required=False
+    # )
     vrf = DynamicModelChoiceField(queryset = VRF.objects.all(), required=True)
+
+    class Meta:
+        model = VirtualNetwork
+        fields = ('name', 'fabric_site', 'vrf')
 
 class VirtualNetworkFilterForm(NetBoxModelFilterSetForm):
     model = VirtualNetwork
-    fabric_site = forms.ModelMultipleChoiceField(
+    fabric_site = DynamicModelChoiceField(
         queryset = FabricSite.objects.all(),
         required=False
     )

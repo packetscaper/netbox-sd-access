@@ -18,6 +18,11 @@ class FabricSiteType(NetBoxObjectType):
     ip_prefixes: List[Annotated["PrefixType", strawberry.lazy('ipam.graphql.types')]]
     devices: List[Annotated["DeviceType", strawberry.lazy('dcim.graphql.types')]]
 
+@strawberry_django.type(
+    models.VirtualNetwork,
+    fields='__all__',
+    filters=filters.VirtualNetworkFilter
+)
 class VirtualNetworkType(NetBoxObjectType):
     id: int
     name: str

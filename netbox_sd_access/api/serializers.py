@@ -31,7 +31,7 @@ class NestedVirtualNetworkSerializer(WritableNestedSerializer):
     )
 
     class Meta:
-        model = FabricSite
+        model = VirtualNetwork
         fields = ('id', 'url', 'display', 'name')
 
 class VirtualNetworkSerializer(NetBoxModelSerializer):
@@ -42,4 +42,4 @@ class VirtualNetworkSerializer(NetBoxModelSerializer):
 
     class Meta:
         model = VirtualNetwork
-        fields = ('id','url', 'name', 'fabric_site',' vrf', 'tags', 'custom_fields', 'created', 'last_updated')
+        fields = ('id','url', 'name', 'fabric_site','vrf', 'tags', 'custom_fields', 'created', 'last_updated')
