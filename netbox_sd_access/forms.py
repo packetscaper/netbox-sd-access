@@ -1,8 +1,15 @@
 from django import forms
 from ipam.models import Prefix, IPAddress, ASN
 from dcim.models import Site, Location, Device
-from netbox.forms import NetBoxModelForm, NetBoxModelFilterSetForm
-from utilities.forms.fields import CommentField, DynamicModelChoiceField, DynamicModelMultipleChoiceField
+from netbox.forms import NetBoxModelForm, NetBoxModelFilterSetForm, NetBoxModelImportForm, NetBoxModelBulkEditForm
+from utilities.forms.fields import (
+    CommentField,
+    DynamicModelChoiceField,
+    DynamicModelMultipleChoiceField,
+    CSVChoiceField,
+    CSVModelChoiceField,
+    CSVModelMultipleChoiceField,
+)
 
 from .models import *
 
@@ -81,6 +88,25 @@ class SDADeviceForm(NetBoxModelForm):
     class Meta:
         model = SDADevice
         fields = ('physical_site', 'location', 'fabric_site', 'device', 'role', 'comments', 'tags',)
+
+class SDADeviceImportForm(NetBoxModelImportForm):
+    device = CSVModelChoiceField(
+        queryset=Device.objects.all(),
+        to_field_name="name",
+        help_text='Physical device',
+    )
+    fabric_site = CSVModelChoiceField(
+        queryset=FabricSite.objects.all(),
+        to_field_name="name",
+        help_text='Fabric site'
+    )
+    role = CSVChoiceField(
+        choices=SDADeviceRoleChoices, help_text='SDA role'
+    )
+    
+    class Meta:
+        model = SDADevice
+        fields = ('device', 'fabric_site', 'role', 'comments', 'tags')
 
 class SDADeviceFilterForm(NetBoxModelFilterSetForm):
     model = SDADevice
