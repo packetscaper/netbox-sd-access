@@ -12,6 +12,16 @@ class Query:
     fabricsite_list: list[FabricSiteType] = strawberry_django.field()
 
     @strawberry.field
+    def iptransit(self,id:int) -> IPTransitType:
+        return models.IPTransit.objects.get(pk=id)
+    iptransit_list: list[IPTransitType] = strawberry_django.field()
+    
+    @strawberry.field
+    def sdatransit(self,id:int) -> SDATransitType:
+        return models.SDATransit.objects.get(pk=id)
+    sdatransit_list: list[SDATransitType] = strawberry_django.field()
+
+    @strawberry.field
     def sdadevice(self, id: int) -> SDADeviceType:
         return models.SDADevice.objects.get(pk=id)
     sdadevice_list: list[SDADeviceType] = strawberry_django.field()

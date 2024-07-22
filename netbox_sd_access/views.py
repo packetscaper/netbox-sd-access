@@ -3,6 +3,8 @@ from django.db.models import Count
 from netbox.views import generic
 from . import filtersets, forms, models, tables
 
+from dcim.tables import DeviceTable
+
 
 class SDAccessView(generic.ObjectView):
     queryset = models.SDAccess.objects.all()
@@ -61,6 +63,17 @@ class SDADeviceEditView(generic.ObjectEditView):
     queryset = models.SDADevice.objects.all()
     form = forms.SDADeviceForm
     
+    # def get_extra_context(self, request, instance):
+    #     ip_transit_table = tables.IPTransitTable(self.qs1)
+    #     sda_transit_table = tables.SDATransitTable(self.qs2)
+        
+    #     ip_transit_table.configure(request)
+    #     sda_transit_table.configure(request)
+        
+    #     return {
+    #         'ip_transit_table': ip_transit_table,
+    #         'sda_transit_table': sda_transit_table
+    #     }
 class SDADeviceDeleteView(generic.ObjectDeleteView):
     queryset = models.SDADevice.objects.all()
 
@@ -79,4 +92,67 @@ class IPPoolEditView(generic.ObjectEditView):
     
 class IPPoolDeleteView(generic.ObjectDeleteView):
     queryset = models.IPPool.objects.all()
+    
+class IPTransitListView(generic.ObjectListView):
+    # qs1 = 
+    # qs2 = models.SDATransit.objects.annotate(
+    #     device_count=Count('devices')
+    # )
+    queryset = models.IPTransit.objects.all()
+    table = tables.IPTransitTable
+    
+    filterset = filtersets.IPTransitFilterSet
+    filterset_form = forms.IPTransitFilterForm
+    
+    # def get_extra_context(self, request, instance):
+    #     ip_transit_table = tables.IPTransitTable(self.qs1)
+    #     sda_transit_table = tables.SDATransitTable(self.qs2)
+        
+    #     ip_transit_table.configure(request)
+    #     sda_transit_table.configure(request)
+        
+    #     return {
+    #         'ip_transit_table': ip_transit_table,
+    #         'sda_transit_table': sda_transit_table
+    #     }
+    
+class IPTransitEditView(generic.ObjectEditView):
+    queryset = models.IPTransit.objects.all()
+    form = forms.IPTransitForm
+class IPTransitDeleteView(generic.ObjectDeleteView):
+    queryset = models.IPTransit.objects.all()
+    
+class IPTransitView(generic.ObjectView):
+    queryset = models.IPTransit.objects.all()
+    
+# class IPTransitBulkDeleteView(generic.BulkDeleteView):
+#     queryset = models.IPTransit.objects.all()
+#     filterset = filtersets.IPTransitFilterSet
+#     table = tables.IPTransitTable
+    
+class SDATransitListView(generic.ObjectListView):
+    queryset = models.SDATransit.objects.annotate(
+        device_count = Count('devices')
+    )
+    table = tables.SDATransitTable
+    filterset = filtersets.SDATransitFilterSet
+    filterset_form = forms.SDATransitFilterForm
+    
+class SDATransitEditView(generic.ObjectEditView):
+    queryset = models.SDATransit.objects.all()
+    form = forms.SDATransitForm
+    
+class SDATransitDeleteView(generic.ObjectDeleteView):
+    queryset = models.SDATransit.objects.all()
+    
+class SDATransitView(generic.ObjectView):
+    queryset = models.SDATransit.objects.all()
+    def get_extra_context(self, request, instance):
+        table = tables.SDADeviceTable(instance.devices.all())
+        table.configure(request)
+        
+        return {
+            'devices_table': table,
+        }
+
 

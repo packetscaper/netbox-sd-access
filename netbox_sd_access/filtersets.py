@@ -2,7 +2,6 @@ import django_filters
 from netbox.filtersets import NetBoxModelFilterSet
 from .models import *
 from dcim.models import Site
-from django.db.models import F
 
 # class SDAccessFilterSet(NetBoxModelFilterSet):
 #
@@ -27,10 +26,29 @@ class SDADeviceFilterSet(NetBoxModelFilterSet):
     
     class Meta:
         model = SDADevice
-        fields = ('role','fabric_site',)
+        fields = ('role','fabric_site')
     
     def search(self, queryset, name, value):
         return queryset.filter(comments__icontains=value)
+    
+
+class IPTransitFilterSet(NetBoxModelFilterSet):
+    class Meta:
+        model = IPTransit
+        fields = ('id', 'name', 'fabric_site', 'asn', 'comments')
+        
+    def search(self, queryset, name, value):
+        return queryset.filter(name__icontains=value)
+
+class SDATransitFilterSet(NetBoxModelFilterSet):
+    transit_type = django_filters.CharFilter(field_name='transit_type', lookup_expr='exact')
+    
+    class Meta:
+        model = SDATransit
+        fields = ('id', 'name', 'transit_type', 'fabric_site', 'control_plane_node', 'devices', 'comments')
+        
+    def search(self, queryset, name, value):
+        return queryset.filter(name__icontains=value)
 
 class IPPoolFilterSet(NetBoxModelFilterSet):
     class Meta:

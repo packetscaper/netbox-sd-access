@@ -11,6 +11,16 @@ class FabricSiteViewSet(NetBoxModelViewSet):
     )
     serializer_class = FabricSiteSerializer
     filterset_class = filtersets.FabricSiteFilterSet
+    
+class IPTransitViewSet(NetBoxModelViewSet):
+    queryset = models.IPTransit.objects.prefetch_related('tags').all()
+    serializer_class = IPTransitSerializer
+    filterset_class = filtersets.IPTransitFilterSet
+    
+class SDATransitViewSet(NetBoxModelViewSet):
+    queryset = models.SDATransit.objects.prefetch_related('tags').all()
+    serializer_class = SDATransitSerializer
+    filterset_class = filtersets.SDATransitFilterSet
 
 class SDADeviceViewSet(NetBoxModelViewSet):
     queryset = models.SDADevice.objects.prefetch_related('tags').all()
@@ -20,3 +30,4 @@ class SDADeviceViewSet(NetBoxModelViewSet):
 class IPPoolViewSet(NetBoxModelViewSet):
     queryset = models.IPPool.objects.prefetch_related('tags').all()
     serializer_class = IPPoolSerializer
+    filterset_class = filtersets.IPPoolFilterSet

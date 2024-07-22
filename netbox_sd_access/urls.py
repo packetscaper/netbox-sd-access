@@ -25,6 +25,23 @@ urlpatterns = (
     path('fabric-sites/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='fabricsite_changelog', 
          kwargs={'model': models.FabricSite}),
     
+    #### TRANSITS
+    path("ip-transits/", views.IPTransitListView.as_view(), name='iptransit_list'),
+    path("ip-transits/add/", views.IPTransitEditView.as_view(), name='iptransit_add'),
+    path('ip-transits/<int:pk>/', views.IPTransitView.as_view(), name='iptransit'),
+    path('ip-transits/<int:pk>/edit/', views.IPTransitEditView.as_view(), name='iptransit_edit'),
+    path('ip-transits/<int:pk>/delete/', views.IPTransitDeleteView.as_view(), name='iptransit_delete'),
+    path('ip-transits/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='iptransit_changelog', 
+         kwargs={'model': models.IPTransit}),
+        
+    path("sda-transits/", views.SDATransitListView.as_view(), name='sdatransit_list'),
+    path("sda-transits/add/", views.SDATransitEditView.as_view(), name='sdatransit_add'),
+    path('sda-transits/<int:pk>/', views.SDATransitView.as_view(), name='sdatransit'),
+    path('sda-transits/<int:pk>/edit/', views.SDATransitEditView.as_view(), name='sdatransit_edit'),
+    path('sda-transits/<int:pk>/delete/', views.SDATransitDeleteView.as_view(), name='sdatransit_delete'),
+    path('sda-transits/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='sdatransit_changelog', 
+         kwargs={'model': models.SDATransit}),
+    
     path("sda-devices/", views.SDADeviceListView.as_view(), name='sdadevice_list'),
     path("sda-devices/add/", views.SDADeviceEditView.as_view(), name='sdadevice_add'),
     path('sda-devices/<int:pk>/', views.SDADeviceView.as_view(), name='sdadevice'),
