@@ -78,20 +78,17 @@ class SDADeviceListView(generic.ObjectListView):
 class SDADeviceEditView(generic.ObjectEditView):
     queryset = models.SDADevice.objects.all()
     form = forms.SDADeviceForm
-    
-    # def get_extra_context(self, request, instance):
-    #     ip_transit_table = tables.IPTransitTable(self.qs1)
-    #     sda_transit_table = tables.SDATransitTable(self.qs2)
-        
-    #     ip_transit_table.configure(request)
-    #     sda_transit_table.configure(request)
-        
-    #     return {
-    #         'ip_transit_table': ip_transit_table,
-    #         'sda_transit_table': sda_transit_table
-    #     }
+
+class SDADeviceBulkImportView(generic.BulkImportView):
+    queryset = models.SDADevice.objects.all()
+    model_form = forms.SDADeviceImportForm
+
 class SDADeviceDeleteView(generic.ObjectDeleteView):
     queryset = models.SDADevice.objects.all()
+
+class SDADeviceBulkDeleteView(generic.BulkDeleteView):
+    queryset = models.SDADevice.objects.all()
+    table = tables.SDADeviceTable
 
 class IPPoolView(generic.ObjectView):
     queryset = models.IPPool.objects.all()

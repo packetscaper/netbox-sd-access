@@ -54,6 +54,8 @@ urlpatterns = (
     #### SDA Devices
     path("sda-devices/", views.SDADeviceListView.as_view(), name='sdadevice_list'),
     path("sda-devices/add/", views.SDADeviceEditView.as_view(), name='sdadevice_add'),
+    path('sda-devices/import/', views.SDADeviceBulkImportView.as_view(), name='sdadevice_import'),
+    path('sda-device/delete/', views.SDADeviceBulkDeleteView.as_view(), name='sdadevice_bulk_delete'),
     path('sda-devices/<int:pk>/', views.SDADeviceView.as_view(), name='sdadevice'),
     path('sda-devices/<int:pk>/edit/', views.SDADeviceEditView.as_view(), name='sdadevice_edit'),
     path('sda-devices/<int:pk>/delete/', views.SDADeviceDeleteView.as_view(), name='sdadevice_delete'),

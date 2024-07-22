@@ -22,6 +22,11 @@ devicerole_buttons = [
         title='Add',
         icon_class='mdi mdi-plus-thick'
     ),
+    PluginMenuButton(
+        link='plugins:netbox_sd_access:sdadevice_import',
+        title='Import',
+        icon_class='mdi mdi-upload',
+    )
 ]
 
 ip_transit_buttons = [
