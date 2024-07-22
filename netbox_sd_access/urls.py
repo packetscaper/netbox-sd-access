@@ -33,5 +33,39 @@ urlpatterns = (
     path('virtual-networks/<int:pk>/delete/', views.VirtualNetworkDeleteView.as_view(), name = "virtualnetwork_delete"),
     path('virtual-networks/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='virtualnetwork_changelog',
          kwargs={'model': models.VirtualNetwork}),
+    
+    #### TRANSITS
+    path("ip-transits/", views.IPTransitListView.as_view(), name='iptransit_list'),
+    path("ip-transits/add/", views.IPTransitEditView.as_view(), name='iptransit_add'),
+    path('ip-transits/<int:pk>/', views.IPTransitView.as_view(), name='iptransit'),
+    path('ip-transits/<int:pk>/edit/', views.IPTransitEditView.as_view(), name='iptransit_edit'),
+    path('ip-transits/<int:pk>/delete/', views.IPTransitDeleteView.as_view(), name='iptransit_delete'),
+    path('ip-transits/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='iptransit_changelog', 
+         kwargs={'model': models.IPTransit}),
+        
+    path("sda-transits/", views.SDATransitListView.as_view(), name='sdatransit_list'),
+    path("sda-transits/add/", views.SDATransitEditView.as_view(), name='sdatransit_add'),
+    path('sda-transits/<int:pk>/', views.SDATransitView.as_view(), name='sdatransit'),
+    path('sda-transits/<int:pk>/edit/', views.SDATransitEditView.as_view(), name='sdatransit_edit'),
+    path('sda-transits/<int:pk>/delete/', views.SDATransitDeleteView.as_view(), name='sdatransit_delete'),
+    path('sda-transits/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='sdatransit_changelog', 
+         kwargs={'model': models.SDATransit}),
+    
+    #### SDA Devices
+    path("sda-devices/", views.SDADeviceListView.as_view(), name='sdadevice_list'),
+    path("sda-devices/add/", views.SDADeviceEditView.as_view(), name='sdadevice_add'),
+    path('sda-devices/<int:pk>/', views.SDADeviceView.as_view(), name='sdadevice'),
+    path('sda-devices/<int:pk>/edit/', views.SDADeviceEditView.as_view(), name='sdadevice_edit'),
+    path('sda-devices/<int:pk>/delete/', views.SDADeviceDeleteView.as_view(), name='sdadevice_delete'),
+    path('sda-devices/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='sdadevice_changelog', 
+         kwargs={'model': models.SDADevice}),
 
+    #### IP Pools
+    path("ip-pools/", views.IPPoolListView.as_view(), name='ippool_list'),
+    path("ip-pools/add/", views.IPPoolEditView.as_view(), name='ippool_add'),
+    path('ip-pools/<int:pk>/', views.IPPoolView.as_view(), name='ippool'),
+    path('ip-pools/<int:pk>/edit/', views.IPPoolEditView.as_view(), name='ippool_edit'),
+    path('ip-pools/<int:pk>/delete/', views.IPPoolDeleteView.as_view(), name='ippool_delete'),
+    path('ip-pools/<int:pk>/changelog/', ObjectChangeLogView.as_view(), name='ippool_changelog', 
+         kwargs={'model': models.IPPool}),
 )
