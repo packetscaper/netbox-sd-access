@@ -20,7 +20,7 @@
             </tr>
             <tr>
               <th scope="row">Role</th>
-              <td>{{ object.get_role_display }}</td>
+              <td>{% badge object.get_role_display bg_color=object.get_role_color %}</td>
             </tr>
         </table>
       </div>
