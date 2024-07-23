@@ -1,4 +1,4 @@
-from typing import Annotated, List
+from typing import Annotated, List, Optional
 import strawberry
 import strawberry_django
 from netbox.graphql.types import NetBoxObjectType
@@ -28,7 +28,7 @@ class FabricSiteType(NetBoxObjectType):
     id: int
     name: str
     physical_site: Annotated["SiteType", strawberry.lazy('dcim.graphql.types')]
-    location: Annotated["LocationType", strawberry.lazy('dcim.graphql.types')]
+    location: Optional[Annotated["LocationType", strawberry.lazy('dcim.graphql.types')]]
     ip_prefixes: List[IPPoolType]
       
     
