@@ -19,6 +19,7 @@ urlpatterns = (
     
     path("fabric-sites/", views.FabricSiteListView.as_view(), name='fabricsite_list'),
     path("fabric-sites/add/", views.FabricSiteEditView.as_view(), name='fabricsite_add'),
+    path('fabric-sites/import/', views.FabricSiteImportView.as_view(), name='fabricsite_import'),
     path('fabric-sites/delete/', views.FabricSiteBulkDeleteView.as_view(), name='fabricsite_bulk_delete'),
     path('fabric-sites/<int:pk>/', views.FabricSiteView.as_view(), name='fabricsite'),
     path('fabric-sites/<int:pk>/edit/', views.FabricSiteEditView.as_view(), name='fabricsite_edit'),

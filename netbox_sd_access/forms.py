@@ -26,7 +26,7 @@ class FabricSiteForm(NetBoxModelForm):
     
     class Meta:
         model = FabricSite
-        fields = ('name', 'physical_site', 'location', 'ip_prefixes')
+        fields = ('name', 'physical_site', 'location', 'ip_prefixes', 'tags')
 
 class FabricSiteFilterForm(NetBoxModelFilterSetForm):
     model = FabricSite
@@ -34,6 +34,24 @@ class FabricSiteFilterForm(NetBoxModelFilterSetForm):
         queryset=Site.objects.all(),
         required=False
     )
+
+class FabricSiteImportForm(NetBoxModelImportForm):
+    physical_site = CSVModelChoiceField(
+        queryset=Site.objects.all(),
+        to_field_name="name",
+    )
+    location = CSVModelChoiceField(
+        queryset=Location.objects.all(),
+        to_field_name="name",
+    )
+    ip_prefixes = CSVModelMultipleChoiceField(
+        queryset=IPPool.objects.all(),
+        to_field_name = "name",
+    )
+    
+    class Meta:
+        model = FabricSite
+        fields = ('physical_site', 'location', 'ip_prefixes', 'tags')
     
 class IPTransitForm(NetBoxModelForm):
     fabric_site = DynamicModelChoiceField(queryset=FabricSite.objects.all(), required=True)

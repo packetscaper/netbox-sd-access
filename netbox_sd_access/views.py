@@ -49,6 +49,10 @@ class FabricSiteListView(generic.ObjectListView):
 class FabricSiteEditView(generic.ObjectEditView):
     queryset = models.FabricSite.objects.all()
     form = forms.FabricSiteForm
+
+class FabricSiteImportView(generic.BulkImportView):
+    queryset = models.FabricSite.objects.all()
+    model_form = forms.FabricSiteImportForm
     
 class FabricSiteDeleteView(generic.ObjectDeleteView):
     queryset = models.FabricSite.objects.all()

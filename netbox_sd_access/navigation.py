@@ -6,6 +6,11 @@ fabricsite_buttons = [
         title='Add',
         icon_class='mdi mdi-plus-thick'
     ),
+    PluginMenuButton(
+        link='plugins:netbox_sd_access:fabricsite_import',
+        title='Import',
+        icon_class='mdi mdi-upload',
+    )
 ]
 
 virtualnetwork_buttons = [
