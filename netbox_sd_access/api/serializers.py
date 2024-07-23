@@ -35,6 +35,7 @@ class FabricSiteSerializer(NetBoxModelSerializer):
     class Meta:
         model = FabricSite
         fields = ('id', 'url', 'display', 'name', 'physical_site', 'location', 'ip_prefixes', 'device_count', 'tags', 'custom_fields', 'created', 'last_updated')
+        brief_fields = ('id', 'url', 'display', 'name', 'device_count')
 
 class NestedIPTransitSerializer(WritableNestedSerializer):
     url = serializers.HyperlinkedIdentityField(
