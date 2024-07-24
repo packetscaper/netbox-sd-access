@@ -1,11 +1,11 @@
 from rest_framework import serializers
 
-from dcim.api.serializers import SiteSerializer
+from dcim.api.serializers import SiteSerializer, LocationSerializer, DeviceSerializer
 from ipam.models import IPAddress
 from netbox.api.serializers import NetBoxModelSerializer, WritableNestedSerializer
-from netbox.api.fields import SerializedPKRelatedField
+from netbox.api.fields import SerializedPKRelatedField, ChoiceField
 from ipam.api.serializers import NestedVRFSerializer, IPAddressSerializer, PrefixSerializer
-from ..models import FabricSite, IPPool, SDADevice, IPTransit, SDATransit, VirtualNetwork
+from ..models import FabricSite, IPPool, SDADevice, IPTransit, SDATransit, VirtualNetwork, SDADeviceRoleChoices
 
 #import and use NestedPrefix, Nested Device Serializer
 class NestedFabricSiteSerializer(WritableNestedSerializer):
@@ -63,10 +63,13 @@ class SDADeviceSerializer(NetBoxModelSerializer):
         view_name='plugins-api:netbox_sd_access-api:sdadevice-detail'
     )
     fabric_site = NestedFabricSiteSerializer()
+    device = DeviceSerializer(nested=True)
+    role = ChoiceField(choices=SDADeviceRoleChoices)
     
     class Meta:
         model = SDADevice
         fields = ('id', 'url', 'display', 'device', 'role', 'fabric_site', 'tags', 'custom_fields', 'created', 'last_updated')
+        brief_fields = ('id', 'url', 'display', 'device', 'role', 'fabric_site')
 
 class NestedSDATransitSerializer(WritableNestedSerializer):
     url = serializers.HyperlinkedIdentityField(
