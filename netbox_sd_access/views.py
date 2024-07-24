@@ -113,10 +113,14 @@ class IPPoolEditView(generic.ObjectEditView):
     
 class IPPoolDeleteView(generic.ObjectDeleteView):
     queryset = models.IPPool.objects.all()
-    
+
 class IPPoolBulkDeleteView(generic.BulkDeleteView):
     queryset = models.IPPool.objects.all()
     table = tables.IPPoolTable
+
+class IPPoolBulkImportView(generic.BulkImportView):
+    queryset = models.IPPool.objects.all()
+    model_form = forms.IPPoolImportForm
     
 class IPTransitListView(generic.ObjectListView):
     # qs1 = 

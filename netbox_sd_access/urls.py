@@ -71,6 +71,7 @@ urlpatterns = (
     #### IP Pools
     path("ip-pools/", views.IPPoolListView.as_view(), name='ippool_list'),
     path("ip-pools/add/", views.IPPoolEditView.as_view(), name='ippool_add'),
+    path("ip-pools/import/", views.IPPoolBulkImportView.as_view(), name='ippool_import'),
     path('ip-pools/delete/', views.IPPoolBulkDeleteView.as_view(), name='ippool_bulk_delete'),
     path('ip-pools/<int:pk>/', views.IPPoolView.as_view(), name='ippool'),
     path('ip-pools/<int:pk>/edit/', views.IPPoolEditView.as_view(), name='ippool_edit'),

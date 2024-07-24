@@ -51,7 +51,7 @@ class FabricSiteImportForm(NetBoxModelImportForm):
     
     class Meta:
         model = FabricSite
-        fields = ('physical_site', 'location', 'ip_prefixes', 'tags')
+        fields = ('name', 'physical_site', 'location', 'ip_prefixes', 'tags')
     
 class IPTransitForm(NetBoxModelForm):
     fabric_site = DynamicModelChoiceField(queryset=FabricSite.objects.all(), required=True)
@@ -176,6 +176,29 @@ class IPPoolForm(NetBoxModelForm):
     gateway = DynamicModelChoiceField(queryset=IPAddress.objects.all(), required=True)
     dhcp_server = DynamicModelChoiceField(queryset=IPAddress.objects.all(), required=True)
     dns_servers = DynamicModelMultipleChoiceField(queryset=IPAddress.objects.all(), required=True)
+    
+    class Meta:
+        model = IPPool
+        fields = ('name', 'prefix', 'gateway', 'dhcp_server', 'dns_servers')
+
+class IPPoolImportForm(NetBoxModelImportForm):
+    prefix = CSVModelChoiceField(
+        queryset=Prefix.objects.all(),
+        to_field_name='prefix'
+    )
+    gateway = CSVModelChoiceField(
+        queryset=IPAddress.objects.all(),
+        to_field_name='address'
+    )
+    dhcp_server = CSVModelChoiceField(
+        queryset=IPAddress.objects.all(),
+        to_field_name='address'
+    )
+    dns_servers = CSVModelMultipleChoiceField(
+        queryset=IPAddress.objects.all(),
+        to_field_name='address',
+        required=False
+    )
     
     class Meta:
         model = IPPool
