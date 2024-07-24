@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""Tests for `netbox_sd_access` package."""
+"""Tests for Fabric Site."""
 
 from django.urls import reverse
 from rest_framework import status
