@@ -6,7 +6,7 @@ from django.urls import reverse
 from rest_framework import status
 from utilities.testing import APITestCase, APIViewTestCases
 
-from dcim.models import Site, Location, Device, DeviceRole, Manufacturer, DeviceType
+from dcim.models import Site, Device, DeviceRole, Manufacturer, DeviceType
 
 from netbox_sd_access.models import *
 
