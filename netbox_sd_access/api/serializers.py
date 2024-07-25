@@ -123,8 +123,16 @@ class VirtualNetworkSerializer(NetBoxModelSerializer):
     url = serializers.HyperlinkedIdentityField(
         view_name='plugins-api:netbox_sd_access-api:virtualnetwork-detail'
     )
+    fabric_site = SerializedPKRelatedField(
+        queryset=FabricSite.objects.all(),
+        serializer=FabricSiteSerializer,
+        nested=True,
+        required=False,
+        many=True
+    )
     vrf = NestedVRFSerializer()
 
     class Meta:
         model = VirtualNetwork
         fields = ('id','url', 'name', 'fabric_site','vrf', 'tags', 'custom_fields', 'created', 'last_updated')
+        brief_fields = ('id', 'url', 'name', 'fabric_site')

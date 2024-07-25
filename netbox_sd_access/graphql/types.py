@@ -70,7 +70,7 @@ class SDATransitType(NetBoxObjectType):
     control_plane_node:SDADeviceType
     devices:List[SDADeviceType]
     comments:str
-      
+    
     
 @strawberry_django.type(
     models.VirtualNetwork,
@@ -80,5 +80,5 @@ class SDATransitType(NetBoxObjectType):
 class VirtualNetworkType(NetBoxObjectType):
     id: int
     name: str
-    fabric_site: FabricSiteType
+    fabric_site: List[FabricSiteType]
     vrf: Annotated["VRFType", strawberry.lazy('ipam.graphql.types')]

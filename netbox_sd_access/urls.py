@@ -30,6 +30,8 @@ urlpatterns = (
     #####Virtual Networks
     path("virtual-networks/", views.VirtualNetworkListView.as_view(), name='virtualnetwork_list'),
     path("virtual-networks/add/", views.VirtualNetworkEditView.as_view(), name='virtualnetwork_add'),
+    path("virtual-networks/import/", views.VirtualNetworkImportView.as_view(), name='virtualnetwork_import'),
+    path("virtual-networks/delete/", views.VirtualNetworkBulkDeleteView.as_view(), name='virtualnetwork_bulk_delete'),
     path('virtual-networks/<int:pk>/', views.VirtualNetworkView.as_view(), name='virtualnetwork'),
     path("virtual-networks/<int:pk>/edit/", views.VirtualNetworkEditView.as_view(), name='virtualnetwork_edit'),
     path('virtual-networks/<int:pk>/delete/', views.VirtualNetworkDeleteView.as_view(), name = "virtualnetwork_delete"),

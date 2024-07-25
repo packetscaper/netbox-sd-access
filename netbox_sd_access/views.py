@@ -74,6 +74,14 @@ class VirtualNetworkDeleteView(generic.ObjectDeleteView):
 class VirtualNetworkView(generic.ObjectView):
     queryset = models.VirtualNetwork.objects.all()
 
+class VirtualNetworkImportView(generic.BulkImportView):
+    queryset = models.VirtualNetwork.objects.all()
+    model_form = forms.VirtualNetworkImportForm
+
+class VirtualNetworkBulkDeleteView(generic.BulkDeleteView):
+    queryset = models.VirtualNetwork.objects.all()
+    table = tables.VirtualNetworkTable
+
 class SDADeviceView(generic.ObjectView):
     queryset = models.SDADevice.objects.all()
     

@@ -220,6 +220,21 @@ class VirtualNetworkForm(NetBoxModelForm):
         model = VirtualNetwork
         fields = ('name', 'fabric_site', 'vrf')
 
+class VirtualNetworkImportForm(NetBoxModelImportForm):
+    fabric_site = CSVModelMultipleChoiceField(
+        queryset=FabricSite.objects.all(),
+        to_field_name='name'
+    )
+    vrf = CSVModelChoiceField(
+        queryset=VRF.objects.all(),
+        to_field_name='name',
+        required=True
+    )
+    
+    class Meta:
+        model = VirtualNetwork
+        fields = ('name', 'fabric_site', 'vrf')
+
 class VirtualNetworkFilterForm(NetBoxModelFilterSetForm):
     model = VirtualNetwork
     fabric_site = DynamicModelChoiceField(
