@@ -4,6 +4,8 @@ from netbox.models import NetBoxModel
 from utilities.choices import ChoiceSet
 from django.core.exceptions import ValidationError
 
+import netaddr
+
 
 
 class SDAccess(NetBoxModel):
@@ -35,6 +37,13 @@ class IPPool(NetBoxModel):
     
     def __str__(self) -> str:
         return self.name
+    
+    def clean(self):
+        """
+        Verify that the gateway is in the same subnet as the prefix.
+        """
+        if netaddr.IPNetwork(self.gateway.address) != self.prefix.prefix:
+            raise ValidationError('Gateway must be in the same subnet as prefix.')
     
 class FabricSite(NetBoxModel):
     name = models.CharField(max_length=200)
