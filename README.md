@@ -54,6 +54,10 @@ To install the plugin, use `pip install --editable .` once the container loads, 
 
 To run the server, use `python ../manage.py runserver`
 
+### Testing
+
+To test the plugin, run `python ../manage.py test netbox_sd_access` while inside the plugin directory in the dev container. Alternatively, you can run a specific test file by using `python ../manage.py test netbox_sd_access.tests.<test_file_name>` to run a specific test, such as `...test netbox_sd_access.tests.test_fabric_site`.
+
 ## Credits
 
 Based on the NetBox plugin tutorial:
