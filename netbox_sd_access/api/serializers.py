@@ -88,6 +88,7 @@ class SDATransitSerializer(NetBoxModelSerializer):
     class Meta:
         model = SDATransit
         fields = ('id', 'url', 'display', 'name', 'transit_type', 'fabric_site', 'control_plane_node', 'devices', 'comments', 'tags', 'custom_fields', 'created', 'last_updated')
+        brief_fields = ('id', 'url', 'display', 'name', 'transit_type', 'fabric_site', 'control_plane_node')
 
 class IPPoolSerializer(NetBoxModelSerializer):
     url = serializers.HyperlinkedIdentityField(
