@@ -56,7 +56,7 @@ class IPTransitSerializer(NetBoxModelSerializer):
     class Meta:  
         model = IPTransit
         fields= ('id', 'url', 'display', 'name', 'fabric_site', 'asn', 'comments', 'tags', 'custom_fields', 'created', 'last_updated')
-    
+        brief_fields = ('id', 'url', 'display', 'name', 'fabric_site', 'asn')
     
 class SDADeviceSerializer(NetBoxModelSerializer):
     url = serializers.HyperlinkedIdentityField(
