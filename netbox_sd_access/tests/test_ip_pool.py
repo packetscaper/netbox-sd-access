@@ -3,6 +3,9 @@
 """Tests for IP Pools."""
 
 from django.urls import reverse
+from django.test import TestCase
+from django.core.exceptions import ValidationError
+
 from rest_framework import status
 from utilities.testing import APITestCase, APIViewTestCases
 
@@ -56,7 +59,7 @@ class IPPoolTestCase(APIViewTestCases.APIViewTestCase):
                 'name':'Pool4',
                 'prefix': prefix4.id,
                 'gateway': gateway4.id,
-                'dhcp_server': gateway4.id,
+                'dhcp_server': gateway5.id,
                 'dns_servers': [dns1.id, dns2.id]
             },
             {
@@ -73,3 +76,18 @@ class IPPoolTestCase(APIViewTestCases.APIViewTestCase):
                 'dhcp_server': gateway6.id,
             },
         ]
+
+class IPPoolValidationTestCase(TestCase):
+    def setUp(self):
+        self.prefix1 = Prefix.objects.create(prefix='10.0.0.0/24')
+        self.address1 = IPAddress.objects.create(address='10.0.0.1/24')
+        self.address2 = IPAddress.objects.create(address='10.0.1.1/24')
+    
+    def test_gateway_oob(self):
+        ippool = IPPool(
+            name='Pool1',
+            prefix=self.prefix1,
+            gateway=self.address2,
+            dhcp_server=self.address1,
+        )
+        self.assertRaises(ValidationError, ippool.full_clean)
