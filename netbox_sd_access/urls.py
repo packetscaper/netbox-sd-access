@@ -19,6 +19,7 @@ urlpatterns = (
     
     path("fabric-sites/", views.FabricSiteListView.as_view(), name='fabricsite_list'),
     path("fabric-sites/add/", views.FabricSiteEditView.as_view(), name='fabricsite_add'),
+    path('fabric-sites/import/', views.FabricSiteImportView.as_view(), name='fabricsite_import'),
     path('fabric-sites/delete/', views.FabricSiteBulkDeleteView.as_view(), name='fabricsite_bulk_delete'),
     path('fabric-sites/<int:pk>/', views.FabricSiteView.as_view(), name='fabricsite'),
     path('fabric-sites/<int:pk>/edit/', views.FabricSiteEditView.as_view(), name='fabricsite_edit'),
@@ -29,6 +30,8 @@ urlpatterns = (
     #####Virtual Networks
     path("virtual-networks/", views.VirtualNetworkListView.as_view(), name='virtualnetwork_list'),
     path("virtual-networks/add/", views.VirtualNetworkEditView.as_view(), name='virtualnetwork_add'),
+    path("virtual-networks/import/", views.VirtualNetworkImportView.as_view(), name='virtualnetwork_import'),
+    path("virtual-networks/delete/", views.VirtualNetworkBulkDeleteView.as_view(), name='virtualnetwork_bulk_delete'),
     path('virtual-networks/<int:pk>/', views.VirtualNetworkView.as_view(), name='virtualnetwork'),
     path("virtual-networks/<int:pk>/edit/", views.VirtualNetworkEditView.as_view(), name='virtualnetwork_edit'),
     path('virtual-networks/<int:pk>/delete/', views.VirtualNetworkDeleteView.as_view(), name = "virtualnetwork_delete"),
@@ -70,6 +73,7 @@ urlpatterns = (
     #### IP Pools
     path("ip-pools/", views.IPPoolListView.as_view(), name='ippool_list'),
     path("ip-pools/add/", views.IPPoolEditView.as_view(), name='ippool_add'),
+    path("ip-pools/import/", views.IPPoolBulkImportView.as_view(), name='ippool_import'),
     path('ip-pools/delete/', views.IPPoolBulkDeleteView.as_view(), name='ippool_bulk_delete'),
     path('ip-pools/<int:pk>/', views.IPPoolView.as_view(), name='ippool'),
     path('ip-pools/<int:pk>/edit/', views.IPPoolEditView.as_view(), name='ippool_edit'),

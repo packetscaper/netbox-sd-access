@@ -6,6 +6,11 @@ fabricsite_buttons = [
         title='Add',
         icon_class='mdi mdi-plus-thick'
     ),
+    PluginMenuButton(
+        link='plugins:netbox_sd_access:fabricsite_import',
+        title='Import',
+        icon_class='mdi mdi-upload',
+    )
 ]
 
 virtualnetwork_buttons = [
@@ -14,6 +19,11 @@ virtualnetwork_buttons = [
         title='Add',
         icon_class='mdi mdi-plus-thick'
     ),
+    PluginMenuButton(
+        link='plugins:netbox_sd_access:virtualnetwork_import',
+        title='Import',
+        icon_class='mdi mdi-upload',
+    )
 ]
 
 devicerole_buttons = [
@@ -48,6 +58,11 @@ ippool_buttons = [
         title='Add',
         icon_class='mdi mdi-plus-thick'
     ),
+    PluginMenuButton(
+        link='plugins:netbox_sd_access:ippool_import',
+        title='Import',
+        icon_class='mdi mdi-upload',
+    )
 ]
 
 sda_transit_buttons = [

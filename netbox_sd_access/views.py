@@ -49,6 +49,10 @@ class FabricSiteListView(generic.ObjectListView):
 class FabricSiteEditView(generic.ObjectEditView):
     queryset = models.FabricSite.objects.all()
     form = forms.FabricSiteForm
+
+class FabricSiteImportView(generic.BulkImportView):
+    queryset = models.FabricSite.objects.all()
+    model_form = forms.FabricSiteImportForm
     
 class FabricSiteDeleteView(generic.ObjectDeleteView):
     queryset = models.FabricSite.objects.all()
@@ -69,6 +73,14 @@ class VirtualNetworkDeleteView(generic.ObjectDeleteView):
 
 class VirtualNetworkView(generic.ObjectView):
     queryset = models.VirtualNetwork.objects.all()
+
+class VirtualNetworkImportView(generic.BulkImportView):
+    queryset = models.VirtualNetwork.objects.all()
+    model_form = forms.VirtualNetworkImportForm
+
+class VirtualNetworkBulkDeleteView(generic.BulkDeleteView):
+    queryset = models.VirtualNetwork.objects.all()
+    table = tables.VirtualNetworkTable
 
 class SDADeviceView(generic.ObjectView):
     queryset = models.SDADevice.objects.all()
@@ -109,10 +121,14 @@ class IPPoolEditView(generic.ObjectEditView):
     
 class IPPoolDeleteView(generic.ObjectDeleteView):
     queryset = models.IPPool.objects.all()
-    
+
 class IPPoolBulkDeleteView(generic.BulkDeleteView):
     queryset = models.IPPool.objects.all()
     table = tables.IPPoolTable
+
+class IPPoolBulkImportView(generic.BulkImportView):
+    queryset = models.IPPool.objects.all()
+    model_form = forms.IPPoolImportForm
     
 class IPTransitListView(generic.ObjectListView):
     # qs1 = 

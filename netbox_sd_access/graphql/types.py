@@ -1,4 +1,4 @@
-from typing import Annotated, List
+from typing import Annotated, List, Optional
 import strawberry
 import strawberry_django
 from netbox.graphql.types import NetBoxObjectType
@@ -28,7 +28,7 @@ class FabricSiteType(NetBoxObjectType):
     id: int
     name: str
     physical_site: Annotated["SiteType", strawberry.lazy('dcim.graphql.types')]
-    location: Annotated["LocationType", strawberry.lazy('dcim.graphql.types')]
+    location: Optional[Annotated["LocationType", strawberry.lazy('dcim.graphql.types')]]
     ip_prefixes: List[IPPoolType]
       
     
@@ -70,7 +70,7 @@ class SDATransitType(NetBoxObjectType):
     control_plane_node:SDADeviceType
     devices:List[SDADeviceType]
     comments:str
-      
+    
     
 @strawberry_django.type(
     models.VirtualNetwork,
@@ -80,5 +80,5 @@ class SDATransitType(NetBoxObjectType):
 class VirtualNetworkType(NetBoxObjectType):
     id: int
     name: str
-    fabric_site: FabricSiteType
+    fabric_site: List[FabricSiteType]
     vrf: Annotated["VRFType", strawberry.lazy('ipam.graphql.types')]

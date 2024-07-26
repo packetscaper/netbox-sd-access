@@ -26,7 +26,7 @@ class FabricSiteForm(NetBoxModelForm):
     
     class Meta:
         model = FabricSite
-        fields = ('name', 'physical_site', 'location', 'ip_prefixes')
+        fields = ('name', 'physical_site', 'location', 'ip_prefixes', 'tags')
 
 class FabricSiteFilterForm(NetBoxModelFilterSetForm):
     model = FabricSite
@@ -34,6 +34,24 @@ class FabricSiteFilterForm(NetBoxModelFilterSetForm):
         queryset=Site.objects.all(),
         required=False
     )
+
+class FabricSiteImportForm(NetBoxModelImportForm):
+    physical_site = CSVModelChoiceField(
+        queryset=Site.objects.all(),
+        to_field_name="name",
+    )
+    location = CSVModelChoiceField(
+        queryset=Location.objects.all(),
+        to_field_name="name",
+    )
+    ip_prefixes = CSVModelMultipleChoiceField(
+        queryset=IPPool.objects.all(),
+        to_field_name = "name",
+    )
+    
+    class Meta:
+        model = FabricSite
+        fields = ('name', 'physical_site', 'location', 'ip_prefixes', 'tags')
     
 class IPTransitForm(NetBoxModelForm):
     fabric_site = DynamicModelChoiceField(queryset=FabricSite.objects.all(), required=True)
@@ -163,6 +181,29 @@ class IPPoolForm(NetBoxModelForm):
         model = IPPool
         fields = ('name', 'prefix', 'gateway', 'dhcp_server', 'dns_servers')
 
+class IPPoolImportForm(NetBoxModelImportForm):
+    prefix = CSVModelChoiceField(
+        queryset=Prefix.objects.all(),
+        to_field_name='prefix'
+    )
+    gateway = CSVModelChoiceField(
+        queryset=IPAddress.objects.all(),
+        to_field_name='address'
+    )
+    dhcp_server = CSVModelChoiceField(
+        queryset=IPAddress.objects.all(),
+        to_field_name='address'
+    )
+    dns_servers = CSVModelMultipleChoiceField(
+        queryset=IPAddress.objects.all(),
+        to_field_name='address',
+        required=False
+    )
+    
+    class Meta:
+        model = IPPool
+        fields = ('name', 'prefix', 'gateway', 'dhcp_server', 'dns_servers')
+
 class IPPoolFilterForm(NetBoxModelFilterSetForm):
     model = IPPool
     prefix = DynamicModelChoiceField(queryset=Prefix.objects.all(), required=False)
@@ -175,6 +216,21 @@ class VirtualNetworkForm(NetBoxModelForm):
     # )
     vrf = DynamicModelChoiceField(queryset = VRF.objects.all(), required=True, label='VRF')
 
+    class Meta:
+        model = VirtualNetwork
+        fields = ('name', 'fabric_site', 'vrf')
+
+class VirtualNetworkImportForm(NetBoxModelImportForm):
+    fabric_site = CSVModelMultipleChoiceField(
+        queryset=FabricSite.objects.all(),
+        to_field_name='name'
+    )
+    vrf = CSVModelChoiceField(
+        queryset=VRF.objects.all(),
+        to_field_name='name',
+        required=True
+    )
+    
     class Meta:
         model = VirtualNetwork
         fields = ('name', 'fabric_site', 'vrf')
