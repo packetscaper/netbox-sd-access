@@ -109,7 +109,7 @@ class IPPoolSerializer(NetBoxModelSerializer):
     
     class Meta:
         model = IPPool
-        fields = ('id', 'url', 'display', 'name', 'prefix', 'gateway', 'dhcp_server', 'dns_servers')
+        fields = ('id', 'url', 'display', 'name', 'prefix', 'gateway', 'dhcp_server', 'dns_servers', 'comments', 'tags', 'custom_fields', 'created', 'last_updated')
         brief_fields = ('id', 'url', 'display', 'prefix')
 
 class NestedVirtualNetworkSerializer(WritableNestedSerializer):

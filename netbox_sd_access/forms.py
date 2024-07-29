@@ -177,10 +177,11 @@ class IPPoolForm(NetBoxModelForm):
     gateway = DynamicModelChoiceField(queryset=IPAddress.objects.all(), required=True)
     dhcp_server = DynamicModelChoiceField(queryset=IPAddress.objects.all(), required=True)
     dns_servers = DynamicModelMultipleChoiceField(queryset=IPAddress.objects.all(), required=True)
+    comments = CommentField()
     
     class Meta:
         model = IPPool
-        fields = ('name', 'prefix', 'gateway', 'dhcp_server', 'dns_servers')
+        fields = ('name', 'prefix', 'gateway', 'dhcp_server', 'dns_servers', 'comments')
 
 class IPPoolImportForm(NetBoxModelImportForm):
     prefix = CSVModelChoiceField(
