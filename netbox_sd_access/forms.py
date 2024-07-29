@@ -13,12 +13,6 @@ from utilities.forms.fields import (
 
 from .models import *
 
-
-class SDAccessForm(NetBoxModelForm):
-    class Meta:
-        model = SDAccess
-        fields = ("name", "tags")
-
 class FabricSiteForm(NetBoxModelForm):
     """
     GUI form for creating or editing a Fabric Site.

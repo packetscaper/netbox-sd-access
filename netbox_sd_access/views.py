@@ -5,24 +5,6 @@ from . import filtersets, forms, models, tables
 
 from dcim.tables import DeviceTable
 
-
-class SDAccessView(generic.ObjectView):
-    queryset = models.SDAccess.objects.all()
-
-
-class SDAccessListView(generic.ObjectListView):
-    queryset = models.SDAccess.objects.all()
-    table = tables.SDAccessTable
-
-
-class SDAccessEditView(generic.ObjectEditView):
-    queryset = models.SDAccess.objects.all()
-    form = forms.SDAccessForm
-
-
-class SDAccessDeleteView(generic.ObjectDeleteView):
-    queryset = models.SDAccess.objects.all()
-
 class FabricSiteView(generic.ObjectView):
     queryset = models.FabricSite.objects.all()
     

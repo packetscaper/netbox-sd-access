@@ -3,14 +3,6 @@ from netbox.tables import NetBoxTable, ChoiceFieldColumn
 
 from .models import *
 
-class SDAccessTable(NetBoxTable):
-    name = tables.Column(linkify=True)
-
-    class Meta(NetBoxTable.Meta):
-        model = SDAccess
-        fields = ("pk", "id", "name", "actions")
-        default_columns = ("name",)
-
 class FabricSiteTable(NetBoxTable):
     name = tables.Column(linkify=True)
     
@@ -23,7 +15,7 @@ class VirtualNetworkTable(NetBoxTable):
     name = tables.Column(linkify=True)
     class Meta(NetBoxTable.Meta):
         model = VirtualNetwork   
-        fields= ("pk", "id", "fabric_site", "name", "vrf")  
+        fields= ("pk", "id", "fabric_site", "name", "vrf", "actions")  
         default_columns=("name","fabric_site","vrf")   
 
 class SDADeviceTable(NetBoxTable):
@@ -42,7 +34,7 @@ class IPPoolTable(NetBoxTable):
     
     class Meta(NetBoxTable.Meta):
         model = IPPool
-        fields = ("pk", "id", "name", "prefix", "gateway", "dhcp_server", "dns_servers")
+        fields = ("pk", "id", "name", "prefix", "gateway", "dhcp_server", "dns_servers", "actions")
         default_columns = ("name", "prefix", "gateway")
 
 class IPTransitTable(NetBoxTable):
@@ -51,7 +43,7 @@ class IPTransitTable(NetBoxTable):
     asn = tables.Column(linkify=True)
     class Meta(NetBoxTable.Meta):
         model = IPTransit
-        fields=("pk", "id", "name", "fabric_site", "asn")
+        fields=("pk", "id", "name", "fabric_site", "asn", "actions")
         default_columns=("name", "fabric_site", "asn")
         
 class SDATransitTable(NetBoxTable):
@@ -61,5 +53,5 @@ class SDATransitTable(NetBoxTable):
     control_plane_node = tables.Column(linkify=True)
     class Meta(NetBoxTable.Meta):
         model = SDATransit
-        fields=("pk", "id", "transit_type", "name", "fabric_site", "control_plane_node", "device_count")
+        fields=("pk", "id", "transit_type", "name", "fabric_site", "control_plane_node", "device_count", "actions")
         default_columns=("name", "fabric_site", "transit_type", "device_count", "control_plane_node")

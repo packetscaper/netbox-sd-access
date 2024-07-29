@@ -6,21 +6,6 @@ from django.core.exceptions import ValidationError
 
 import netaddr
 
-
-class SDAccess(NetBoxModel):
-    """Auto-generated SDAccess model. Not used by the plugin"""
-    name = models.CharField(max_length=100)
-
-    class Meta:
-        ordering = ("name",)
-
-    def __str__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return reverse("plugins:netbox_sd_access:sdaccess", args=[self.pk])
-    
-
 class IPPool(NetBoxModel):
     """IP Pool model groups existing IP prefix, gateway, DHCP, and DNS server. IP pools are associated with a given fabric site."""
     name = models.CharField(max_length=200)
