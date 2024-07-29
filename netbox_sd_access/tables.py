@@ -3,7 +3,7 @@ from netbox.tables import NetBoxTable, ChoiceFieldColumn
 
 from .models import *
 
-
+"""Define what information is displayed in table for a model instance"""
 
 class FabricSiteTable(NetBoxTable):
     """

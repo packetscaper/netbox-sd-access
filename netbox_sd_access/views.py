@@ -6,7 +6,7 @@ from . import filtersets, forms, models, tables
 from dcim.tables import DeviceTable
 
 
-"Views define application logic for each model"
+"Views define application logic for each model. Define what tables are seen on each page"
 
 class FabricSiteView(generic.ObjectView):
     """

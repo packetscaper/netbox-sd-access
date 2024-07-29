@@ -20,6 +20,7 @@ class FabricSiteForm(NetBoxModelForm):
     """
     GUI form for creating or editing a Fabric Site.
     Requires a name, physical site, and location.
+    query_params
     """
     physical_site = DynamicModelChoiceField(queryset=Site.objects.all(),required=True)
     location = DynamicModelChoiceField(queryset=Location.objects.all(), required=False, query_params={'site_id': '$physical_site'} )
@@ -27,6 +28,7 @@ class FabricSiteForm(NetBoxModelForm):
     comments = CommentField()
     
     class Meta:
+        """Meta class maps fabric site form to fabric site model"""
         model = FabricSite
         fields = ('name', 'physical_site', 'location', 'ip_prefixes', 'comments', 'tags')
 
@@ -281,7 +283,7 @@ class VirtualNetworkImportForm(NetBoxModelImportForm):
         to_field_name='name',
         required=True
     )
-    
+
     class Meta:
         model = VirtualNetwork
         fields = ('name', 'fabric_site', 'vrf')
