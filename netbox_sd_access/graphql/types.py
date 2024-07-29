@@ -11,6 +11,9 @@ from . import filters
     filters=filters.IPPoolFilter
 )
 class IPPoolType(NetBoxObjectType):
+    """
+    Defines GraphQL type for IP Pools.
+    """
     id: int
     name: str
     prefix: Annotated["PrefixType", strawberry.lazy('ipam.graphql.types')]
@@ -25,6 +28,9 @@ class IPPoolType(NetBoxObjectType):
     filters=filters.FabricSiteFilter
 )
 class FabricSiteType(NetBoxObjectType):
+    """
+    Defines GraphQL type for Fabric Sites.
+    """
     id: int
     name: str
     physical_site: Annotated["SiteType", strawberry.lazy('dcim.graphql.types')]
@@ -39,6 +45,9 @@ class FabricSiteType(NetBoxObjectType):
     filters=filters.IPTransitFilter
 )
 class IPTransitType(NetBoxObjectType):
+    """
+    Defines GraphQL type for IP Transits.
+    """
     id:int
     name:str
     fabric_site:FabricSiteType
@@ -52,6 +61,9 @@ class IPTransitType(NetBoxObjectType):
     filters=filters.SDADeviceFilter
 )
 class SDADeviceType(NetBoxObjectType):
+    """
+    Defines GraphQL type for SDA Devices.
+    """
     id: int
     device: Annotated["DeviceType", strawberry.lazy('dcim.graphql.types')]
     fabric_site: FabricSiteType
@@ -64,6 +76,9 @@ class SDADeviceType(NetBoxObjectType):
     filters=filters.SDATransitFilter
 )
 class SDATransitType(NetBoxObjectType):
+    """
+    Defines GraphQL type for SDA Transits.
+    """
     id:int
     name:str
     transit_type:str
@@ -79,6 +94,9 @@ class SDATransitType(NetBoxObjectType):
     filters=filters.VirtualNetworkFilter
 )
 class VirtualNetworkType(NetBoxObjectType):
+    """
+    Defines GraphQL type for Virtual Networks.
+    """
     id: int
     name: str
     fabric_site: List[FabricSiteType]
