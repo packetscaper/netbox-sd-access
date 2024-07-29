@@ -66,3 +66,4 @@ Based on the NetBox plugin tutorial:
 - [tutorial](https://github.com/netbox-community/netbox-plugin-tutorial)
 
 This package was created with [Cookiecutter](https://github.com/audreyr/cookiecutter) and the [`netbox-community/cookiecutter-netbox-plugin`](https://github.com/netbox-community/cookiecutter-netbox-plugin) project template.
+
