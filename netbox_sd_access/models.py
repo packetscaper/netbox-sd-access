@@ -50,6 +50,10 @@ class IPPool(NetBoxModel):
         """
         if netaddr.IPNetwork(self.gateway.address) != self.prefix.prefix:
             raise ValidationError('Gateway must be in the same subnet as prefix.')
+
+'''
+All SD-Access features can be associated with a fabric site. 
+'''
     
 class FabricSite(NetBoxModel):
     name = models.CharField(max_length=200)
@@ -69,7 +73,7 @@ class FabricSite(NetBoxModel):
 
 
 '''
-Set possible device roles
+Set possible SD device roles
 '''
 
 class SDADeviceRoleChoices(ChoiceSet):
@@ -82,13 +86,18 @@ class SDADeviceRoleChoices(ChoiceSet):
         ('l2-border', 'L2 Border Node', 'teal')
     ]
     
+'''
+Set possible SD Transit types
+'''
 class SDATransitTypeChoices(ChoiceSet):
     CHOICES = [
         ('lisp', 'LISP', 'yellow'),
         ('lisp-bgp', 'LISP-BGP', 'green')
     ]
 
-
+'''
+SD Device which fulfills one of a given set of roles
+'''
     
 class SDADevice(NetBoxModel):
     device = models.OneToOneField(to='dcim.Device', on_delete=models.CASCADE, related_name='sda_info')
