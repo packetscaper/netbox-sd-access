@@ -15,6 +15,9 @@ from ipam.models import Prefix, IPAddress
 from netbox_sd_access.models import *
 
 class IPPoolTestCase(APIViewTestCases.APIViewTestCase):
+    """
+    API tests for IP Pools.
+    """
     model = IPPool
     view_namespace = 'plugins-api:netbox_sd_access'
     brief_fields = ['display', 'id', 'prefix', 'url']
@@ -83,20 +86,6 @@ class IPPoolValidationTestCase(TestCase):
         self.prefix1 = Prefix.objects.create(prefix='10.0.0.0/24')
         self.address1 = IPAddress.objects.create(address='10.0.0.1/24')
         self.address2 = IPAddress.objects.create(address='10.0.1.1/24')
-    
-    def test_gateway_oob(self):
-        ippool = IPPool(
-            name='Pool1',
-            prefix=self.prefix1,
-            gateway=self.address2,
-            dhcp_server=self.address1,
-        )
-        self.assertRaises(ValidationError, ippool.full_clean)
-
-class IPPoolValidationTestCase(TestCase):
-    def setUp(self):
-        self.prefix1 = Prefix.objects.create(prefix='10.0.0.0/24')
-        self.address1 = IPAddress.objects.create(address='10.0.0.1/24')
         self.pool1 = IPPool.objects.create(
             name='Pool1',
             prefix=self.prefix1,
@@ -104,7 +93,22 @@ class IPPoolValidationTestCase(TestCase):
             dhcp_server=self.address1
         )
     
+    def test_gateway_oob(self):
+        """
+        Test error if gateway is not in prefix.
+        """
+        ippool = IPPool(
+            name='Pool2',
+            prefix=self.prefix1,
+            gateway=self.address2,
+            dhcp_server=self.address1,
+        )
+        self.assertRaises(ValidationError, ippool.full_clean)
+    
     def test_unique_names(self):
+        """
+        Test error if creating pool with same name.
+        """
         with self.assertRaises(IntegrityError):
             IPPool.objects.create(
                 name='Pool1',

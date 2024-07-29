@@ -17,6 +17,9 @@ from ipam.models import Prefix, IPAddress
 from netbox_sd_access.models import *
 
 class FabricSiteTestCase(APIViewTestCases.APIViewTestCase):
+    """
+    API tests for fabric site.
+    """
     model = FabricSite
     view_namespace = 'plugins-api:netbox_sd_access'
     brief_fields = ['device_count', 'display', 'id', 'name', 'url']
@@ -79,5 +82,8 @@ class FabricSiteValidationTestCase(TestCase):
         self.fabric_site1 = FabricSite.objects.create(name='Fabric 1', physical_site=self.site1, location=self.location1)
     
     def test_unique_names(self):
+        """
+        Test error if creating fabric site with the same name.
+        """
         with self.assertRaises(IntegrityError):
             FabricSite.objects.create(name='Fabric 1', physical_site=self.site1)

@@ -16,6 +16,9 @@ from ipam.models import ASN, RIR
 from netbox_sd_access.models import *
 
 class IPTransitTestCase(APIViewTestCases.APIViewTestCase):
+    """
+    API tests for IP Transits.
+    """
     model = IPTransit
     view_namespace = 'plugins-api:netbox_sd_access'
     brief_fields = ['asn', 'display', 'fabric_site', 'id', 'name', 'url']
