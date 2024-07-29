@@ -4,6 +4,9 @@ from netbox.tables import NetBoxTable, ChoiceFieldColumn
 from .models import *
 
 class FabricSiteTable(NetBoxTable):
+    """
+    Defines table view for Fabric Sites.
+    """
     name = tables.Column(linkify=True)
     
     class Meta(NetBoxTable.Meta):
@@ -12,6 +15,9 @@ class FabricSiteTable(NetBoxTable):
         default_columns = ("name", "physical_site", "location", "device_count")
 
 class VirtualNetworkTable(NetBoxTable):
+    """
+    Defines table view for Virtual Networks.
+    """
     name = tables.Column(linkify=True)
     class Meta(NetBoxTable.Meta):
         model = VirtualNetwork   
@@ -19,6 +25,9 @@ class VirtualNetworkTable(NetBoxTable):
         default_columns=("name","fabric_site","vrf")   
 
 class SDADeviceTable(NetBoxTable):
+    """
+    Defines table view for SDA Devices.
+    """
     id = tables.Column(linkify=True)
     device = tables.Column(linkify=True)
     fabric_site = tables.Column(linkify=True)
@@ -30,6 +39,9 @@ class SDADeviceTable(NetBoxTable):
         default_columns = ('id', 'device', 'role', 'fabric_site')
         
 class IPPoolTable(NetBoxTable):
+    """
+    Defines table view for IP Pools.
+    """
     name = tables.Column(linkify=True)
     
     class Meta(NetBoxTable.Meta):
@@ -38,6 +50,9 @@ class IPPoolTable(NetBoxTable):
         default_columns = ("name", "prefix", "gateway")
 
 class IPTransitTable(NetBoxTable):
+    """
+    Defines table view for IP Transits.
+    """
     name = tables.Column(linkify=True)
     fabric_site = tables.Column(linkify=True)
     asn = tables.Column(linkify=True)
@@ -47,6 +62,9 @@ class IPTransitTable(NetBoxTable):
         default_columns=("name", "fabric_site", "asn")
         
 class SDATransitTable(NetBoxTable):
+    """
+    Defines table view for SDA Transits.
+    """
     name = tables.Column(linkify=True)
     transit_type = ChoiceFieldColumn()
     fabric_site = tables.Column(linkify=True)
