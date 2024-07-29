@@ -28,7 +28,6 @@ class SDADeviceFilterSet(NetBoxModelFilterSet):
         fields = ('id', 'role','fabric_site')
     
     def search(self, queryset, name, value):
-        # return queryset.filter(comments__icontains=value)
         return queryset.filter(Q(comments__icontains=value) | Q(device__name__icontains=value))
     
 
