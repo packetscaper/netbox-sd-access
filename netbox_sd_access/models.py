@@ -6,7 +6,9 @@ from django.core.exceptions import ValidationError
 
 import netaddr
 
-
+'''
+SDAccess model 
+'''
 
 class SDAccess(NetBoxModel):
     name = models.CharField(max_length=100)
@@ -20,6 +22,10 @@ class SDAccess(NetBoxModel):
     def get_absolute_url(self):
         return reverse("plugins:netbox_sd_access:sdaccess", args=[self.pk])
     
+'''
+IP Pool model groups existing IP prefix, gateway, dhcp, and DNS server. 
+IP pools are associated with a given fabric site. 
+'''
 class IPPool(NetBoxModel):
     name = models.CharField(max_length=200)
     prefix = models.ForeignKey(to='ipam.Prefix', on_delete=models.PROTECT)
@@ -61,6 +67,10 @@ class FabricSite(NetBoxModel):
     def get_absolute_url(self):
         return reverse('plugins:netbox_sd_access:fabricsite', args=[self.pk])
 
+
+'''
+Set possible device roles
+'''
 
 class SDADeviceRoleChoices(ChoiceSet):
     
