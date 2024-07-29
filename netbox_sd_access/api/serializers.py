@@ -7,6 +7,11 @@ from netbox.api.fields import SerializedPKRelatedField, ChoiceField
 from ipam.api.serializers import NestedVRFSerializer, IPAddressSerializer, PrefixSerializer
 from ..models import FabricSite, IPPool, SDADevice, IPTransit, SDATransit, VirtualNetwork, SDADeviceRoleChoices
 
+"""
+Serializers are needed for each model to translate data to and from python objects.
+ID is model primary key and must be included, display is built into NetboxModelSerializer and returns string representaion of an object.
+Other fields in the serializer are defined in the model.
+"""
 #import and use NestedPrefix, Nested Device Serializer
 class NestedFabricSiteSerializer(WritableNestedSerializer):
     """

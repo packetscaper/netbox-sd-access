@@ -2,7 +2,7 @@ from django.urls import path
 from netbox.views.generic import ObjectChangeLogView
 
 from . import models, views
-
+"Assigns urls to access different views"
 
 urlpatterns = (
     path("fabric-sites/", views.FabricSiteListView.as_view(), name='fabricsite_list'),

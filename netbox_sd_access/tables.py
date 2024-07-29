@@ -3,6 +3,8 @@ from netbox.tables import NetBoxTable, ChoiceFieldColumn
 
 from .models import *
 
+
+
 class FabricSiteTable(NetBoxTable):
     """
     Defines table view for Fabric Sites.

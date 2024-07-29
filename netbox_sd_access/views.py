@@ -5,6 +5,9 @@ from . import filtersets, forms, models, tables
 
 from dcim.tables import DeviceTable
 
+
+"Views define application logic for each model"
+
 class FabricSiteView(generic.ObjectView):
     """
     Defines the view for the FabricSite model.
@@ -12,6 +15,7 @@ class FabricSiteView(generic.ObjectView):
     queryset = models.FabricSite.objects.all()
     
     def get_extra_context(self, request, instance):
+        """define an additional table of SD devices"""
         table = tables.SDADeviceTable(instance.devices.all())
         table.configure(request)
         
@@ -256,7 +260,9 @@ class SDATransitView(generic.ObjectView):
     Defines the view for the SDATransit model.
     """
     queryset = models.SDATransit.objects.all()
+    
     def get_extra_context(self, request, instance):
+        """Define extra table of attached SDA devices """
         table = tables.SDADeviceTable(instance.devices.all())
         table.configure(request)
         
