@@ -96,7 +96,7 @@ class SDATransitTypeChoices(ChoiceSet):
     ]
 
 '''
-SD Device which fulfills one of a given set of roles
+SD Device assigns existing Netbox device to one of a given set of roles. 
 '''
     
 class SDADevice(NetBoxModel):
@@ -135,7 +135,9 @@ class SDADevice(NetBoxModel):
             if not device_location:
                 raise ValidationError('Fabric site and device must belong to the same site and location')
             
-    
+'''
+Transit between site and outside network
+'''
     
 class SDATransit(NetBoxModel):
     name=models.CharField(max_length=200)
@@ -158,7 +160,10 @@ class SDATransit(NetBoxModel):
     def get_role_color(self):
         return SDATransitTypeChoices.colors.get(self.role)
     
-    
+'''
+Transit between site and outside network using BGP. 
+Applys existing ASN configuration to SDA transit.
+'''
 class IPTransit(NetBoxModel):
     name=models.CharField(max_length=200)
     fabric_site=models.OneToOneField(to=FabricSite, on_delete=models.PROTECT, blank=True, null=True)
@@ -175,7 +180,9 @@ class IPTransit(NetBoxModel):
     def get_absolute_url(self):
         return reverse('plugins:netbox_sd_access:iptransit', args=[self.pk])
 
-
+'''
+Virtual Network is VRF for SD-Access. Can contain multiple fabric sites.
+'''
 class VirtualNetwork(NetBoxModel):
     name=models.CharField(max_length=200, default = "Virtual Network")
     #fabric_site=models.ForeignKey(to=FabricSite, on_delete=models.CASCADE, related_name='virtual_networks')
