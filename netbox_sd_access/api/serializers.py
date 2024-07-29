@@ -7,8 +7,16 @@ from netbox.api.fields import SerializedPKRelatedField, ChoiceField
 from ipam.api.serializers import NestedVRFSerializer, IPAddressSerializer, PrefixSerializer
 from ..models import FabricSite, IPPool, SDADevice, IPTransit, SDATransit, VirtualNetwork, SDADeviceRoleChoices
 
+"""
+Serializers are needed for each model to translate data to and from python objects.
+ID is model primary key and must be included, display is built into NetboxModelSerializer and returns string representaion of an object.
+Other fields in the serializer are defined in the model.
+"""
 #import and use NestedPrefix, Nested Device Serializer
 class NestedFabricSiteSerializer(WritableNestedSerializer):
+    """
+    Nested serializer for Fabric Sites.
+    """
     url = serializers.HyperlinkedIdentityField(
         view_name='plugins-api:netbox_sd_access-api:fabricsite-detail'
     )
@@ -18,6 +26,9 @@ class NestedFabricSiteSerializer(WritableNestedSerializer):
         fields = ('id', 'url', 'display', 'name')
         
 class NestedIPPoolSerializer(WritableNestedSerializer):
+    """
+    Nested serializer for IP Pools.
+    """
     url = serializers.HyperlinkedIdentityField(
         view_name='plugins-api:netbox_sd_access-api:ippool-detail'
     )
@@ -28,6 +39,9 @@ class NestedIPPoolSerializer(WritableNestedSerializer):
         fields = ('id', 'url', 'display', 'name', 'prefix')
 
 class FabricSiteSerializer(NetBoxModelSerializer):
+    """
+    API serializer for Fabric Sites.
+    """
     url = serializers.HyperlinkedIdentityField(
         view_name='plugins-api:netbox_sd_access-api:fabricsite-detail'
     )
@@ -41,6 +55,9 @@ class FabricSiteSerializer(NetBoxModelSerializer):
         brief_fields = ('id', 'url', 'display', 'name', 'device_count')
 
 class NestedIPTransitSerializer(WritableNestedSerializer):
+    """
+    Nested serializer for IP Transits.
+    """
     url = serializers.HyperlinkedIdentityField(
         view_name = 'plugins-api:netbox_sd_access-api:iptransit-detail'
     )
@@ -50,6 +67,9 @@ class NestedIPTransitSerializer(WritableNestedSerializer):
         fields = ('id','url','display','name')
 
 class IPTransitSerializer(NetBoxModelSerializer):
+    """
+    API serializer for IP Transits.
+    """
     url = serializers.HyperlinkedIdentityField(
         view_name = 'plugins-api:netbox_sd_access-api:iptransit-detail'
     )
@@ -60,6 +80,9 @@ class IPTransitSerializer(NetBoxModelSerializer):
         brief_fields = ('id', 'url', 'display', 'name', 'fabric_site', 'asn')
     
 class SDADeviceSerializer(NetBoxModelSerializer):
+    """
+    API serializer for SDA Devices.
+    """
     url = serializers.HyperlinkedIdentityField(
         view_name='plugins-api:netbox_sd_access-api:sdadevice-detail'
     )
@@ -73,6 +96,9 @@ class SDADeviceSerializer(NetBoxModelSerializer):
         brief_fields = ('id', 'url', 'display', 'device', 'role', 'fabric_site')
 
 class NestedSDATransitSerializer(WritableNestedSerializer):
+    """
+    Nested serializer for SDA Transits.
+    """
     url = serializers.HyperlinkedIdentityField(
         view_name = 'plugins-api:netbox_sd_access-api:sdatransit-detail'
     )
@@ -82,6 +108,9 @@ class NestedSDATransitSerializer(WritableNestedSerializer):
         fields = ('id','url','display','name')
         
 class SDATransitSerializer(NetBoxModelSerializer):
+    """
+    API serializer for SDA Transits.
+    """
     url=serializers.HyperlinkedIdentityField(
         view_name = 'plugins-api:netbox_sd_access-api:sdatransit-detail'
     )
@@ -92,6 +121,9 @@ class SDATransitSerializer(NetBoxModelSerializer):
         brief_fields = ('id', 'url', 'display', 'name', 'transit_type', 'fabric_site', 'control_plane_node')
 
 class IPPoolSerializer(NetBoxModelSerializer):
+    """
+    API serializer for IP Pools.
+    """
     url = serializers.HyperlinkedIdentityField(
         view_name='plugins-api:netbox_sd_access-api:ippool-detail'
     )
@@ -113,6 +145,9 @@ class IPPoolSerializer(NetBoxModelSerializer):
         brief_fields = ('id', 'url', 'display', 'prefix')
 
 class NestedVirtualNetworkSerializer(WritableNestedSerializer):
+    """
+    Nested serializer for Virtual Networks.
+    """
     url = serializers.HyperlinkedIdentityField(
         view_name='plugins-api:netbox_sd_access-api:virtualnetwork-detail'
     )
@@ -122,6 +157,9 @@ class NestedVirtualNetworkSerializer(WritableNestedSerializer):
         fields = ('id', 'url', 'display', 'name')
 
 class VirtualNetworkSerializer(NetBoxModelSerializer):
+    """
+    API serializer for Virtual Networks.
+    """
     url = serializers.HyperlinkedIdentityField(
         view_name='plugins-api:netbox_sd_access-api:virtualnetwork-detail'
     )

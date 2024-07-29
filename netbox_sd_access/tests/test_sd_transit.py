@@ -15,6 +15,9 @@ from ipam.models import Prefix, IPAddress
 from netbox_sd_access.models import *
 
 class SDTransitTestCase(APIViewTestCases.APIViewTestCase):
+    """
+    API tests for SDA Transits.
+    """
     model = SDATransit
     view_namespace = 'plugins-api:netbox_sd_access'
     brief_fields = ['control_plane_node', 'display', 'fabric_site', 'id', 'name', 'transit_type', 'url']

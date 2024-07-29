@@ -15,6 +15,9 @@ from ipam.models import VRF
 from netbox_sd_access.models import *
 
 class VirtualNetworkTestCase(APIViewTestCases.APIViewTestCase):
+    """
+    API tests for virtual networks.
+    """
     model = VirtualNetwork
     view_namespace = 'plugins-api:netbox_sd_access'
     brief_fields = ['fabric_site', 'id', 'name', 'url']
@@ -75,6 +78,9 @@ class VirtualNetworkValidationTestCase(TestCase):
         self.vn1 = VirtualNetwork.objects.create(name='VN1', vrf=self.vrf1)
     
     def test_unique_name(self):
+        """
+        Test error if creating VN with the same name.
+        """
         vrf2 = VRF.objects.create(name='VRF2')
         with self.assertRaises(IntegrityError):
             VirtualNetwork.objects.create(name='VN1', vrf=vrf2)

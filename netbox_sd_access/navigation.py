@@ -1,5 +1,5 @@
 from netbox.plugins import PluginMenuButton, PluginMenuItem
-
+"""Add navigation buttons"""
 fabricsite_buttons = [
     PluginMenuButton(
         link='plugins:netbox_sd_access:fabricsite_add',

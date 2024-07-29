@@ -13,6 +13,9 @@ from dcim.models import Site, Location, Device, DeviceRole, Manufacturer, Device
 from netbox_sd_access.models import *
 
 class SDADeviceTestCase(APIViewTestCases.APIViewTestCase):
+    """
+    API tests for SDA Devices.
+    """
     model = SDADevice
     view_namespace = 'plugins-api:netbox_sd_access'
     brief_fields = ['device', 'display', 'fabric_site', 'id', 'role', 'url']

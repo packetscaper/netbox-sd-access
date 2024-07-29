@@ -3,6 +3,7 @@ from django.db.models import Count
 
 from .. import filtersets, models
 from .serializers import *
+"""Views for each API to add, edit, or delete an instance of a model"""
 
 class FabricSiteViewSet(NetBoxModelViewSet):
     queryset = models.FabricSite.objects.prefetch_related('tags').annotate(
