@@ -8,7 +8,7 @@ import netaddr
 
 
 class SDAccess(NetBoxModel):
-    """SDAccess model """
+    """Auto-generated SDAccess model. Not used by the plugin"""
     name = models.CharField(max_length=100)
 
     class Meta:
@@ -22,7 +22,7 @@ class SDAccess(NetBoxModel):
     
 
 class IPPool(NetBoxModel):
-    """IP Pool model groups existing IP prefix, gateway, dhcp, and DNS server. IP pools are associated with a given fabric site. """
+    """IP Pool model groups existing IP prefix, gateway, DHCP, and DNS server. IP pools are associated with a given fabric site."""
     name = models.CharField(max_length=200)
     prefix = models.ForeignKey(to='ipam.Prefix', on_delete=models.PROTECT)
     gateway = models.ForeignKey(to='ipam.IPAddress', on_delete=models.PROTECT)
@@ -86,7 +86,7 @@ class SDATransitTypeChoices(ChoiceSet):
     ]
     
 class SDADevice(NetBoxModel):
-    """SD Device assigns existing Netbox device to one of a given set of roles. """
+    """SD Device assigns existing Netbox device to one of a given set of roles and a Fabric Site. """
     device = models.OneToOneField(to='dcim.Device', on_delete=models.CASCADE, related_name='sda_info')
     role = models.CharField(max_length=50, choices=SDADeviceRoleChoices, blank=True, null=True)
     fabric_site = models.ForeignKey(to=FabricSite, on_delete=models.CASCADE, related_name='devices')
