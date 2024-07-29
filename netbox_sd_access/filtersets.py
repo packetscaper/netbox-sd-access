@@ -4,6 +4,9 @@ from netbox.filtersets import NetBoxModelFilterSet
 from .models import *
 from dcim.models import Site
 
+
+"""Filtersets are used in query parameters and API calls. Visibly used in filter tabs. """
+
 class FabricSiteFilterSet(NetBoxModelFilterSet):
     """
     Filter set for Fabric Sites.
@@ -22,7 +25,7 @@ class SDADeviceFilterSet(NetBoxModelFilterSet):
     Allows filtering by ID, role, and fabric site, as well as searching by comments or device name.
     """
     role = django_filters.CharFilter(field_name='role', lookup_expr='exact')
-    
+
     class Meta:
         model = SDADevice
         fields = ('id', 'role','fabric_site')

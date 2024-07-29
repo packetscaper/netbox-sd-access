@@ -13,6 +13,9 @@ from utilities.forms.fields import (
 
 from .models import *
 
+
+"""Forms are used to create, edit, and delete a model instance."""
+
 class FabricSiteForm(NetBoxModelForm):
     """
     GUI form for creating or editing a Fabric Site.

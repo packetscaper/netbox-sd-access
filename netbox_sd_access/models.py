@@ -6,6 +6,11 @@ from django.core.exceptions import ValidationError
 
 import netaddr
 
+"""
+Each model class represents an underlying PostreSQL database. Each instance of the 
+model is a row in the database.
+"""
+
 class IPPool(NetBoxModel):
     """
     IP Pool model groups existing IP prefix, gateway, DHCP, and DNS server. IP pools are associated with a given fabric site.
