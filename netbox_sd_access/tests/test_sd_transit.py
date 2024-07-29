@@ -4,6 +4,9 @@
 
 from django.urls import reverse
 from rest_framework import status
+from django.db.utils import IntegrityError
+
+from django.test import TestCase
 from utilities.testing import APITestCase, APIViewTestCases
 
 from dcim.models import Site, Location, Device, DeviceRole, Manufacturer, DeviceType
@@ -81,16 +84,19 @@ class SDTransitTestCase(APIViewTestCases.APIViewTestCase):
         
         sda_transits = [
             SDATransit(
+                name='SDTransit 1',
                 control_plane_node=sda_devices[0],
                 fabric_site=fabricsite_list[0],
                 transit_type='lisp'
             ),
             SDATransit(
+                name='SDTransit 2',
                 control_plane_node=sda_devices[1],
                 fabric_site=fabricsite_list[1],
                 transit_type='lisp-bgp'
             ),
             SDATransit(
+                name='SDTransit 3',
                 control_plane_node=sda_devices[2],
                 fabric_site=fabricsite_list[2],
                 transit_type='lisp'

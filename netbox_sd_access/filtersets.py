@@ -17,10 +17,10 @@ class FabricSiteFilterSet(NetBoxModelFilterSet):
     
     class Meta:
         model = FabricSite
-        fields = ('id', 'name', 'physical_site', 'location', 'ip_prefixes')
+        fields = ('id', 'name', 'physical_site', 'location', 'ip_prefixes', 'comments')
     
     def search(self, queryset, name, value):
-        return queryset.filter(name__icontains=value)
+        return queryset.filter(Q(name__icontains=value) | Q(comments__icontains=value))
 
 class SDADeviceFilterSet(NetBoxModelFilterSet):
     role = django_filters.CharFilter(field_name='role', lookup_expr='exact')
@@ -55,10 +55,10 @@ class SDATransitFilterSet(NetBoxModelFilterSet):
 class IPPoolFilterSet(NetBoxModelFilterSet):
     class Meta:
         model = IPPool
-        fields = ('id', 'name', 'gateway', 'dhcp_server', 'dns_servers')
+        fields = ('id', 'name', 'gateway', 'dhcp_server', 'dns_servers', 'comments')
     
     def search(self, queryset, name, value):
-        return queryset.filter(name__icontains=value)
+        return queryset.filter(Q(name__icontains=value) | Q(comments__icontains=value))
     
 class VirtualNetworkFilterSet(NetBoxModelFilterSet):
 

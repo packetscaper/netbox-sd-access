@@ -32,11 +32,12 @@ class FabricSiteSerializer(NetBoxModelSerializer):
         view_name='plugins-api:netbox_sd_access-api:fabricsite-detail'
     )
     physical_site = SiteSerializer(nested=True)
+    location = LocationSerializer(nested=True, required=False, allow_null=True)
     device_count = serializers.IntegerField(read_only=True)
     
     class Meta:
         model = FabricSite
-        fields = ('id', 'url', 'display', 'name', 'physical_site', 'location', 'ip_prefixes', 'device_count', 'tags', 'custom_fields', 'created', 'last_updated')
+        fields = ('id', 'url', 'display', 'name', 'physical_site', 'location', 'ip_prefixes', 'device_count', 'comments', 'tags', 'custom_fields', 'created', 'last_updated')
         brief_fields = ('id', 'url', 'display', 'name', 'device_count')
 
 class NestedIPTransitSerializer(WritableNestedSerializer):
@@ -62,7 +63,7 @@ class SDADeviceSerializer(NetBoxModelSerializer):
     url = serializers.HyperlinkedIdentityField(
         view_name='plugins-api:netbox_sd_access-api:sdadevice-detail'
     )
-    fabric_site = NestedFabricSiteSerializer()
+    fabric_site = FabricSiteSerializer(nested=True)
     device = DeviceSerializer(nested=True)
     role = ChoiceField(choices=SDADeviceRoleChoices)
     
@@ -108,7 +109,7 @@ class IPPoolSerializer(NetBoxModelSerializer):
     
     class Meta:
         model = IPPool
-        fields = ('id', 'url', 'display', 'name', 'prefix', 'gateway', 'dhcp_server', 'dns_servers')
+        fields = ('id', 'url', 'display', 'name', 'prefix', 'gateway', 'dhcp_server', 'dns_servers', 'comments', 'tags', 'custom_fields', 'created', 'last_updated')
         brief_fields = ('id', 'url', 'display', 'prefix')
 
 class NestedVirtualNetworkSerializer(WritableNestedSerializer):
