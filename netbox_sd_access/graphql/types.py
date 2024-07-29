@@ -30,7 +30,8 @@ class FabricSiteType(NetBoxObjectType):
     physical_site: Annotated["SiteType", strawberry.lazy('dcim.graphql.types')]
     location: Optional[Annotated["LocationType", strawberry.lazy('dcim.graphql.types')]]
     ip_prefixes: List[IPPoolType]
-      
+    comments: str
+    
     
 @strawberry_django.type(
     models.IPTransit,

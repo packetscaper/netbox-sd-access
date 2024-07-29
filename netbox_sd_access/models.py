@@ -26,6 +26,7 @@ class IPPool(NetBoxModel):
     gateway = models.ForeignKey(to='ipam.IPAddress', on_delete=models.PROTECT)
     dhcp_server = models.ForeignKey(to='ipam.IPAddress', on_delete=models.PROTECT, related_name='dhcp_server')
     dns_servers = models.ManyToManyField(to='ipam.IPAddress', related_name='dns_servers')
+    comments = models.TextField(blank=True)
     
     class Meta:
         ordering = ("name",)
@@ -57,6 +58,7 @@ class FabricSite(NetBoxModel):
     # locations is an optional field for if you make the fabric on a per floor basis
     location = models.OneToOneField(to='dcim.Location', on_delete=models.PROTECT, blank=True, null=True)
     ip_prefixes = models.ManyToManyField(to=IPPool)
+    comments = models.TextField(blank=True)
     
     class Meta:
         ordering = ("name",)
