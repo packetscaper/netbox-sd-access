@@ -5,6 +5,7 @@
 from django.urls import reverse
 from django.test import TestCase
 from django.core.exceptions import ValidationError
+from django.db.utils import IntegrityError
 
 from rest_framework import status
 from utilities.testing import APITestCase, APIViewTestCases
@@ -91,3 +92,23 @@ class IPPoolValidationTestCase(TestCase):
             dhcp_server=self.address1,
         )
         self.assertRaises(ValidationError, ippool.full_clean)
+
+class IPPoolValidationTestCase(TestCase):
+    def setUp(self):
+        self.prefix1 = Prefix.objects.create(prefix='10.0.0.0/24')
+        self.address1 = IPAddress.objects.create(address='10.0.0.1/24')
+        self.pool1 = IPPool.objects.create(
+            name='Pool1',
+            prefix=self.prefix1,
+            gateway=self.address1,
+            dhcp_server=self.address1
+        )
+    
+    def test_unique_names(self):
+        with self.assertRaises(IntegrityError):
+            IPPool.objects.create(
+                name='Pool1',
+                prefix=self.prefix1,
+                gateway=self.address1,
+                dhcp_server=self.address1
+            )

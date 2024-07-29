@@ -4,6 +4,9 @@
 
 from django.urls import reverse
 from rest_framework import status
+from django.db import IntegrityError
+
+from django.test import TestCase
 from utilities.testing import APITestCase, APIViewTestCases
 
 from dcim.models import Site
@@ -65,3 +68,13 @@ class VirtualNetworkTestCase(APIViewTestCases.APIViewTestCase):
                 'vrf': vrf6.id
             },
         ]
+
+class VirtualNetworkValidationTestCase(TestCase):
+    def setUp(self):
+        self.vrf1 = VRF.objects.create(name='VRF1')
+        self.vn1 = VirtualNetwork.objects.create(name='VN1', vrf=self.vrf1)
+    
+    def test_unique_name(self):
+        vrf2 = VRF.objects.create(name='VRF2')
+        with self.assertRaises(IntegrityError):
+            VirtualNetwork.objects.create(name='VN1', vrf=vrf2)
