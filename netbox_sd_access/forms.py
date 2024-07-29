@@ -23,10 +23,11 @@ class FabricSiteForm(NetBoxModelForm):
     physical_site = DynamicModelChoiceField(queryset=Site.objects.all(),required=True)
     location = DynamicModelChoiceField(queryset=Location.objects.all(), required=False, query_params={'site_id': '$physical_site'} )
     ip_prefixes = DynamicModelMultipleChoiceField(queryset=IPPool.objects.all(), required=True, label='IP Pools')
+    comments = CommentField()
     
     class Meta:
         model = FabricSite
-        fields = ('name', 'physical_site', 'location', 'ip_prefixes', 'tags')
+        fields = ('name', 'physical_site', 'location', 'ip_prefixes', 'comments', 'tags')
 
 class FabricSiteFilterForm(NetBoxModelFilterSetForm):
     model = FabricSite

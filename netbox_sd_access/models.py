@@ -57,6 +57,7 @@ class FabricSite(NetBoxModel):
     # locations is an optional field for if you make the fabric on a per floor basis
     location = models.OneToOneField(to='dcim.Location', on_delete=models.PROTECT, blank=True, null=True)
     ip_prefixes = models.ManyToManyField(to=IPPool)
+    comments = models.TextField(blank=True)
     
     class Meta:
         ordering = ("name",)

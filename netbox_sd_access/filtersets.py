@@ -20,7 +20,7 @@ class FabricSiteFilterSet(NetBoxModelFilterSet):
         fields = ('id', 'name', 'physical_site', 'location', 'ip_prefixes')
     
     def search(self, queryset, name, value):
-        return queryset.filter(name__icontains=value)
+        return queryset.filter(Q(name__icontains=value) | Q(comments__icontains=value))
 
 class SDADeviceFilterSet(NetBoxModelFilterSet):
     role = django_filters.CharFilter(field_name='role', lookup_expr='exact')
