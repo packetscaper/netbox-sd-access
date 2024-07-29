@@ -1,0 +1,49 @@
+ARG NETBOX_VARIANT=latest
+
+FROM netboxcommunity/netbox:${NETBOX_VARIANT}
+
+ARG NETBOX_INITIALIZERS_VARIANT=""
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+# Install APT packages
+# hadolint ignore=DL3008
+USER root
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get -y install --no-install-recommends  curl git make openssh-client python3.11-dev sudo wget zsh \
+    && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
+
+# Install development & ide dependencies
+COPY requirements-dev.txt /tmp/pip-tmp/
+RUN /opt/netbox/venv/bin/python3 -m pip install --disable-pip-version-check --no-cache-dir -r /tmp/pip-tmp/requirements-dev.txt \
+   && rm -rf /tmp/*
+
+ARG USERNAME=ubuntu
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+
+RUN usermod -aG sudo $USERNAME \
+    && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
+    && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers.d/$USERNAME \
+    && chown $USERNAME:$USERNAME /opt/netbox /etc/netbox /opt/unit -R
+
+USER $USERNAME
+
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+# Add oh my zsh
+RUN wget --quiet https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
+
+COPY .bashrc /home/vscode/.bashrc
+COPY .zshrc /home/vscode/.zshrc
+
+RUN /opt/netbox/venv/bin/pip install  --no-warn-script-location netbox-initializers
+
+WORKDIR /opt/netbox/netbox/netbox-sd-access
+
+# hadolint ignore=DL3002
+USER root
+
+COPY entrypoint-dev.sh /bin/entrypoint-dev.sh
+RUN chmod +x /bin/entrypoint-dev.sh
+
+CMD ["/bin/entrypoint-dev.sh"]

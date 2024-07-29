@@ -1,0 +1,35 @@
+
+{% extends 'generic/object.html' %}
+{% load render_table from django_tables2 %}
+
+{% block content %}
+  <div class="row mb-3">
+    <div class="col col-md-6">
+      <div class="card">
+
+        <h5 class="card-header">SDA Device</h5>
+
+        <table class="table table-hover attr-table">
+            <tr>
+              <th scope="row">Name</th>
+              <td><a href="{{ object.device.get_absolute_url }}">{{ object.device }}</a></td>
+            </tr>
+            <tr>
+              <th scope="row">Fabric Site</th>
+              <td><a href="{{ object.fabric_site.get_absolute_url }}">{{ object.fabric_site }}</a></td>
+            </tr>
+            <tr>
+              <th scope="row">Role</th>
+              <td>{% badge object.get_role_display bg_color=object.get_role_color %}</td>
+            </tr>
+        </table>
+      </div>
+      {% include 'inc/panels/custom_fields.html' %}
+    </div>
+    <div class="col col-md-6">
+      {% include 'inc/panels/tags.html' %}
+      {% include 'inc/panels/comments.html' %}
+    </div>
+  </div>
+{% endblock content %}
+
