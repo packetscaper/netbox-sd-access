@@ -10,13 +10,18 @@
                 <td>{{ object.name }}</td>
             </tr>
             <tr>
-                <th scope="row">Fabric Site</th>
-                <td><a href="{{ object.fabric_site.get_absolute_url }}">{{ object.fabric_site }}</a></td>
-            </tr>
-            <tr>
                 <th scope="row">VRF</th>
                 <td><a href="{{ object.vrf.get_absolute_url }}">{{ object.vrf }}</a></td>
             </tr>
+            <tr>
+                <th scope="row">Fabric Sites</th>
+                <td>{% for site in object.fabric_site.all %}
+                    <a href="{{ site.get_absolute_url }}">{{ site }}</a>
+                    <br>
+                    {% endfor %}
+                </td>
+            </tr>
+            </table>
         </div>
     </div>
 </div>
