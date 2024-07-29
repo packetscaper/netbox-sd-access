@@ -6,11 +6,9 @@ from django.core.exceptions import ValidationError
 
 import netaddr
 
-'''
-SDAccess model 
-'''
 
 class SDAccess(NetBoxModel):
+    """SDAccess model """
     name = models.CharField(max_length=100)
 
     class Meta:
@@ -22,11 +20,9 @@ class SDAccess(NetBoxModel):
     def get_absolute_url(self):
         return reverse("plugins:netbox_sd_access:sdaccess", args=[self.pk])
     
-'''
-IP Pool model groups existing IP prefix, gateway, dhcp, and DNS server. 
-IP pools are associated with a given fabric site. 
-'''
+
 class IPPool(NetBoxModel):
+    """IP Pool model groups existing IP prefix, gateway, dhcp, and DNS server. IP pools are associated with a given fabric site. """
     name = models.CharField(max_length=200)
     prefix = models.ForeignKey(to='ipam.Prefix', on_delete=models.PROTECT)
     gateway = models.ForeignKey(to='ipam.IPAddress', on_delete=models.PROTECT)
@@ -51,11 +47,9 @@ class IPPool(NetBoxModel):
         if netaddr.IPNetwork(self.gateway.address) != self.prefix.prefix:
             raise ValidationError('Gateway must be in the same subnet as prefix.')
 
-'''
-All SD-Access features can be associated with a fabric site. 
-'''
     
 class FabricSite(NetBoxModel):
+    """All SD-Access features can be associated with a fabric site. """
     name = models.CharField(max_length=200)
     physical_site = models.ForeignKey(to='dcim.Site', on_delete=models.PROTECT)
     # locations is an optional field for if you make the fabric on a per floor basis
@@ -72,12 +66,8 @@ class FabricSite(NetBoxModel):
         return reverse('plugins:netbox_sd_access:fabricsite', args=[self.pk])
 
 
-'''
-Set possible SD device roles
-'''
-
 class SDADeviceRoleChoices(ChoiceSet):
-    
+    """Set possible SD device roles"""
     CHOICES = [
         ('control', 'Control Plane Node', 'blue'),
         ('edge', 'Edge Node', 'red'),
@@ -86,20 +76,17 @@ class SDADeviceRoleChoices(ChoiceSet):
         ('l2-border', 'L2 Border Node', 'teal')
     ]
     
-'''
-Set possible SD Transit types
-'''
+
+
 class SDATransitTypeChoices(ChoiceSet):
+    """ Set possible SD Transit types"""
     CHOICES = [
         ('lisp', 'LISP', 'yellow'),
         ('lisp-bgp', 'LISP-BGP', 'green')
     ]
-
-'''
-SD Device assigns existing Netbox device to one of a given set of roles. 
-'''
     
 class SDADevice(NetBoxModel):
+    """SD Device assigns existing Netbox device to one of a given set of roles. """
     device = models.OneToOneField(to='dcim.Device', on_delete=models.CASCADE, related_name='sda_info')
     role = models.CharField(max_length=50, choices=SDADeviceRoleChoices, blank=True, null=True)
     fabric_site = models.ForeignKey(to=FabricSite, on_delete=models.CASCADE, related_name='devices')
@@ -135,11 +122,9 @@ class SDADevice(NetBoxModel):
             if not device_location:
                 raise ValidationError('Fabric site and device must belong to the same site and location')
             
-'''
-Transit between site and outside network
-'''
     
 class SDATransit(NetBoxModel):
+    """Transit between site and outside network"""
     name=models.CharField(max_length=200)
     transit_type=models.CharField(max_length=8, choices=SDATransitTypeChoices, default=SDATransitTypeChoices.CHOICES[0], blank=False, null=False)
     fabric_site=models.OneToOneField(to=FabricSite, on_delete=models.PROTECT, blank=True, null=True)
@@ -161,10 +146,10 @@ class SDATransit(NetBoxModel):
         return SDATransitTypeChoices.colors.get(self.role)
     
 '''
-Transit between site and outside network using BGP. 
-Applys existing ASN configuration to SDA transit.
+
 '''
 class IPTransit(NetBoxModel):
+    """Transit between site and outside network using BGP. Applys existing ASN configuration to SDA transit."""
     name=models.CharField(max_length=200)
     fabric_site=models.OneToOneField(to=FabricSite, on_delete=models.PROTECT, blank=True, null=True)
     asn=models.OneToOneField(to='ipam.ASN',on_delete=models.PROTECT,null=True, blank=True)
@@ -180,10 +165,9 @@ class IPTransit(NetBoxModel):
     def get_absolute_url(self):
         return reverse('plugins:netbox_sd_access:iptransit', args=[self.pk])
 
-'''
-Virtual Network is VRF for SD-Access. Can contain multiple fabric sites.
-'''
+
 class VirtualNetwork(NetBoxModel):
+    """Virtual Network is VRF for SD-Access. Can contain multiple fabric sites."""
     name=models.CharField(max_length=200, default = "Virtual Network")
     #fabric_site=models.ForeignKey(to=FabricSite, on_delete=models.CASCADE, related_name='virtual_networks')
     fabric_site=models.ManyToManyField(to=FabricSite, blank= True,related_name = 'virtual_networks')
