@@ -32,6 +32,7 @@ class FabricSiteSerializer(NetBoxModelSerializer):
         view_name='plugins-api:netbox_sd_access-api:fabricsite-detail'
     )
     physical_site = SiteSerializer(nested=True)
+    location = LocationSerializer(nested=True, required=False, allow_null=True)
     device_count = serializers.IntegerField(read_only=True)
     
     class Meta:
@@ -62,7 +63,7 @@ class SDADeviceSerializer(NetBoxModelSerializer):
     url = serializers.HyperlinkedIdentityField(
         view_name='plugins-api:netbox_sd_access-api:sdadevice-detail'
     )
-    fabric_site = NestedFabricSiteSerializer()
+    fabric_site = FabricSiteSerializer(nested=True)
     device = DeviceSerializer(nested=True)
     role = ChoiceField(choices=SDADeviceRoleChoices)
     

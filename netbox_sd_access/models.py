@@ -31,6 +31,12 @@ class IPPool(NetBoxModel):
         ordering = ("name",)
         verbose_name = 'IP Pool'
         verbose_name_plural = 'IP Pools'
+        constraints = (
+            models.UniqueConstraint(
+                fields=('name',),
+                name='netbox_sd_access_ip_pool_unique_name'
+            ),
+        )
     
     def get_absolute_url(self):
         return reverse("plugins:netbox_sd_access:ippool", args=[self.pk])
@@ -54,6 +60,12 @@ class FabricSite(NetBoxModel):
     
     class Meta:
         ordering = ("name",)
+        constraints = (
+            models.UniqueConstraint(
+                fields=('name',),
+                name='netbox_sd_access_fabric_site_unique_name'
+            ),
+        )
         
     def __str__(self):
         return self.name
@@ -166,6 +178,12 @@ class VirtualNetwork(NetBoxModel):
 
     class Meta:
         ordering = ("name",)
+        constraints = (
+            models.UniqueConstraint(
+                fields=('name',),
+                name='netbox_sd_access_vns_unique_name',
+            ),
+        )
     
     def __str__(self):
         return self.name
